@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(start \"\" \"i:\\Wordpress_NEU\\Design Projekte\\CAS\\CODEX\\.superdesign\\design_iterations\\graphiks_hero_1.html\")",
+      "Bash(start \"\" \"i:\\Wordpress_NEU\\Design Projekte\\CAS\\CODEX\\.superdesign\\design_iterations\\graphiks_hero_2.html\")",
+      "Bash(start \"\" \"i:\\Wordpress_NEU\\Design Projekte\\CAS\\CODEX\\.superdesign\\design_iterations\\graphiks_hero_3.html\")",
+      "Read(//i/Wordpress_NEU/Design Projekte/CAS/method-1-app/**)",
+      "Bash(cat:*)",
+      "Bash(mkdir:*)",
+      "Bash(start \"\" \"i:\\Wordpress_NEU\\Design Projekte\\CAS\\CODEX\\.superdesign\\design_iterations\\bf6_team_10.html\")",
+      "Bash(git init:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

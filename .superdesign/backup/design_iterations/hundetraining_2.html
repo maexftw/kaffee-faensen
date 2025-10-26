@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joelle's Hundetraining - Modern Dark Mode</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Flowbite -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.0.0/dist/flowbite.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        /* Dark Mode Theme */
+        :root {
+            --background: #0a0a0a;
+            --foreground: #ededed;
+            --card: #161616;
+            --card-foreground: #ededed;
+            --primary: #ffffff;
+            --primary-foreground: #0a0a0a;
+            --secondary: #404040;
+            --secondary-foreground: #ededed;
+            --muted: #1a1a1a;
+            --muted-foreground: #a1a1a1;
+            --accent: #2a2a2a;
+            --accent-foreground: #ededed;
+            --border: #2a2a2a;
+            --input: #2a2a2a;
+            --ring: #ffffff;
+            --radius: 0.75rem;
+            --shadow-2xs: 0 1px 2px 0px hsl(0 0% 0% / 0.3);
+            --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.4);
+            --shadow-sm: 0 2px 4px 0px hsl(0 0% 0% / 0.5), 0 1px 2px -1px hsl(0 0% 0% / 0.5);
+            --shadow: 0 4px 6px 0px hsl(0 0% 0% / 0.5), 0 2px 4px -1px hsl(0 0% 0% / 0.5);
+            --shadow-md: 0 6px 8px 0px hsl(0 0% 0% / 0.6), 0 2px 4px -1px hsl(0 0% 0% / 0.5);
+            --shadow-lg: 0 10px 15px 0px hsl(0 0% 0% / 0.6), 0 4px 6px -2px hsl(0 0% 0% / 0.5);
+            --shadow-xl: 0 20px 25px 0px hsl(0 0% 0% / 0.7), 0 8px 10px -4px hsl(0 0% 0% / 0.5);
+            --shadow-2xl: 0 25px 50px 0px hsl(0 0% 0% / 0.8);
+            --tracking-normal: -0.01em;
+            --spacing: 0.25rem;
+            --radius-sm: calc(var(--radius) - 4px);
+            --radius-md: calc(var(--radius) - 2px);
+            --radius-lg: var(--radius);
+            --radius-xl: calc(var(--radius) + 4px);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif !important;
+            background-color: var(--background) !important;
+            color: var(--foreground) !important;
+            line-height: 1.6 !important;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 700 !important;
+            letter-spacing: var(--tracking-normal) !important;
+        }
+
+        /* Animation Classes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pawWiggle {
+            0%, 100% {
+                transform: rotate(-5deg) translateY(-3px);
+            }
+            50% {
+                transform: rotate(5deg) translateY(3px);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in-left {
+            animation: fadeInLeft 0.6s ease-out forwards;
+        }
+
+        .animate-fade-in-right {
+            animation: fadeInRight 1s ease-out forwards;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.5s ease-out forwards;
+        }
+
+        .animate-paw {
+            animation: pawWiggle 0.8s ease-in-out infinite;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+
+        .delay-600 {
+            animation-delay: 0.6s;
+            opacity: 0;
+        }
+
+        .delay-800 {
+            animation-delay: 0.8s;
+            opacity: 0;
+        }
+
+        /* Custom Styles */
+        .service-card {
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .testimonial-card {
+            transition: all 0.25s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.02);
+            background: var(--accent);
+        }
+
+        .cta-button {
+            transition: all 0.2s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        .nav-sticky {
+            transition: all 0.3s ease;
+        }
+
+        .image-zoom {
+            transition: transform 0.4s ease;
+            overflow: hidden;
+        }
+
+        .image-zoom img {
+            transition: transform 0.4s ease;
+        }
+
+        .image-zoom:hover img {
+            transform: scale(1.1);
+        }
+
+        .input-focus {
+            transition: all 0.2s ease;
+        }
+
+        .input-focus:focus {
+            border-color: var(--ring);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+
+        /* Scroll reveal */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease-out;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)]">
+
+    <!-- Navigation -->
+    <nav class="nav-sticky fixed w-full top-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-sm shadow-[var(--shadow-sm)]" style="border-bottom: 1px solid var(--border);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center animate-paw">
+                        <i data-lucide="dog" class="text-black w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">Joelle's</h1>
+                        <p class="text-sm text-gray-400">Hundetraining</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Home</a>
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Services</a>
+                    <a href="#about" class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Über mich</a>
+                    <a href="#testimonials" class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Bewertungen</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Kontakt</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button data-collapse-toggle="mobile-menu" type="button" class="md:hidden inline-flex items-center p-2 text-white rounded-lg hover:bg-[var(--muted)]">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Home</a>
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Services</a>
+                    <a href="#about" class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Über mich</a>
+                    <a href="#testimonials" class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Bewertungen</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Kontakt</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-4" style="background: linear-gradient(to bottom, #0a0a0a, #161616);">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Hero Content -->
+                <div class="animate-fade-in-up">
+                    <h2 class="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight">
+                        Professionelles<br/>
+                        <span class="text-white">Hundetraining</span><br/>
+                        mit Herz
+                    </h2>
+                    <p class="text-xl text-gray-400 mb-8 leading-relaxed">
+                        Individuelles Training für Sie und Ihren Vierbeiner.
+                        Mit Geduld, Fachwissen und positiver Verstärkung zum Erfolg.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="cta-button inline-flex items-center justify-center px-8 py-4 bg-white text-black rounded-[var(--radius)] font-semibold text-lg shadow-[var(--shadow-md)]">
+                            <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+                            Termin buchen
+                        </a>
+                        <a href="#services" class="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white rounded-[var(--radius)] font-semibold text-lg shadow-[var(--shadow-md)] hover:bg-[var(--muted)] transition-all duration-200" style="border: 1px solid var(--border);">
+                            Mehr erfahren
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="animate-fade-in-right delay-200 image-zoom rounded-[var(--radius-xl)] overflow-hidden shadow-[var(--shadow-2xl)]">
+                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&h=600&fit=crop"
+                         alt="Happy dog with trainer"
+                         class="w-full h-auto object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-4" style="background-color: #0a0a0a;">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">Unsere Leistungen</h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Maßgeschneidertes Training für jeden Hund und jedes Herrchen
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="service-card scroll-reveal bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)]" style="border: 1px solid var(--border);">
+                    <div class="w-16 h-16 bg-white rounded-[var(--radius)] flex items-center justify-center mb-6">
+                        <i data-lucide="baby" class="text-black w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Welpentraining</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Der perfekte Start für Ihren Welpen. Grundkommandos, Sozialisierung und spielerisches Lernen in der Gruppe.
+                    </p>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 text-white mr-2"></i>
+                            Grundkommandos
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 text-white mr-2"></i>
+                            Sozialisierung
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 text-white mr-2"></i>
+                            Stubenreinheit
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card scroll-reveal bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)]" style="border: 1px solid var(--border);">
+                    <div class="w-16 h-16 bg-gray-400 rounded-[var(--radius)] flex items-center justify-center mb-6">
+                        <i data-lucide="user" class="text-black w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Einzeltraining</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Individuelles Training auf Ihre speziellen Bedürfnisse zugeschnitten. Problemlösungen und maßgeschneidertes Coaching.
+                    </p>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 text-gray-400 mr-2"></i>
+                            Verhaltenskorrektur
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 text-gray-400 mr-2"></i>
+                            Individuelle Ziele
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 text-gray-400 mr-2"></i>
+                            Flexible Termine
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card scroll-reveal bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)]" style="border: 1px solid var(--border);">
+                    <div class="w-16 h-16 bg-gray-600 rounded-[var(--radius)] flex items-center justify-center mb-6">
+                        <i data-lucide="users" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Gruppentraining</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Training in der Gruppe für bessere Sozialisierung. Lernen Sie gemeinsam mit anderen Hundebesitzern.
+                    </p>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 text-gray-600 mr-2"></i>
+                            Soziale Interaktion
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 text-gray-600 mr-2"></i>
+                            Ablenkungstraining
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="check" class="w-5 h-5 text-gray-600 mr-2"></i>
+                            Erfahrungsaustausch
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4" style="background-color: #161616;">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- About Image -->
+                <div class="scroll-reveal image-zoom rounded-[var(--radius-xl)] overflow-hidden shadow-[var(--shadow-xl)]">
+                    <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&h=700&fit=crop"
+                         alt="Joelle mit Hund"
+                         class="w-full h-auto object-cover">
+                </div>
+
+                <!-- About Content -->
+                <div class="scroll-reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+                        Über <span class="text-gray-400">Joelle</span>
+                    </h2>
+                    <p class="text-lg text-gray-400 mb-6 leading-relaxed">
+                        Mit über 10 Jahren Erfahrung im Hundetraining habe ich hunderten von Hunden und ihren Besitzern geholfen,
+                        eine harmonische Beziehung aufzubauen.
+                    </p>
+                    <p class="text-lg text-gray-400 mb-8 leading-relaxed">
+                        Meine Philosophie basiert auf positiver Verstärkung, Geduld und individueller Betreuung.
+                        Jeder Hund ist einzigartig und verdient einen maßgeschneiderten Trainingsansatz.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-white rounded-[var(--radius)] flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="award" class="text-black w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1 text-white">Zertifizierte Trainerin</h4>
+                                <p class="text-gray-400">Professionelle Ausbildung nach neuesten Standards</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gray-400 rounded-[var(--radius)] flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="heart" class="text-black w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1 text-white">Mit Leidenschaft</h4>
+                                <p class="text-gray-400">Hunde sind meine Berufung, nicht nur mein Beruf</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gray-600 rounded-[var(--radius)] flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="trending-up" class="text-white w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1 text-white">Bewährte Methoden</h4>
+                                <p class="text-gray-400">Positive Verstärkung für nachhaltige Erfolge</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 px-4" style="background-color: #0a0a0a;">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">Was Kunden sagen</h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Erfolgsgeschichten von zufriedenen Hundebesitzern
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card scroll-reveal bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)]" style="border: 1px solid var(--border);">
+                    <div class="flex mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed italic">
+                        "Joelle hat uns geholfen, Max' Leinenagression in den Griff zu bekommen.
+                        Nach nur 6 Wochen können wir entspannt spazieren gehen. Unglaublich!"
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-black font-bold mr-3">
+                            SM
+                        </div>
+                        <div>
+                            <p class="font-bold text-white">Sarah M.</p>
+                            <p class="text-sm text-gray-400">Golden Retriever Besitzerin</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card scroll-reveal bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)]" style="border: 1px solid var(--border);">
+                    <div class="flex mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed italic">
+                        "Das Welpentraining war perfekt für unseren kleinen Benny.
+                        Joelle ist geduldig, kompetent und einfach großartig mit Hunden!"
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center text-black font-bold mr-3">
+                            TK
+                        </div>
+                        <div>
+                            <p class="font-bold text-white">Thomas K.</p>
+                            <p class="text-sm text-gray-400">Labrador Besitzer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card scroll-reveal bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)]" style="border: 1px solid var(--border);">
+                    <div class="flex mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed italic">
+                        "Endlich jemand, der uns versteht! Das Einzeltraining war maßgeschneidert
+                        auf Luna's Bedürfnisse. Absolute Empfehlung!"
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                            JW
+                        </div>
+                        <div>
+                            <p class="font-bold text-white">Julia W.</p>
+                            <p class="text-sm text-gray-400">Border Collie Besitzerin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4" style="background-color: #161616;">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">Kontakt aufnehmen</h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Bereit für den ersten Schritt? Kontaktieren Sie mich für ein kostenloses Erstgespräch!
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="scroll-reveal bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)]" style="border: 1px solid var(--border);">
+                    <h3 class="text-2xl font-bold mb-6 text-white">Nachricht senden</h3>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-gray-300">Name</label>
+                            <input type="text"
+                                   class="input-focus w-full px-4 py-3 rounded-[var(--radius)] bg-[var(--background)] text-white"
+                                   style="border: 1px solid var(--border);"
+                                   placeholder="Ihr Name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-gray-300">Email</label>
+                            <input type="email"
+                                   class="input-focus w-full px-4 py-3 rounded-[var(--radius)] bg-[var(--background)] text-white"
+                                   style="border: 1px solid var(--border);"
+                                   placeholder="ihre.email@beispiel.de">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-gray-300">Telefon</label>
+                            <input type="tel"
+                                   class="input-focus w-full px-4 py-3 rounded-[var(--radius)] bg-[var(--background)] text-white"
+                                   style="border: 1px solid var(--border);"
+                                   placeholder="+41 XX XXX XX XX">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-gray-300">Nachricht</label>
+                            <textarea rows="5"
+                                      class="input-focus w-full px-4 py-3 rounded-[var(--radius)] bg-[var(--background)] text-white"
+                                      style="border: 1px solid var(--border);"
+                                      placeholder="Erzählen Sie mir von Ihrem Hund..."></textarea>
+                        </div>
+                        <button type="submit"
+                                class="cta-button w-full px-8 py-4 bg-white text-black rounded-[var(--radius)] font-semibold text-lg shadow-[var(--shadow-md)] flex items-center justify-center">
+                            <i data-lucide="send" class="w-5 h-5 mr-2"></i>
+                            Nachricht senden
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="scroll-reveal space-y-8">
+                    <div class="bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)]" style="border: 1px solid var(--border);">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-white rounded-[var(--radius)] flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone" class="text-black w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1 text-white">Telefon</h4>
+                                <p class="text-gray-400">+41 XX XXX XX XX</p>
+                                <p class="text-sm text-gray-500 mt-1">Mo-Fr: 8:00 - 18:00 Uhr</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)]" style="border: 1px solid var(--border);">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gray-400 rounded-[var(--radius)] flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="mail" class="text-black w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1 text-white">Email</h4>
+                                <p class="text-gray-400">info@joelles-hundetraining.ch</p>
+                                <p class="text-sm text-gray-500 mt-1">Antwort innerhalb 24h</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)]" style="border: 1px solid var(--border);">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gray-600 rounded-[var(--radius)] flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="text-white w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1 text-white">Standort</h4>
+                                <p class="text-gray-400">Zürich & Umgebung</p>
+                                <p class="text-sm text-gray-500 mt-1">Mobiles Training bei Ihnen vor Ort</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[var(--card)] p-8 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)]" style="border: 1px solid var(--border);">
+                        <h4 class="font-bold text-lg mb-4 text-white">Folgen Sie uns</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-white rounded-[var(--radius)] flex items-center justify-center hover:scale-110 transition-transform duration-200">
+                                <i data-lucide="facebook" class="text-black w-6 h-6"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white rounded-[var(--radius)] flex items-center justify-center hover:scale-110 transition-transform duration-200">
+                                <i data-lucide="instagram" class="text-black w-6 h-6"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white rounded-[var(--radius)] flex items-center justify-center hover:scale-110 transition-transform duration-200">
+                                <i data-lucide="youtube" class="text-black w-6 h-6"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4" style="border-top: 1px solid var(--border);">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Joelle's Hundetraining</h4>
+                    <p class="text-gray-400">
+                        Professionelles Training mit Herz für Sie und Ihren Vierbeiner.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">Über mich</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Öffnungszeiten</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Montag - Freitag: 8:00 - 18:00</li>
+                        <li>Samstag: 9:00 - 16:00</li>
+                        <li>Sonntag: Nach Vereinbarung</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Kontakt</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>+41 XX XXX XX XX</li>
+                        <li>info@joelles-hundetraining.ch</li>
+                        <li>Zürich & Umgebung</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Joelle's Hundetraining. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Vielen Dank für Ihre Nachricht! Wir melden uns bald bei Ihnen.');
+        });
+    </script>
+</body>
+</html>
