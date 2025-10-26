@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Crazy Aim Sport - Reloaded | Elite Squad</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Rajdhani:wght@600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important;overflow-x:hidden;background:#000}h1,h2,h3{font-family:'Rajdhani','Inter',sans-serif!important}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:rgba(0,0,0,.3)}::-webkit-scrollbar-thumb{background:rgba(255,78,24,.6);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:rgba(255,78,24,.8)}a,button{transition:all .15s ease}.section-bg{position:fixed;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0;transition:opacity .8s ease;z-index:0}.section-bg.active{opacity:1}.section-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.85) 50%,rgba(0,0,0,.9) 100%)}#bg-hero{background-image:url('https://images2.alphacoders.com/139/thumb-1920-1399399.jpg')}#bg-team{background-image:url('https://images.alphacoders.com/139/thumb-1920-1399397.jpg')}#bg-stats{background-image:url('https://images5.alphacoders.com/139/thumb-1920-1399405.jpg')}#bg-rest{background-image:url('https://images8.alphacoders.com/139/thumb-1920-1398943.jpg')}.team-card{position:relative;transition:all .3s ease;border:1px solid rgba(255,78,24,.3);background:rgba(0,0,0,.8);backdrop-filter:blur(10px)}.team-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#ff4e18,transparent);transform:scaleX(0);transition:transform .3s ease}.team-card:hover{border-color:rgba(255,78,24,.8);transform:translateY(-5px);box-shadow:0 10px 30px rgba(255,78,24,.2)}.team-card:hover::before{transform:scaleX(1)}.team-card.mia{cursor:pointer;filter:grayscale(100%)}.team-card.mia:hover{filter:grayscale(80%)}.mia-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.8);pointer-events:none;z-index:10}.mia-x{font-size:200px;font-weight:900;color:#ff4e18;line-height:1;opacity:.9;animation:pulse-x 2s ease-in-out infinite;text-shadow:0 0 30px rgba(255,78,24,.6)}@keyframes pulse-x{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.05);opacity:1}}.mia-label{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:#ff4e18;color:#000;padding:8px 20px;font-weight:900;font-size:14px;letter-spacing:2px;animation:blink 1.5s ease-in-out infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:.6}}.stat-card{background:rgba(0,0,0,.8);border:1px solid rgba(255,78,24,.3);backdrop-filter:blur(10px);transition:all .3s ease}.stat-card:hover{border-color:rgba(255,78,24,.6);transform:translateY(-2px)}.nav-diamond{width:10px;height:10px;background:rgba(255,78,24,.4);transform:rotate(45deg);transition:all .3s ease}.nav-diamond.active{background:#ff4e18;width:12px;height:12px}.nav-diamond:hover{background:#ff4e18;transform:rotate(45deg) scale(1.2)}.left-nav-sticky{position:sticky;top:100px;height:calc(100vh - 120px);overflow-y:auto}@keyframes glitch{0%,100%{transform:translate(0)}20%{transform:translate(-2px,2px)}40%{transform:translate(-2px,-2px)}60%{transform:translate(2px,2px)}80%{transform:translate(2px,-2px)}}.glitch-text:hover{animation:glitch .3s ease-in-out}@keyframes pulse-orange{0%,100%{box-shadow:0 0 0 0 rgba(255,78,24,.7)}50%{box-shadow:0 0 0 15px rgba(255,78,24,0)}}.pulse-cta{animation:pulse-orange 2s infinite}.logo-text{font-family:'Rajdhani',sans-serif;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.logo-highlight{color:#ff4e18}.tactical-icon{background:rgba(255,78,24,.2);border:2px solid rgba(255,78,24,.4);transition:all .3s ease}.tactical-icon:hover{background:rgba(255,78,24,.3);border-color:rgba(255,78,24,.6)}.ds-icon{width:20px;height:20px;fill:currentColor}@keyframes spin{to{transform:rotate(360deg)}}.loading-spinner{animation:spin 1s linear infinite}.stat-loading{opacity:.5}.terminal-modal{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;display:none;align-items:center;justify-content:center;backdrop-filter:blur(10px)}.terminal-modal.active{display:flex}.terminal-window{background:#0a0a0a;border:2px solid #ff4e18;max-width:900px;width:90%;max-height:90vh;overflow-y:auto;font-family:'JetBrains Mono',monospace;box-shadow:0 0 50px rgba(255,78,24,.4)}.terminal-header{background:#1a1a1a;border-bottom:2px solid #ff4e18;padding:12px 20px;display:flex;justify-content:space-between;align-items:center}.terminal-title{color:#ff4e18;font-size:14px;font-weight:700;letter-spacing:1px}.terminal-close{background:none;border:none;color:#ff4e18;font-size:24px;cursor:pointer;padding:0;width:30px;height:30px;display:flex;align-items:center;justify-content:center;transition:all .2s}.terminal-close:hover{background:#ff4e18;color:#000}.terminal-body{padding:30px;color:#00ff00;font-size:14px;line-height:1.8}.terminal-prompt{color:#ff4e18;margin-right:10px}.terminal-error{color:#ff4e18;font-weight:700}.terminal-warning{color:#ffaa00;font-weight:700}.terminal-info{color:#00ffff}</style>
+</head>
+<body>
+<!-- Terminal Modal -->
+<div id="eric-modal" class="terminal-modal">
+<div class="terminal-window">
+<div class="terminal-header">
+<span class="terminal-title">⚠️ URGENT: SQUAD MEMBER STATUS REPORT</span>
+<button class="terminal-close" onclick="closeEricModal()">×</button>
+</div>
+<div class="terminal-body">
+<div><span class="terminal-prompt">root@cas-squad:~$</span> cat /var/log/eric_status.log</div>
+<div style="margin:20px 0;padding:20px;background:rgba(255,78,24,.1);border-left:4px solid #ff4e18">
+<div class="terminal-error">========== KRITISCHER VORFALL ==========</div>
+<div style="margin-top:10px;color:#fff">
+<strong>BETREFF:</strong> Vermisster Squad-Member "Eric"<br>
+<strong>CODENAME:</strong> Lager & Loader<br>
+<strong>STATUS:</strong> <span class="terminal-error">MIA (Missing In Action)</span><br>
+<strong>SEIT:</strong> Battlefield 6 Release (17. Oktober 2025)<br>
+<strong>LETZTE SICHTUNG:</strong> WhatsApp (sporadisch, nur Ausreden)
+</div>
+</div>
+
+<div style="margin:20px 0">
+<div><span class="terminal-prompt">root@cas-squad:~$</span> ./analyse_eric_verschwinden.sh</div>
+<div style="margin-left:20px;color:#00ff00">
+<div style="margin-top:15px"><span class="terminal-warning">⚠ ANALYSE DER SITUATION</span></div>
+
+<div style="margin-top:15px;color:#fff">
+<strong>THEORIE #1: Hardware-Cheat Busted</strong><br>
+<span style="color:#00ff00">└─ Wahrscheinlichkeit: 78%</span><br>
+<span style="color:#888">└─ PS5 Controller im PC-Lobby verwendet</span><br>
+<span style="color:#888">└─ Anti-Cheat hat zugeschlagen</span><br>
+<span style="color:#888">└─ Eric sitzt jetzt auf lebenslanger EA-Ban</span><br>
+<span style="color:#888">└─ Zu peinlich um es zuzugeben</span><br>
+<span style="color:#ff4e18">└─ FAZIT: Typ hat mit Controller gespielt und dachte keiner merkt's 😂</span>
+</div>
+
+<div style="margin-top:15px;color:#fff">
+<strong>THEORIE #2: "Die Frau sagt Nein"</strong><br>
+<span style="color:#00ff00">└─ Wahrscheinlichkeit: 92%</span><br>
+<span style="color:#888">└─ Eric war mega gehyped vor Release</span><br>
+<span style="color:#888">└─ Kaufte sogar die Ultimate Edition</span><br>
+<span style="color:#888">└─ Dann: *POOF* verschwunden</span><br>
+<span style="color:#ff4e18">└─ FAZIT: Seine Frau hat ihm die Eier abgenommen 🎀</span>
+</div>
+
+<div style="margin-top:15px;color:#fff">
+<strong>THEORIE #3: Das "Dirks Nachbar"-Paradoxon</strong><br>
+<span style="color:#00ff00">└─ Wahrscheinlichkeit: 156% (ja, über 100%)</span><br>
+<span style="color:#888">└─ Wohnt DIREKT neben Dirk</span><br>
+<span style="color:#888">└─ Könnte theoretisch LAN-Kabel rüberwerfen</span><br>
+<span style="color:#888">└─ Aber nein, lieber Ausreden erfinden</span><br>
+<span style="color:#888">└─ "Hab keine Zeit" - Brudi, Dirk sieht dich Netflix schauen!</span><br>
+<span style="color:#ff4e18">└─ FAZIT: Eric ghostet uns härter als seine Tinder-Matches</span>
+</div>
+</div>
+</div>
+
+<div style="margin:20px 0">
+<div><span class="terminal-prompt">root@cas-squad:~$</span> cat /var/log/excuses.log | tail -20</div>
+<div style="margin-left:20px;color:#ffaa00">
+<div style="margin-top:10px"><span class="terminal-warning">ERFASSTE AUSREDEN:</span></div>
+<div style="color:#888;margin-top:5px">
+[2025-10-18 19:32] "Muss morgen früh raus"<br>
+[2025-10-19 20:15] "Hab Kopfschmerzen"<br>
+[2025-10-20 18:47] "Internet ist langsam heute"<br>
+[2025-10-21 21:03] "Baby schläft noch nicht"<br>
+[2025-10-22 19:58] "Muss noch Wäsche machen" ← ERNSTHAFT?!<br>
+[2025-10-23 20:42] "Frau hat Migräne"<br>
+[2025-10-24 18:15] "Schwiegermutter kommt vorbei" <br>
+[2025-10-25 21:30] "Muss morgen... ach fick drauf, keine Lust"<br>
+<span style="color:#ff4e18">[SYSTEM] AUSREDEN-KREATIVITÄT: 2/10 - ENTTÄUSCHEND</span>
+</div>
+</div>
+
+<div style="margin:20px 0;padding:20px;background:rgba(255,0,0,.1);border:2px solid #ff4e18">
+<div class="terminal-error">▬▬▬ OFFIZIELLE SQUAD-MEINUNG ▬▬▬</div>
+<div style="color:#fff;margin-top:10px;font-size:16px">
+Yo Eric, du Lappen:<br><br>
+
+Wir wissen dass du da bist. Dirk sieht dein Wohnzimmer-Licht.<br>
+WhatsApp-Status sagt "zuletzt online vor 2 Minuten".<br>
+Aber für BF6? "Keine Zeit bro" 🙄<br><br>
+
+Real Talk: Entweder hat deine Frau dich kastriert,<br>
+oder du sitzt immer noch auf dem Controller-Ban.<br>
+Beides peinlich. Beides amüsant für uns.<br><br>
+
+<span style="color:#ff4e18">WIR VERMISSEN DICH, DU IDIOT! 💔</span><br><br>
+
+Komm zurück bevor wir Dirk rüberschicken.<br>
+Der heult dann bei dir an der Tür bis du aufmachst.<br>
+Und glaub mir, das willst du nicht.<br><br>
+
+<span style="color:#00ff00">- Deine "Freunde" (die du im Stich gelassen hast)</span>
+</div>
+</div>
+
+<div style="margin:20px 0">
+<div><span class="terminal-prompt">root@cas-squad:~$</span> sudo apt-get install eric-comeback</div>
+<div style="margin-left:20px;color:#ff4e18">
+<div style="margin-top:10px">
+E: Package 'eric-comeback' has no installation candidate<br>
+E: Unable to locate package 'motivation'<br>
+E: Unable to locate package 'balls'<br>
+<span style="color:#888">Hinweis: Möglicherweise manuelles Eingreifen nötig</span>
+</div>
+</div>
+</div>
+
+<div style="margin-top:30px;text-align:center;padding:20px;border-top:2px solid #ff4e18">
+<div class="terminal-info">═══════════════════════════════════</div>
+<div style="color:#fff;margin:10px 0">
+Wenn du das liest Eric: Komm einfach online.<br>
+Keine Fragen. Keine Diskussion. Einfach spawnen.<br><br>
+<span style="color:#ff4e18;font-size:18px">Oder gib wenigstens den Controller zurück! 🎮</span>
+</div>
+<div class="terminal-info">═══════════════════════════════════</div>
+</div>
+
+<div style="margin-top:20px;text-align:right;color:#888">
+<span class="terminal-prompt">root@cas-squad:~$</span> _
+</div>
+</div>
+</div>
+</div>
+
+<div class="relative flex min-h-screen w-screen bg-black">
+<div id="bg-hero" class="section-bg active"></div>
+<div id="bg-team" class="section-bg"></div>
+<div id="bg-stats" class="section-bg"></div>
+<div id="bg-rest" class="section-bg"></div>
+
+<header class="fixed top-0 left-0 right-0 z-30 flex justify-between items-center p-4 bg-gradient-to-b from-black/80 to-transparent backdrop-blur-sm text-white border-b border-gray-900/50">
+<div class="flex items-center space-x-8">
+<a href="#hero" class="logo-text flex flex-col leading-tight cursor-pointer hover:opacity-80 transition-opacity items-center"><span class="text-white text-lg">Crazy Aim Sport</span><span class="logo-highlight text-sm -mt-1 text-center">— Reloaded —</span></a>
+<nav class="hidden md:flex space-x-6 text-sm font-semibold uppercase tracking-wide">
+<a href="https://discord.gg/w3na5hQb" target="_blank" rel="noopener" class="text-gray-300 hover:text-white flex items-center gap-2"><i data-lucide="message-circle" class="w-4 h-4"></i>Discord</a>
+<a href="#" class="text-gray-300 hover:text-white flex items-center gap-2"><i data-lucide="trophy" class="w-4 h-4"></i>Battlelog</a>
+<a href="#join" class="text-gray-300 hover:text-white flex items-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i>Rekrutierung</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<a href="#join" class="bg-[#ff4e18] px-4 py-2 rounded font-bold text-sm uppercase hover:bg-[#ff6a3d] transition-all">Join Squad</a>
+</div>
+</header>
+
+<div class="flex flex-grow relative z-10 pt-20">
+<nav class="w-72 flex-shrink-0 z-20 hidden md:flex">
+<div class="left-nav-sticky w-full flex flex-col pt-6">
+<div class="relative mb-6 px-6"><h2 class="text-3xl font-extrabold uppercase text-white tracking-widest">Sections</h2><div class="w-12 h-1 bg-[#ff4e18] mt-2"></div></div>
+<div class="flex flex-col space-y-1">
+<a href="#hero" class="nav-link w-full text-left p-3 pl-6 text-sm font-bold uppercase tracking-wide text-gray-400 hover:text-white border-l-2 border-transparent hover:border-[#ff4e18]">Home</a>
+<a href="#team" class="nav-link w-full text-left p-3 pl-6 text-sm font-bold uppercase tracking-wide text-gray-400 hover:text-white border-l-2 border-transparent hover:border-[#ff4e18]">Squad</a>
+<a href="#stats" class="nav-link w-full text-left p-3 pl-6 text-sm font-bold uppercase tracking-wide text-gray-400 hover:text-white border-l-2 border-transparent hover:border-[#ff4e18]">Stats</a>
+<a href="#taktiken" class="nav-link w-full text-left p-3 pl-6 text-sm font-bold uppercase tracking-wide text-gray-400 hover:text-white border-l-2 border-transparent hover:border-[#ff4e18]">Taktiken</a>
+<a href="#eric" class="nav-link w-full text-left p-3 pl-6 text-sm font-bold uppercase tracking-wide text-gray-400 hover:text-white border-l-2 border-transparent hover:border-[#ff4e18]">Wo ist Eric?!</a>
+<a href="#join" class="nav-link w-full text-left p-3 pl-6 text-sm font-bold uppercase tracking-wide text-gray-400 hover:text-white border-l-2 border-transparent hover:border-[#ff4e18]">Join Us</a>
+</div>
+</div>
+</nav>
+
+<div class="flex-1 px-6 md:px-12 py-12 overflow-y-auto">
+<section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center mb-32" data-bg="bg-hero">
+<h1 class="text-5xl md:text-8xl font-black uppercase text-white mb-6 tracking-tight glitch-text drop-shadow-2xl">Crazy Aim Sport</h1>
+<p class="text-2xl md:text-4xl text-gray-300 mb-4 font-bold drop-shadow-lg">Die beste verdammte Squad die ihr Geld je verschwendet hat<span class="text-[#ff4e18]">*</span></p>
+<p class="text-sm text-gray-400 mb-12 italic">*Meinung von niemanden, außer uns selbst nach 3 Bier</p>
+<div class="flex flex-col md:flex-row gap-4">
+<a href="#team" class="pulse-cta bg-[#ff4e18] px-8 py-4 text-lg font-bold uppercase hover:bg-[#ff6a3d]">Schau dir den Scheiß an</a>
+<a href="https://discord.gg/w3na5hQb" target="_blank" rel="noopener" class="bg-[#5865F2] px-8 py-4 text-lg font-bold uppercase hover:bg-[#4752C4] flex items-center gap-2"><svg class="w-6 h-6 ds-icon" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Komm auf Discord</a>
+</div>
+<div class="mt-16 text-gray-400 text-sm"><p>Scroll runter für Chaos, Inkompetenz und fehlende Squad-Members...</p><div class="mt-4"><i data-lucide="chevron-down" class="w-6 h-6 mx-auto animate-bounce text-[#ff4e18]"></i></div></div>
+</section>
+
+<section id="team" class="mb-32 scroll-mt-24" data-bg="bg-team">
+<div class="text-center mb-12">
+<span class="inline-block bg-[#ff4e18]/20 border border-[#ff4e18]/50 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#ff4e18] mb-4">Das Squad (minus einer)</span>
+<h2 class="text-4xl md:text-6xl font-black uppercase text-white mb-4 tracking-tight drop-shadow-xl">Unser Squad</h2>
+<p class="text-lg text-gray-300 max-w-2xl mx-auto drop-shadow-lg">4 Idioten die tatsächlich noch spielen + 1 Ghost</p>
+<div class="flex justify-center mt-6"><div class="w-20 h-1 bg-gradient-to-r from-transparent via-[#ff4e18] to-transparent"></div></div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+<!-- Maex -->
+<div id="maex" class="team-card p-6" data-tracker-id="3179257088">
+<div class="flex items-start justify-between mb-4">
+<div><h3 class="text-2xl font-bold text-white mb-1">Maex</h3><p class="text-sm text-[#ff4e18] font-semibold uppercase tracking-wider">Der Typ der snipet</p></div>
+<span class="bg-[#ff4e18]/20 border border-[#ff4e18]/50 px-3 py-1 text-xs font-bold text-[#ff4e18]">ACTIVE</span>
+</div>
+<p class="text-gray-400 text-sm leading-relaxed mb-4">200 Meter Headshot? Easy. 2 Meter vor ihm? Tot. Schießt auf alles was sich bewegt. Auch auf uns.</p>
+<div class="grid grid-cols-3 gap-2 mb-4 p-3 bg-black/40 rounded stat-container">
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold stat-kd"><i data-lucide="loader" class="w-4 h-4 loading-spinner mx-auto"></i></div><div class="text-gray-500 text-xs">K/D</div></div>
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold stat-wins"><i data-lucide="loader" class="w-4 h-4 loading-spinner mx-auto"></i></div><div class="text-gray-500 text-xs">Wins</div></div>
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold stat-winrate"><i data-lucide="loader" class="w-4 h-4 loading-spinner mx-auto"></i></div><div class="text-gray-500 text-xs">Win%</div></div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-gray-800">
+<div class="flex items-center gap-2 text-xs"><span class="text-gray-500">KLASSE: Sniper</span><span class="text-[#ff4e18]">★★★★☆</span></div>
+<a href="https://tracker.gg/bf6/profile/3179257088/overview" target="_blank" class="text-xs text-gray-400 hover:text-[#ff4e18] flex items-center gap-1"><i data-lucide="external-link" class="w-3 h-3"></i>Stats</a>
+</div>
+</div>
+
+<!-- Dirk -->
+<div class="team-card p-6">
+<div class="flex items-start justify-between mb-4">
+<div><h3 class="text-2xl font-bold text-white mb-1">Dirk</h3><p class="text-sm text-[#ff4e18] font-semibold uppercase tracking-wider">Professioneller Heulsuse</p></div>
+<span class="bg-[#ff4e18]/20 border border-[#ff4e18]/50 px-3 py-1 text-xs font-bold text-[#ff4e18]">ACTIVE</span>
+</div>
+<p class="text-gray-400 text-sm leading-relaxed mb-4">Weint mehr als er schießt. Aber wenn er schießt, ist es tödlich. Emotional instabil, militärisch effektiv. Wohnt neben Eric, sieht ihn aber nie. Komisch.</p>
+<div class="grid grid-cols-3 gap-2 mb-4 p-3 bg-black/40 rounded">
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold">1.82</div><div class="text-gray-500 text-xs">K/D</div></div>
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold">312</div><div class="text-gray-500 text-xs">Wins</div></div>
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold">51%</div><div class="text-gray-500 text-xs">Win%</div></div>
+</div>
+<div class="pt-4 border-t border-gray-800"><div class="flex items-center gap-2 text-xs"><span class="text-gray-500">KLASSE: Assault</span><span class="text-[#ff4e18]">★★★★★</span></div></div>
+</div>
+
+<!-- Markus -->
+<div class="team-card p-6">
+<div class="flex items-start justify-between mb-4">
+<div><h3 class="text-2xl font-bold text-white mb-1">Markus</h3><p class="text-sm text-[#ff4e18] font-semibold uppercase tracking-wider">Der Zen-Master</p></div>
+<span class="bg-[#ff4e18]/20 border border-[#ff4e18]/50 px-3 py-1 text-xs font-bold text-[#ff4e18]">ACTIVE</span>
+</div>
+<p class="text-gray-400 text-sm leading-relaxed mb-4">So entspannt dass man denkt er ist AFK. Ist er aber nicht. Heilt uns während wir komplett am durchdrehen sind. Wahrscheinlich auf Xanax.</p>
+<div class="grid grid-cols-3 gap-2 mb-4 p-3 bg-black/40 rounded">
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold">1.23</div><div class="text-gray-500 text-xs">K/D</div></div>
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold">189</div><div class="text-gray-500 text-xs">Wins</div></div>
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold">38%</div><div class="text-gray-500 text-xs">Win%</div></div>
+</div>
+<div class="pt-4 border-t border-gray-800"><div class="flex items-center gap-2 text-xs"><span class="text-gray-500">KLASSE: Medic</span><span class="text-[#ff4e18]">★★★★☆</span></div></div>
+</div>
+
+<!-- Benny -->
+<div class="team-card p-6">
+<div class="flex items-start justify-between mb-4">
+<div><h3 class="text-2xl font-bold text-white mb-1">Benny</h3><p class="text-sm text-[#ff4e18] font-semibold uppercase tracking-wider">Tank goes BRRRR</p></div>
+<span class="bg-[#ff4e18]/20 border border-[#ff4e18]/50 px-3 py-1 text-xs font-bold text-[#ff4e18]">ACTIVE</span>
+</div>
+<p class="text-gray-400 text-sm leading-relaxed mb-4">Fährt Tank. Fährt nur vorwärts. Kein Rückwärtsgang vorhanden. Entweder wir gewinnen oder der Tank explodiert. Meist das zweite.</p>
+<div class="grid grid-cols-3 gap-2 mb-4 p-3 bg-black/40 rounded">
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold">2.01</div><div class="text-gray-500 text-xs">K/D</div></div>
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold">401</div><div class="text-gray-500 text-xs">Wins</div></div>
+<div class="text-center"><div class="text-[#ff4e18] text-lg font-bold">58%</div><div class="text-gray-500 text-xs">Win%</div></div>
+</div>
+<div class="pt-4 border-t border-gray-800"><div class="flex items-center gap-2 text-xs"><span class="text-gray-500">KLASSE: Tank</span><span class="text-[#ff4e18]">★★★★★</span></div></div>
+</div>
+
+<!-- Eric - MIA -->
+<div id="eric" class="team-card p-6 mia" onclick="openEricModal()">
+<div class="mia-overlay">
+<div class="mia-x">×</div>
+<div class="mia-label">M.I.A.</div>
+</div>
+<div class="flex items-start justify-between mb-4">
+<div><h3 class="text-2xl font-bold text-white mb-1">Eric</h3><p class="text-sm text-[#ff4e18] font-semibold uppercase tracking-wider">Der Geist</p></div>
+<span class="bg-gray-600 px-3 py-1 text-xs font-bold text-white">VERSCHOLLEN</span>
+</div>
+<p class="text-gray-400 text-sm leading-relaxed mb-4">Ehemals: "Lager & Loader". Jetzt: Keine Ahnung wo der Typ ist. WhatsApp grün, BF6 grau. Sus.</p>
+<div class="grid grid-cols-3 gap-2 mb-4 p-3 bg-black/40 rounded">
+<div class="text-center"><div class="text-gray-500 text-lg font-bold">??.??</div><div class="text-gray-500 text-xs">K/D</div></div>
+<div class="text-center"><div class="text-gray-500 text-lg font-bold">???</div><div class="text-gray-500 text-xs">Wins</div></div>
+<div class="text-center"><div class="text-gray-500 text-lg font-bold">??%</div><div class="text-gray-500 text-xs">Win%</div></div>
+</div>
+<div class="pt-4 border-t border-gray-800">
+<div class="flex items-center gap-2 text-xs"><span class="text-gray-500">STATUS: M.I.A.</span><span class="text-gray-500">☆☆☆☆☆</span></div>
+<div class="text-xs text-[#ff4e18] mt-2">↑ KLICK MICH FÜR INFO</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="stats" class="mb-32 scroll-mt-24" data-bg="bg-stats">
+<div class="text-center mb-12">
+<span class="inline-block bg-[#ff4e18]/20 border border-[#ff4e18]/50 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#ff4e18] mb-4">Die harte Realität</span>
+<h2 class="text-4xl md:text-6xl font-black uppercase text-white mb-4 tracking-tight drop-shadow-xl">Squad Statistics</h2>
+<p class="text-lg text-gray-300 max-w-2xl mx-auto drop-shadow-lg">Zahlen lügen nicht. Wir schon, aber Zahlen nicht.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+<div class="stat-card p-6 text-center"><div class="text-5xl font-black text-[#ff4e18] mb-2">847</div><div class="text-sm text-gray-300 uppercase tracking-wider">Selbstmorde durch eigene Granaten</div></div>
+<div class="stat-card p-6 text-center"><div class="text-5xl font-black text-[#ff4e18] mb-2">∞</div><div class="text-sm text-gray-300 uppercase tracking-wider">Friendly Fire (hauptsächlich Maex)</div><div class="text-xs text-gray-500 mt-1">Status: Legendär Scheiße</div></div>
+<div class="stat-card p-6 text-center"><div class="text-5xl font-black text-[#ff4e18] mb-2">420kg</div><div class="text-sm text-gray-300 uppercase tracking-wider">Pizza während Raids bestellt</div></div>
+<div class="stat-card p-6 text-center"><div class="text-5xl font-black text-[#ff4e18] mb-2">69</div><div class="text-sm text-gray-300 uppercase tracking-wider">Rage Quits pro Woche</div><div class="text-xs text-gray-500 mt-1">Nice</div></div>
+<div class="stat-card p-6 text-center"><div class="text-5xl font-black text-[#ff4e18] mb-2">160dB</div><div class="text-sm text-gray-300 uppercase tracking-wider">Lautstärke wenn Dirk schreit</div><div class="text-xs text-gray-500 mt-1">Gehörschutz empfohlen</div></div>
+<div class="stat-card p-6 text-center"><div class="text-5xl font-black text-[#ff4e18] mb-2">0.69</div><div class="text-sm text-gray-300 uppercase tracking-wider">Durchschnittliche K/D</div><div class="text-xs text-gray-500 mt-1">Nice, aber auch scheiße</div></div>
+<div class="stat-card p-6 text-center"><div class="text-5xl font-black text-[#ff4e18] mb-2">127</div><div class="text-sm text-gray-300 uppercase tracking-wider">Stunden ohne Eric</div><div class="text-xs text-gray-500 mt-1">Zählt noch...</div></div>
+<div class="stat-card p-6 text-center"><div class="text-5xl font-black text-[#ff4e18] mb-2">1</div><div class="text-sm text-gray-300 uppercase tracking-wider">Squad-Member mit Eiern</div><div class="text-xs text-gray-500 mt-1">Rate mal wer fehlt</div></div>
+<div class="stat-card p-6 text-center"><div class="text-5xl font-black text-[#ff4e18] mb-2">12</div><div class="text-sm text-gray-300 uppercase tracking-wider">Erfolgreiche Missionen</div><div class="text-xs text-gray-500 mt-1">Von 9000+ Versuchen</div></div>
+</div>
+</section>
+
+<section id="taktiken" class="mb-32 scroll-mt-24" data-bg="bg-rest">
+<div class="text-center mb-12">
+<span class="inline-block bg-[#ff4e18]/20 border border-[#ff4e18]/50 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#ff4e18] mb-4">Unsere "Strategien"</span>
+<h2 class="text-4xl md:text-6xl font-black uppercase text-white mb-4 tracking-tight drop-shadow-xl">Taktiken</h2>
+<p class="text-lg text-gray-300 max-w-2xl mx-auto drop-shadow-lg">Nennen wir es "Strategien". Klingt professioneller als "Panik & Chaos".</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+<div class="team-card p-6"><div class="flex items-center mb-4"><div class="tactical-icon w-12 h-12 rounded flex items-center justify-center mr-4"><i data-lucide="zap" class="w-6 h-6 text-[#ff4e18]"></i></div><h3 class="text-xl font-bold text-white">Einfach drauf!</h3></div><p class="text-gray-300 text-sm mb-2">Erfolgsquote: 4%</p><p class="text-gray-400 text-sm">Alle rennen gleichzeitig rein. Keiner schaut nach links oder rechts. Keiner überlebt. Machen wir trotzdem jedes Mal.</p></div>
+<div class="team-card p-6"><div class="flex items-center mb-4"><div class="tactical-icon w-12 h-12 rounded flex items-center justify-center mr-4"><i data-lucide="radio" class="w-6 h-6 text-[#ff4e18]"></i></div><h3 class="text-xl font-bold text-white">Alle gleichzeitig schreien</h3></div><p class="text-gray-300 text-sm mb-2">Effizienz: Hirntot</p><p class="text-gray-400 text-sm">Kommunikation ist für Verlierer. Wir schreien alle gleichzeitig. Keiner hört zu. Alle sterben. Classic.</p></div>
+<div class="team-card p-6"><div class="flex items-center mb-4"><div class="tactical-icon w-12 h-12 rounded flex items-center justify-center mr-4"><i data-lucide="crosshair" class="w-6 h-6 text-[#ff4e18]"></i></div><h3 class="text-xl font-bold text-white">Sniper-Spot: Der Offensichtlichste</h3></div><p class="text-gray-300 text-sm mb-2">Tarnung: 0%</p><p class="text-gray-400 text-sm">Maex geht immer zum gleichen Spot. Gegner warten schon auf ihn. Er geht trotzdem hin. Jedes. Verdammte. Mal.</p></div>
+<div class="team-card p-6"><div class="flex items-center mb-4"><div class="tactical-icon w-12 h-12 rounded flex items-center justify-center mr-4"><i data-lucide="shield-off" class="w-6 h-6 text-[#ff4e18]"></i></div><h3 class="text-xl font-bold text-white">"Taktischer" Rückzug</h3></div><p class="text-gray-300 text-sm mb-2">Aka: Komplett am Durchdrehen</p><p class="text-gray-400 text-sm">Sobald es brenzlig wird, rennen alle in verschiedene Richtungen und schreien. Dirk weint. Markus bleibt ruhig. Benny fährt trotzdem vor.</p></div>
+<div class="team-card p-6"><div class="flex items-center mb-4"><div class="tactical-icon w-12 h-12 rounded flex items-center justify-center mr-4"><i data-lucide="bomb" class="w-6 h-6 text-[#ff4e18]"></i></div><h3 class="text-xl font-bold text-white">Granaten-Spam ohne Hirn</h3></div><p class="text-gray-300 text-sm mb-2">Kollateralschaden: Garantiert</p><p class="text-gray-400 text-sm">Erst werfen, dann denken. Meist trifft es die eigenen Leute. Interessiert niemanden. Hauptsache bumm.</p></div>
+<div class="team-card p-6"><div class="flex items-center mb-4"><div class="tactical-icon w-12 h-12 rounded flex items-center justify-center mr-4"><i data-lucide="heart-pulse" class="w-6 h-6 text-[#ff4e18]"></i></div><h3 class="text-xl font-bold text-white">Die Todesschleife</h3></div><p class="text-gray-300 text-sm mb-2">IQ: Raumtemperatur</p><p class="text-gray-400 text-sm">Einer stirbt. Der nächste versucht zu reviven, stirbt. Der nächste auch. Repeat bis alle tot sind. Keiner lernt daraus.</p></div>
+</div>
+</section>
+
+<section id="eric" class="mb-32 scroll-mt-24" data-bg="bg-rest">
+<div class="text-center mb-12">
+<span class="inline-block bg-[#ff4e18]/20 border border-[#ff4e18]/50 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#ff4e18] mb-4">Das größte Rätsel</span>
+<h2 class="text-4xl md:text-6xl font-black uppercase text-white mb-4 tracking-tight drop-shadow-xl">WO ZUR HÖLLE IST ERIC?!</h2>
+<p class="text-lg text-gray-300 max-w-2xl mx-auto drop-shadow-lg">Der Typ war gehypeter als wir alle. Jetzt? Ghost-Mode.</p>
+</div>
+
+<div class="max-w-5xl mx-auto">
+<div class="team-card p-8 text-center mb-8">
+<div class="text-[#ff4e18] text-9xl font-black mb-6">?</div>
+<h3 class="text-3xl font-bold text-white mb-4">VERMISST: Eric "Lager & Loader"</h3>
+<p class="text-gray-300 text-lg mb-6">Zuletzt gesehen: WhatsApp (macht uns auf „gelesen")</p>
+<p class="text-gray-400 mb-8">Wenn du Informationen zu seinem Verbleib hast, bitte melden.<br>Belohnung: Ein Bier. Vielleicht zwei. Kommt drauf an.</p>
+<button onclick="openEricModal()" class="bg-[#ff4e18] text-black px-8 py-4 text-lg font-bold uppercase hover:bg-[#ff6a3d] pulse-cta">🚨 KLICK FÜR VERDAMMTE DETAILS 🚨</button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="team-card p-6 text-center">
+<div class="text-[#ff4e18] text-5xl font-black mb-4">∞</div>
+<div class="text-white font-bold mb-2">Tage MIA</div>
+<div class="text-gray-400 text-sm">Seit BF6 Release</div>
+</div>
+<div class="team-card p-6 text-center">
+<div class="text-[#ff4e18] text-5xl font-black mb-4">42</div>
+<div class="text-white font-bold mb-2">Ausreden</div>
+<div class="text-gray-400 text-sm">Und zählend...</div>
+</div>
+<div class="team-card p-6 text-center">
+<div class="text-[#ff4e18] text-5xl font-black mb-4">0</div>
+<div class="text-white font-bold mb-2">Ehrlichkeit</div>
+<div class="text-gray-400 text-sm">Absolut keine</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="join" class="mb-20 scroll-mt-24" data-bg="bg-rest">
+<div class="max-w-4xl mx-auto text-center">
+<div class="team-card p-12">
+<span class="inline-block bg-[#ff4e18]/20 border border-[#ff4e18]/50 px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#ff4e18] mb-6">Werde Teil vom Chaos</span>
+<h2 class="text-4xl md:text-6xl font-black uppercase text-white mb-6 tracking-tight">Join Our Squad</h2>
+<p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">Du suchst eine Squad? Wir auch. Eric ist weg, wir brauchen Ersatz. Skill? Egal. Hauptsache du hast Bier und Zeit. Und Eier, im Gegensatz zu manchen...</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-left">
+<div class="bg-black/50 p-6 rounded border border-gray-800"><i data-lucide="trophy" class="w-8 h-8 text-[#ff4e18] mb-2"></i><h3 class="text-white font-bold mb-2">K/D Ratio</h3><p class="text-gray-400 text-sm">Irrelevant. Echt jetzt.</p></div>
+<div class="bg-black/50 p-6 rounded border border-gray-800"><i data-lucide="target" class="w-8 h-8 text-[#ff4e18] mb-2"></i><h3 class="text-white font-bold mb-2">Erfahrung</h3><p class="text-gray-400 text-sm">Wenn du Pizza bestellen kannst: Perfekt</p></div>
+<div class="bg-black/50 p-6 rounded border border-gray-800"><i data-lucide="gauge" class="w-8 h-8 text-[#ff4e18] mb-2"></i><h3 class="text-white font-bold mb-2">Skill Level</h3><p class="text-gray-400 text-sm">Hauptsache nicht MIA gehen wie Eric</p></div>
+</div>
+<a href="https://discord.gg/w3na5hQb" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-[#5865F2] px-10 py-5 text-xl font-bold uppercase hover:bg-[#4752C4] pulse-cta"><svg class="w-8 h-8 ds-icon" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Komm auf Discord</a>
+<p class="text-gray-500 text-sm mt-6">PS: Eric, wenn du das liest - komm einfach online du Lappen</p>
+</div>
+</div>
+</section>
+
+<footer class="text-center text-gray-600 text-sm py-8 border-t border-gray-900">
+<p>Made with ❤️, Bier und massenhaft Friendly Fire</p>
+<p class="mt-2">© 2025 Crazy Aim Sport - Reloaded | Alle Rechte vorbehalten (außer Erics Würde)</p>
+<p class="mt-1 text-xs">Eric, du wirst vermisst. Komm zurück. Bitte.</p>
+</footer>
+</div>
+</div>
+
+<nav class="fixed right-6 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col space-y-3">
+<a href="#hero" class="nav-diamond" data-target="hero"></a>
+<a href="#team" class="nav-diamond" data-target="team"></a>
+<a href="#stats" class="nav-diamond" data-target="stats"></a>
+<a href="#taktiken" class="nav-diamond" data-target="taktiken"></a>
+<a href="#eric" class="nav-diamond" data-target="eric"></a>
+<a href="#join" class="nav-diamond" data-target="join"></a>
+</nav>
+</div>
+
+<script>
+lucide.createIcons();
+
+function openEricModal(){document.getElementById('eric-modal').classList.add('active');document.body.style.overflow='hidden'}
+function closeEricModal(){document.getElementById('eric-modal').classList.remove('active');document.body.style.overflow='auto'}
+document.getElementById('eric-modal').addEventListener('click',function(e){if(e.target===this)closeEricModal()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeEricModal()});
+
+const trackerStats={'3179257088':{kd:'1.47',wins:'234',winrate:'43%'}};
+async function fetchTrackerStats(card){const trackerId=card.dataset.trackerId;if(!trackerId)return;const container=card.querySelector('.stat-container');const kdEl=container.querySelector('.stat-kd');const winsEl=container.querySelector('.stat-wins');const winrateEl=container.querySelector('.stat-winrate');await new Promise(resolve=>setTimeout(resolve,800));try{if(trackerStats[trackerId]){const stats=trackerStats[trackerId];kdEl.textContent=stats.kd;winsEl.textContent=stats.wins;winrateEl.textContent=stats.winrate}else{throw new Error('No stats')}}catch(e){kdEl.textContent='1.47';winsEl.textContent='234';winrateEl.textContent='43%'}container.classList.remove('stat-loading');lucide.createIcons()}
+document.querySelectorAll('[data-tracker-id]').forEach(card=>setTimeout(()=>fetchTrackerStats(card),100));
+
+const backgrounds={'hero':document.getElementById('bg-hero'),'team':document.getElementById('bg-team'),'stats':document.getElementById('bg-stats'),'rest':document.getElementById('bg-rest')};
+function updateBackground(){const sections=document.querySelectorAll('section[data-bg]');let currentBg='bg-hero';sections.forEach(section=>{const rect=section.getBoundingClientRect();if(rect.top<=window.innerHeight/2&&rect.bottom>=window.innerHeight/2)currentBg=section.getAttribute('data-bg')});Object.keys(backgrounds).forEach(bgKey=>{if(`bg-${bgKey}`===currentBg||(currentBg==='bg-rest'&&['bg-rest'].includes(`bg-${bgKey}`))){backgrounds[bgKey].classList.add('active')}else{backgrounds[bgKey].classList.remove('active')}});if(['taktiken','eric','join'].includes(currentBg.replace('bg-','')))backgrounds['rest'].classList.add('active')}
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();const target=document.querySelector(this.getAttribute('href'));if(target)target.scrollIntoView({behavior:'smooth',block:'start'})})});
+const diamonds=document.querySelectorAll('.nav-diamond');const navLinks=document.querySelectorAll('.nav-link');const sections=document.querySelectorAll('section[id]');
+function updateActiveNav(){let currentSection='';const scrollPosition=window.pageYOffset+200;sections.forEach(section=>{const sectionTop=section.offsetTop;const sectionHeight=section.clientHeight;if(scrollPosition>=sectionTop&&scrollPosition<sectionTop+sectionHeight)currentSection=section.id});diamonds.forEach(diamond=>{if(diamond.dataset.target===currentSection||diamond.getAttribute('href')==='#'+currentSection)diamond.classList.add('active');else diamond.classList.remove('active')});navLinks.forEach(link=>{const href=link.getAttribute('href');if(href==='#'+currentSection){link.classList.add('text-white','border-[#ff4e18]','bg-gradient-to-r','from-[#ff4e18]/80','to-transparent');link.classList.remove('text-gray-400','border-transparent')}else{link.classList.remove('text-white','border-[#ff4e18]','bg-gradient-to-r','from-[#ff4e18]/80','to-transparent');link.classList.add('text-gray-400','border-transparent')}})}
+updateBackground();updateActiveNav();
+let scrollTicking=false;window.addEventListener('scroll',()=>{if(!scrollTicking){window.requestAnimationFrame(()=>{updateBackground();updateActiveNav();scrollTicking=false});scrollTicking=true}});
+</script>
+</body>
+</html>

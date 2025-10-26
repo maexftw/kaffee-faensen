@@ -162,18 +162,22 @@ const winsEl=container.querySelector('.stat-wins');
 const winrateEl=container.querySelector('.stat-winrate');
 try{
 // Call PHP proxy to fetch live stats from Tracker.gg
-const response=await fetch(`../.superdesign/api/tracker-proxy.php?id=${trackerId}`);
-if(!response.ok)throw new Error('Failed to fetch');
+// WICHTIG: Für lokales Testing: Starte PHP-Server mit "php -S localhost:8000"
+// Dann öffne: http://localhost:8000/.superdesign/design_iterations/bf6_team_9.html
+const response=await fetch(`/.superdesign/api/tracker-proxy.php?id=${trackerId}`);
+if(!response.ok)throw new Error(`HTTP ${response.status}: ${response.statusText}`);
 const data=await response.json();
 if(data.error){
 throw new Error(data.error);
 }
-console.log('Stats fetched successfully:', data);
+console.log('✅ Stats fetched successfully:', data);
 kdEl.textContent=data.kd;
 winsEl.textContent=data.wins;
 winrateEl.textContent=data.winrate;
 }catch(e){
-console.error('Could not fetch live stats, using fallback',e);
+console.error('❌ Could not fetch live stats:',e.message);
+console.error('📝 Make sure PHP server is running: php -S localhost:8000');
+console.error('📝 Then open: http://localhost:8000/.superdesign/design_iterations/bf6_team_9.html');
 // Fallback zu statischen Werten
 kdEl.textContent='1.47';
 winsEl.textContent='234';
