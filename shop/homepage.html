@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaffee Fänsen - Handwerklich geröstet seit 1933</title>
+    <meta name="description" content="Traditionell gerösteter Kaffee aus Hamm. Seit über 90 Jahren rösten wir mit Leidenschaft. Jede Bohne handverlesen, jede Röstung ein Meisterwerk.">
+
+    <!-- Google Fonts: Patua One + Lora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Navigation Component -->
+    <script src="faensen_navigation.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        /* ===================================
+           CSS VARIABLES - 8px GRID SYSTEM
+           Based on UX Laws & Best Practices
+        =================================== */
+        :root {
+            /* COLORS - Brand Palette */
+            --color-primary: #593F33;
+            --color-secondary: #D1541D;
+            --color-bg: #FAF8F5;
+            --color-bg-white: #FFFFFF;
+            --color-text: #2D2520;
+            --color-text-light: #6B5D57;
+            --color-border: #E8E3DD;
+
+            /* TYPOGRAPHY */
+            --font-display: 'Patua One', serif;
+            --font-body: 'Lora', serif;
+
+            /* Font Sizes - Modular Scale (1.25 ratio) */
+            --text-xs: 12px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 20px;
+            --text-xl: 24px;
+            --text-2xl: 32px;
+            --text-3xl: 40px;
+            --text-4xl: 48px;
+            --text-5xl: 64px;
+
+            /* Line Heights */
+            --leading-tight: 1.2;
+            --leading-snug: 1.4;
+            --leading-normal: 1.6;
+            --leading-relaxed: 1.8;
+
+            /* SPACING - 8px Grid System */
+            --space-1: 8px;
+            --space-2: 16px;
+            --space-3: 24px;
+            --space-4: 32px;
+            --space-5: 40px;
+            --space-6: 48px;
+            --space-8: 64px;
+            --space-10: 80px;
+            --space-12: 96px;
+            --space-16: 128px;
+            --space-20: 160px;
+
+            /* BORDERS & RADIUS */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+
+            /* SHADOWS */
+            --shadow-sm: 0 2px 8px rgba(89, 63, 51, 0.08);
+            --shadow-md: 0 4px 16px rgba(89, 63, 51, 0.12);
+            --shadow-lg: 0 8px 32px rgba(89, 63, 51, 0.16);
+            --shadow-xl: 0 16px 48px rgba(89, 63, 51, 0.2);
+
+            /* TRANSITIONS */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===================================
+           RESET & BASE STYLES
+        =================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            line-height: var(--leading-relaxed);
+            color: var(--color-text);
+            background-color: var(--color-bg);
+        }
+
+        /* Typography Reset */
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: var(--leading-tight);
+            color: var(--color-text);
+        }
+
+        p { margin: 0; }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        button { font-family: inherit; }
+
+        /* ===================================
+           LAYOUT
+        =================================== */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: var(--space-3);
+            padding-right: var(--space-3);
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding-left: var(--space-6);
+                padding-right: var(--space-6);
+            }
+        }
+
+        /* ===================================
+           HEADER - Fitts' Law: Easy to reach
+        =================================== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
+            transition: box-shadow var(--transition-base);
+        }
+
+        .header.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 88px;
+            gap: var(--space-4);
+        }
+
+        .header-logo {
+            flex-shrink: 0;
+        }
+
+        .header-logo img {
+            height: 56px;
+            width: auto;
+            transition: transform var(--transition-fast);
+        }
+
+        .header-logo:hover img {
+            transform: scale(1.03);
+        }
+
+        .header-nav {
+            display: none;
+            gap: var(--space-5);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (min-width: 768px) {
+            .header-nav {
+                display: flex;
+            }
+        }
+
+        .header-nav a {
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            letter-spacing: 0.02em;
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+
+        .header-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-secondary);
+            transition: width var(--transition-base);
+        }
+
+        .header-nav a:hover {
+            color: var(--color-secondary);
+        }
+
+        .header-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Cart Button - Fitts' Law: 48px minimum touch target */
+        .header-cart {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 48px;
+            min-height: 48px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: opacity var(--transition-fast);
+        }
+
+        .header-cart:hover {
+            opacity: 0.7;
+        }
+
+        .header-cart-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            min-width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+            background: var(--color-secondary);
+            color: white;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            border-radius: var(--radius-full);
+        }
+
+        /* ===================================
+           HERO SECTION
+        =================================== */
+        .hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: var(--space-16) 0;
+            background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 100%);
+            color: var(--color-text);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-label {
+            display: inline-block;
+            padding: 6px 16px;
+            margin-bottom: var(--space-4);
+            background: var(--color-secondary);
+            color: white;
+            font-family: var(--font-display);
+            font-size: var(--text-sm);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: transform var(--transition-fast);
+        }
+
+        .hero-label:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-title {
+            font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+            margin-bottom: var(--space-3);
+            color: var(--color-primary);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(var(--text-xl), 3vw, var(--text-2xl));
+            font-weight: 500;
+            margin-bottom: var(--space-4);
+            color: var(--color-text);
+        }
+
+        .hero-description {
+            font-size: var(--text-lg);
+            line-height: var(--leading-relaxed);
+            margin-bottom: var(--space-6);
+            color: var(--color-text);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===================================
+           BUTTONS - Fitts' Law
+        =================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 56px;
+            padding: 0 var(--space-4);
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            letter-spacing: 0.02em;
+            text-align: center;
+            border: 2px solid transparent;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6B4D40;
+            border-color: #6B4D40;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--color-secondary);
+            border-color: var(--color-secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #E16324;
+            border-color: #E16324;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-lg {
+            min-height: 64px;
+            padding: 0 var(--space-6);
+            font-size: var(--text-lg);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-5);
+        }
+
+        /* Trust Elements */
+        .trust-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            align-items: center;
+            justify-content: center;
+            margin-top: var(--space-6);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+        }
+
+        .trust-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            color: var(--color-secondary);
+        }
+
+        /* ===================================
+           SECTIONS
+        =================================== */
+        .section {
+            padding: var(--space-12) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-10);
+        }
+
+        .section-label {
+            display: inline-block;
+            margin-bottom: var(--space-2);
+            font-family: var(--font-display);
+            font-size: var(--text-sm);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+        }
+
+        .section-title {
+            font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+            margin-bottom: var(--space-3);
+        }
+
+        .section-description {
+            font-size: var(--text-lg);
+            line-height: var(--leading-relaxed);
+            color: var(--color-text-light);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* ===================================
+           DIVIDER - Visual Separation
+        =================================== */
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: var(--space-10) 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: calc(50% - 32px);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+        }
+
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+
+        .divider-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: var(--color-bg);
+            border: 2px solid var(--color-secondary);
+            border-radius: var(--radius-full);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===================================
+           GRID - Gestalt: Proximity & Grouping
+        =================================== */
+        .grid {
+            display: grid;
+            gap: var(--space-4);
+        }
+
+        .grid-2 { grid-template-columns: 1fr; }
+        .grid-3 { grid-template-columns: 1fr; }
+        .grid-4 { grid-template-columns: 1fr; }
+
+        @media (min-width: 640px) {
+            .grid-2 { grid-template-columns: repeat(2, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .grid-4 { grid-template-columns: repeat(4, 1fr); }
+            .grid { gap: var(--space-6); }
+        }
+
+        /* ===================================
+           CARDS
+        =================================== */
+        .card {
+            padding: var(--space-4);
+            background: var(--color-bg-white);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-base);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-center {
+            text-align: center;
+        }
+
+        .card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            margin: 0 auto var(--space-3);
+            background: var(--color-bg);
+            border: 3px solid var(--color-primary);
+            border-radius: var(--radius-full);
+        }
+
+        .card-title {
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-text {
+            font-size: var(--text-base);
+            line-height: var(--leading-relaxed);
+            color: var(--color-text-light);
+        }
+
+        /* ===================================
+           PHOTO FRAME
+        =================================== */
+        .photo-frame {
+            position: relative;
+            padding: var(--space-2);
+            background: var(--color-bg-white);
+            border: 4px solid var(--color-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid var(--color-border);
+            pointer-events: none;
+        }
+
+        .photo-frame img {
+            width: 100%;
+        }
+
+        /* ===================================
+           QUOTE
+        =================================== */
+        .quote-block {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quote-text {
+            position: relative;
+            padding: 0 var(--space-4);
+            font-size: clamp(var(--text-lg), 2.5vw, var(--text-2xl));
+            font-style: italic;
+            line-height: var(--leading-normal);
+            margin-bottom: var(--space-6);
+        }
+
+        .quote-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -32px;
+            font-size: 120px;
+            line-height: 1;
+            color: var(--color-secondary);
+            opacity: 0.2;
+        }
+
+        .quote-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-3);
+        }
+
+        .quote-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            background: var(--color-bg);
+            border: 3px solid var(--color-primary);
+            border-radius: var(--radius-full);
+        }
+
+        .quote-name {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+        }
+
+        .quote-title {
+            font-size: var(--text-sm);
+            color: var(--color-secondary);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ===================================
+           TIMELINE
+        =================================== */
+        .timeline-item {
+            display: grid;
+            gap: var(--space-6);
+            align-items: center;
+            margin-bottom: var(--space-10);
+        }
+
+        @media (min-width: 1024px) {
+            .timeline-item {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-8);
+            }
+        }
+
+        .timeline-badge {
+            display: inline-block;
+            padding: var(--space-2) var(--space-4);
+            margin-bottom: var(--space-3);
+            background: var(--color-bg-white);
+            border: 2px solid var(--color-primary);
+            box-shadow: 4px 4px 0 var(--color-secondary);
+        }
+
+        .timeline-year {
+            font-size: var(--text-4xl);
+            line-height: 1;
+            color: var(--color-primary);
+        }
+
+        .timeline-title {
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-2);
+        }
+
+        .timeline-text {
+            font-size: var(--text-lg);
+            line-height: var(--leading-relaxed);
+            color: var(--color-text-light);
+        }
+
+        /* ===================================
+           PRODUCT CARD
+        =================================== */
+        .product-card {
+            padding: var(--space-3);
+            background: var(--color-bg-white);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-base);
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-image {
+            position: relative;
+            aspect-ratio: 1;
+            margin-bottom: var(--space-3);
+            background: linear-gradient(135deg, #FAF8F5 0%, #F5F0E8 100%);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform var(--transition-slow);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            margin-bottom: var(--space-2);
+            background: var(--color-secondary);
+            color: white;
+            font-family: var(--font-display);
+            font-size: var(--text-xs);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transform: rotate(-2deg);
+        }
+
+        .product-title {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-2);
+        }
+
+        .product-price {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            color: var(--color-primary);
+            margin-bottom: var(--space-3);
+        }
+
+        /* ===================================
+           FOOTER
+        =================================== */
+        .footer {
+            padding: var(--space-10) 0 var(--space-4);
+            background: var(--color-primary);
+            color: white;
+            border-top: 4px solid var(--color-secondary);
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
+        }
+
+        .footer-logo {
+            height: 56px;
+            margin-bottom: var(--space-3);
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-text {
+            font-size: var(--text-base);
+            line-height: var(--leading-relaxed);
+            opacity: 0.9;
+        }
+
+        .footer-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-3);
+        }
+
+        .footer-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-1);
+        }
+
+        .footer-links a {
+            font-size: var(--text-base);
+            opacity: 0.8;
+            transition: opacity var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: var(--space-4);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            font-size: var(--text-sm);
+            opacity: 0.8;
+        }
+
+        /* ===================================
+           SCROLL TO TOP
+        =================================== */
+        .scroll-top {
+            position: fixed;
+            bottom: var(--space-4);
+            right: var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-md);
+            z-index: 50;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--color-secondary);
+            transform: scale(1.08);
+        }
+
+        /* ===================================
+           ANIMATIONS
+        =================================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(12px); }
+        }
+
+        .bounce {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        /* ===================================
+           UTILITIES
+        =================================== */
+        .bg-white { background: var(--color-bg-white); }
+        .bg-light { background: var(--color-bg); }
+    </style>
+</head>
+<body>
+    <!-- HEADER - Automatically inserted by faensen_navigation.js -->
+
+    <!-- ===================================
+         HERO SECTION
+    =================================== -->
+    <section class="hero" id="start">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-label">Handgerösteter Kaffee</div>
+
+                <h1 class="hero-title">Echte Handwerkskunst seit 1933</h1>
+                <p class="hero-subtitle">Kaffee, der Geschichte erzählt</p>
+                <p class="hero-description">
+                    Seit Generationen rösten wir mit Leidenschaft und Sorgfalt.
+                    Jede Bohne ist handverlesen, jede Röstung ein Meisterwerk.
+                </p>
+
+                <div class="btn-group">
+                    <a href="#produkte" class="btn btn-secondary btn-lg">
+                        Jetzt probieren
+                        <i data-lucide="arrow-right" style="width: 20px; height: 20px; margin-left: 8px;"></i>
+                    </a>
+                    <a href="#ueber-uns" class="btn btn-outline btn-lg">Mehr erfahren</a>
+                </div>
+
+                <div class="trust-badges">
+                    <div class="trust-item">
+                        <span class="trust-icon">
+                            <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+                        </span>
+                        <span>Über 5.000 zufriedene Kunden</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">
+                            <i data-lucide="truck" style="width: 20px; height: 20px;"></i>
+                        </span>
+                        <span>Kostenloser Versand ab 30€</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">
+                            <i data-lucide="award" style="width: 20px; height: 20px;"></i>
+                        </span>
+                        <span>Seit 1933 in Familienhand</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================
+         DIVIDER
+    =================================== -->
+    <div class="divider">
+        <div class="divider-icon">
+            <i data-lucide="coffee" style="width: 24px; height: 24px; color: var(--color-primary);"></i>
+        </div>
+    </div>
+
+    <!-- ===================================
+         STORY SECTION
+    =================================== -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-2">
+                <div class="fade-in">
+                    <div class="section-label">Unser Versprechen</div>
+                    <h2 class="section-title" style="text-align: left; margin-bottom: var(--space-4);">
+                        Kaffee, der Geschichte erzählt
+                    </h2>
+                    <p class="section-description" style="text-align: left; max-width: none; margin-bottom: var(--space-5);">
+                        Seit Generationen rösten wir mit Leidenschaft und Sorgfalt.
+                        Jede Bohne ist handverlesen, jede Röstung ein Meisterwerk.
+                    </p>
+                    <a href="#produkte" class="btn btn-primary">Jetzt bestellen</a>
+                </div>
+
+                <div class="fade-in">
+                    <div class="photo-frame">
+                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67bf1ee5829be43edda85201_Untitled%20design%20(1).png" alt="Handverlesene Kaffeebohnen">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================
+         DIVIDER
+    =================================== -->
+    <div class="divider">
+        <div class="divider-icon">
+            <i data-lucide="heart" style="width: 24px; height: 24px; color: var(--color-primary);"></i>
+        </div>
+    </div>
+
+    <!-- ===================================
+         QUOTE SECTION
+    =================================== -->
+    <section class="section bg-white">
+        <div class="container">
+            <div class="quote-block fade-in">
+                <blockquote class="quote-text">
+                    Unser Kaffee ist mehr als ein Getränk – er ist unsere Geschichte,
+                    unsere Tradition und unser Handwerk. Das schmeckt man mit jedem Schluck.
+                </blockquote>
+                <div class="quote-author">
+                    <div class="quote-avatar">
+                        <i data-lucide="user" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                    </div>
+                    <div style="text-align: left;">
+                        <div class="quote-name">Rouven Fänsen</div>
+                        <div class="quote-title">Inhaber in 3. Generation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================
+         DIVIDER
+    =================================== -->
+    <div class="divider">
+        <div class="divider-icon">
+            <i data-lucide="award" style="width: 24px; height: 24px; color: var(--color-primary);"></i>
+        </div>
+    </div>
+
+    <!-- ===================================
+         FEATURES SECTION - Miller's Law: Max 6 items
+    =================================== -->
+    <section class="section" id="ueber-uns">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Was uns auszeichnet</div>
+                <h2 class="section-title">Warum Fänsen Kaffee?</h2>
+                <p class="section-description">
+                    Unser Kaffee steht für Tradition, Nachhaltigkeit und höchste Handwerkskunst
+                </p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card card-center fade-in">
+                    <div class="card-icon">
+                        <i data-lucide="home" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                    </div>
+                    <h3 class="card-title">Lokale Rösterei</h3>
+                    <p class="card-text">
+                        Seit 1933 rösten wir in Hamm mit Liebe zum Detail und höchster Qualität
+                    </p>
+                </div>
+
+                <div class="card card-center fade-in">
+                    <div class="card-icon">
+                        <i data-lucide="briefcase" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                    </div>
+                    <h3 class="card-title">Großhändler</h3>
+                    <p class="card-text">
+                        Exklusiver Kaffee für Ihr Unternehmen – fair, nachhaltig und in bester Qualität
+                    </p>
+                </div>
+
+                <div class="card card-center fade-in">
+                    <div class="card-icon">
+                        <i data-lucide="leaf" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                    </div>
+                    <h3 class="card-title">100% Organisch</h3>
+                    <p class="card-text">
+                        Natürliche Kaffeebohnen ohne Pestizide oder künstliche Zusätze
+                    </p>
+                </div>
+
+                <div class="card card-center fade-in">
+                    <div class="card-icon">
+                        <i data-lucide="truck" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                    </div>
+                    <h3 class="card-title">Deutschlandweiter Versand</h3>
+                    <p class="card-text">
+                        Von unserer Rösterei direkt zu Ihnen – frisch geröstet geliefert
+                    </p>
+                </div>
+
+                <div class="card card-center fade-in">
+                    <div class="card-icon">
+                        <i data-lucide="shopping-bag" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                    </div>
+                    <h3 class="card-title">Online Shop</h3>
+                    <p class="card-text">
+                        Bequem online bestellen und frisch gerösteten Kaffee genießen
+                    </p>
+                </div>
+
+                <div class="card card-center fade-in">
+                    <div class="card-icon">
+                        <i data-lucide="star" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                    </div>
+                    <h3 class="card-title">Kundenvertrauen</h3>
+                    <p class="card-text">
+                        Tausende zufriedene Kaffeeliebhaber vertrauen auf unsere Qualität
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================
+         DIVIDER
+    =================================== -->
+    <div class="divider">
+        <div class="divider-icon">
+            <i data-lucide="clock" style="width: 24px; height: 24px; color: var(--color-primary);"></i>
+        </div>
+    </div>
+
+    <!-- ===================================
+         TIMELINE SECTION
+    =================================== -->
+    <section class="section bg-white" id="tradition">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Unsere Reise</div>
+                <h2 class="section-title">Unsere Geschichte</h2>
+                <p class="section-description">
+                    Seit 1933 rösten wir Kaffee mit Hingabe und Leidenschaft
+                </p>
+            </div>
+
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="timeline-item fade-in">
+                    <div class="photo-frame">
+                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67bdbec3a0c1a78e1603aaa9_17_1121.jpg" alt="Gründung 1933">
+                    </div>
+                    <div>
+                        <div class="timeline-badge">
+                            <div class="timeline-year">1933</div>
+                        </div>
+                        <h3 class="timeline-title">Die Gründung</h3>
+                        <p class="timeline-text">
+                            Mit einer kleinen Trommelröstmaschine und großer Vision begann unsere Reise in Hamm
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div>
+                        <div class="timeline-badge">
+                            <div class="timeline-year">1969</div>
+                        </div>
+                        <h3 class="timeline-title">Zweite Generation</h3>
+                        <p class="timeline-text">
+                            Horst Fänsen übernahm die Rösterei und führte die Tradition mit Leidenschaft fort
+                        </p>
+                    </div>
+                    <div class="photo-frame">
+                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8466233bd0fe70b72690b_Faensen_15.%20November%202022_001_(C)POTT.Production.jpg" alt="1969">
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="photo-frame">
+                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b84661a310147872736001_Faensen_15.%20November%202022_014_(C)POTT.Production.jpg" alt="Heute">
+                    </div>
+                    <div>
+                        <div class="timeline-badge" style="border-color: var(--color-secondary); box-shadow: 4px 4px 0 var(--color-secondary);">
+                            <div class="timeline-year" style="color: var(--color-secondary);">Heute</div>
+                        </div>
+                        <h3 class="timeline-title">Dritte Generation</h3>
+                        <p class="timeline-text">
+                            In dritter Generation führen wir die Tradition fort. Zweimal wöchentlich rösten wir etwa 250 Kilogramm Kaffee in 13 verschiedenen Sorten
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================
+         DIVIDER
+    =================================== -->
+    <div class="divider">
+        <div class="divider-icon">
+            <i data-lucide="coffee" style="width: 24px; height: 24px; color: var(--color-primary);"></i>
+        </div>
+    </div>
+
+    <!-- ===================================
+         PRODUCTS SECTION - Hick's Law: Limited choices
+    =================================== -->
+    <section class="section" id="produkte">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Unsere Auswahl</div>
+                <h2 class="section-title">Handverlesene Kaffeesorten</h2>
+                <p class="section-description">
+                    Von mild bis kräftig – entdecken Sie unsere Bestseller
+                </p>
+            </div>
+
+            <div class="grid grid-4" style="margin-bottom: var(--space-8);">
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png" alt="Hammer Spezial">
+                    </div>
+                    <div class="product-badge">Bestseller</div>
+                    <h3 class="product-title">Hammer Spezial</h3>
+                    <div class="product-price">€12,20</div>
+                    <a href="#" class="btn btn-outline" style="width: 100%;">Zum Produkt</a>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png" alt="Café Haus">
+                    </div>
+                    <div class="product-badge">Klassiker</div>
+                    <h3 class="product-title">Café Haus</h3>
+                    <div class="product-price">€12,60</div>
+                    <a href="#" class="btn btn-outline" style="width: 100%;">Zum Produkt</a>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png" alt="Maragogype">
+                    </div>
+                    <div class="product-badge">Premium</div>
+                    <h3 class="product-title">Maragogype</h3>
+                    <div class="product-price">€14,80</div>
+                    <a href="#" class="btn btn-outline" style="width: 100%;">Zum Produkt</a>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67d94e2fc2b48db01fa67c69_Kraft%20Pouch%20Packaging%20Front%20View%20Mockup%20(1).png" alt="Brasil">
+                    </div>
+                    <div class="product-badge">Mild</div>
+                    <h3 class="product-title">Brasil</h3>
+                    <div class="product-price">€10,80</div>
+                    <a href="#" class="btn btn-outline" style="width: 100%;">Zum Produkt</a>
+                </div>
+            </div>
+
+            <div style="text-align: center;" class="fade-in">
+                <a href="#" class="btn btn-primary btn-lg">Alle 11 Kaffeesorten entdecken</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================
+         FOOTER
+    =================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8468ce539285a857943bb_FF-LOGO-deliver-01-scaled-e1658821528426.jpg" alt="Kaffee Fänsen" class="footer-logo">
+                    <p class="footer-text">
+                        Handwerklich gerösteter Kaffee aus Hamm.<br>
+                        Tradition trifft Leidenschaft seit 1933.
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="footer-title">Navigation</h5>
+                    <ul class="footer-links">
+                        <li><a href="#produkte">Produkte</a></li>
+                        <li><a href="#ueber-uns">Über uns</a></li>
+                        <li><a href="#tradition">Tradition</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="footer-title">Rechtliches</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                        <li><a href="#">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kaffee Fänsen – Handwerklich geröstet seit 1933</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================================
+         SCROLL TO TOP BUTTON
+    =================================== -->
+    <button class="scroll-top" id="scroll-top" aria-label="Nach oben scrollen">
+        <i data-lucide="arrow-up" style="width: 24px; height: 24px;"></i>
+    </button>
+
+    <!-- ===================================
+         JAVASCRIPT
+    =================================== -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById('scroll-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Cart Count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+        updateCartCount();
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        const headerHeight = 88;
+                        const targetPosition = target.offsetTop - headerHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Refresh Icons
+        setTimeout(() => lucide.createIcons(), 100);
+    </script>
+</body>
+</html>

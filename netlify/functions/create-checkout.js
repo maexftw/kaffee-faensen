@@ -62,8 +62,8 @@ exports.handler = async (event, context) => {
       payment_method_types: ['card', 'sepa_debit'], // Karte + Banküberweisung
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${event.headers.origin || 'https://maexftw.github.io'}/CODEX/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${event.headers.origin || 'https://maexftw.github.io'}/CODEX/.superdesign/design_iterations/faensen_shop_1.html`,
+      success_url: `${event.headers.origin || 'https://dancing-elf-56bc97.netlify.app'}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${event.headers.origin || 'https://dancing-elf-56bc97.netlify.app'}/shop/shop.html`,
       shipping_address_collection: {
         allowed_countries: ['DE', 'AT', 'CH']
       },
