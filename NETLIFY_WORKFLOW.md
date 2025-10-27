@@ -88,6 +88,26 @@ In `shop/faensen_navigation.js`:
 ```
 
 ### Schritt 4: Git Commit & Push
+
+⚠️ **KRITISCH: Repository-Check vor jedem Push!**
+
+```bash
+# ⚠️ IMMER ZUERST: Überprüfe dass du im richtigen Repository bist!
+git remote -v
+# Muss zeigen: origin https://github.com/maexftw/kaffee-faensen.git
+
+# Überprüfe Working Directory
+pwd
+# Muss zeigen: .../CODEX oder ähnlich (NICHT bf6-squad!)
+
+# ⚠️ Falls falsches Repository: STOP! Navigiere zum richtigen Ordner!
+```
+
+**Warum ist das wichtig?**
+- Es gibt mehrere Projekte im gleichen Workspace (bf6-squad, kaffee-faensen, holdontime)
+- Ein Push zum falschen Repository überschreibt fremde Projekte
+- Immer verifizieren BEVOR du pushst!
+
 ```bash
 # Geänderte Dateien zum Staging hinzufügen
 git add shop/
@@ -102,6 +122,9 @@ git commit -m "Update: [Beschreibung deiner Änderungen]
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>"
+
+# ⚠️ NOCHMAL CHECKEN vor dem Push!
+git remote -v
 
 # Zum korrekten Repository pushen
 git push origin main
@@ -150,15 +173,96 @@ curl -H "Authorization: Bearer YOUR_NETLIFY_TOKEN" \
 2. Letzten Commit zurücksetzen: `git reset --soft HEAD~1`
 3. Dateien erneut bearbeiten und committen
 
-### Problem: Falsches Repository
+### Problem: Falsches Repository ⚠️ KRITISCH!
 **Ursache:** Git Remote zeigt auf falsches Repo (z.B. bf6-squad statt kaffee-faensen)
-**Lösung:**
-```bash
-# Aktuelles Remote prüfen
-git remote -v
 
-# Falls falsch, korrigieren
+**Symptome:**
+- Fremde Website zeigt falsche Inhalte (z.B. bf6-squad zeigt Hold-on-Time)
+- Push wird zu falschem Repository durchgeführt
+- Andere Projekte werden überschrieben
+
+**Prävention:**
+```bash
+# ⚠️ VOR JEDEM PUSH diese Checks durchführen:
+
+# 1. Repository überprüfen
+git remote -v
+# Erwartete Ausgabe: origin https://github.com/maexftw/kaffee-faensen.git
+
+# 2. Working Directory überprüfen
+pwd
+# Erwartete Ausgabe: .../CODEX (NICHT bf6-squad oder holdontime!)
+
+# 3. Branch überprüfen
+git branch --show-current
+# Erwartete Ausgabe: main
+```
+
+**Falls falsches Repository erkannt:**
+```bash
+# Option 1: Remote URL korrigieren (wenn im richtigen Ordner)
 git remote set-url origin https://github.com/maexftw/kaffee-faensen.git
+
+# Option 2: Zum richtigen Ordner navigieren
+cd "I:\Wordpress_NEU\Design Projekte\CAS\CODEX"
+git remote -v  # Nochmal verifizieren!
+
+# Option 3: Falls bereits falsch gepusht (NOTFALL)
+# Siehe Abschnitt "Notfall: Falscher Push rückgängig machen"
+```
+
+## Notfall: Falscher Push rückgängig machen
+
+**Szenario:** Du hast versehentlich Kaffee Fänsen Dateien ins bf6-squad (oder anderes) Repository gepusht.
+
+### Schritt 1: Backup des falschen Repos finden
+```bash
+# Clone das betroffene Repository in temp Verzeichnis
+cd /tmp
+git clone https://github.com/maexftw/bf6-squad.git bf6-recovery
+cd bf6-recovery
+
+# Finde den letzten korrekten Commit (VOR dem falschen Push)
+git log --oneline --all
+# Suche nach dem letzten richtigen Commit (z.B. "Update: Eric MIA redesign")
+```
+
+### Schritt 2: Korrekte Version wiederherstellen
+```bash
+# Checkout des korrekten Commits (ersetze COMMIT_HASH mit richtigem Hash)
+git checkout COMMIT_HASH -- index.html
+
+# Oder: Bestimmte Dateien aus altem Commit wiederherstellen
+git show COMMIT_HASH:index.html > index.html
+
+# Überprüfen ob Datei korrekt ist
+head -20 index.html
+```
+
+### Schritt 3: Fix committen und pushen
+```bash
+git add index.html
+git commit -m "CRITICAL FIX: Restore correct [project name] page
+
+- Restored original content from commit COMMIT_HASH
+- Removed incorrect content that was accidentally pushed
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+
+# Push zum korrekten Repository
+git push origin main
+
+# GitHub Pages Cache leeren (leerer Commit zum Neu-Deployen)
+git commit --allow-empty -m "Trigger GitHub Pages rebuild"
+git push origin main
+```
+
+### Schritt 4: Warten und verifizieren
+```bash
+# Warte 5-10 Minuten bis GitHub Pages neu deployed
+# Dann teste in Inkognito-Fenster oder mit Hard Refresh (Ctrl+Shift+R)
 ```
 
 ## Stripe Checkout Konfiguration
@@ -212,9 +316,12 @@ curl -X POST \
 - [ ] Änderungen in `.superdesign/design_iterations/` gemacht
 - [ ] Dateien nach `shop/` kopiert
 - [ ] Links in Navigation überprüft (keine alten Dateinamen)
+- [ ] ⚠️ **KRITISCH:** Working Directory überprüft: `pwd` (muss CODEX zeigen!)
+- [ ] ⚠️ **KRITISCH:** Git Remote überprüft: `git remote -v` (muss kaffee-faensen zeigen!)
 - [ ] `git status` geprüft
 - [ ] Dateien staged: `git add shop/`
 - [ ] Commit erstellt mit aussagekräftiger Message
+- [ ] ⚠️ **VOR DEM PUSH:** Nochmal `git remote -v` überprüfen!
 - [ ] Zu richtigem Repo gepusht: `git push origin main`
 - [ ] Netlify Deployment abwarten (ca. 30-60 Sekunden)
 - [ ] Live-Site testen: https://dancing-elf-56bc97.netlify.app
