@@ -159,15 +159,15 @@ class FaensenNavigation {
             <header class="header" id="header">
                 <div class="container">
                     <div class="header-inner">
-                        <a href="faensen_homepage_3_final_3.html" class="header-logo">
+                        <a href="homepage.html" class="header-logo">
                             <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8468ce539285a857943bb_FF-LOGO-deliver-01-scaled-e1658821528426.jpg" alt="Kaffee Fänsen">
                         </a>
 
                         <ul class="header-nav">
-                            <li><a href="faensen_homepage_3_final_3.html#start" data-page="home">Start</a></li>
-                            <li><a href="faensen_shop_1.html" data-page="shop">Shop</a></li>
-                            <li><a href="faensen_homepage_3_final_3.html#ueber-uns" data-page="about">Über uns</a></li>
-                            <li><a href="faensen_homepage_3_final_3.html#tradition" data-page="tradition">Tradition</a></li>
+                            <li><a href="homepage.html#start" data-page="home">Start</a></li>
+                            <li><a href="shop.html" data-page="shop">Shop</a></li>
+                            <li><a href="homepage.html#ueber-uns" data-page="about">Über uns</a></li>
+                            <li><a href="homepage.html#tradition" data-page="tradition">Tradition</a></li>
                         </ul>
 
                         <button class="header-cart" id="cart-btn" aria-label="Warenkorb">
