@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestellung abgebrochen - Kaffee Fänsen</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href=".superdesign/design_iterations/faensen_shop_theme.css">
+
+    <style>
+        .cancel-container {
+            min-height: calc(100vh - 88px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-6);
+            background: var(--color-bg);
+        }
+
+        .cancel-card {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: var(--space-8);
+            text-align: center;
+        }
+
+        .cancel-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-4);
+            background: #FFF3E0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cancel-icon svg {
+            width: 48px;
+            height: 48px;
+            color: #F57C00;
+        }
+
+        .cancel-title {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            color: var(--color-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .cancel-message {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-6);
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: var(--color-bg);
+            border-left: 4px solid var(--color-secondary);
+            border-radius: var(--radius);
+            padding: var(--space-4);
+            margin-bottom: var(--space-6);
+            text-align: left;
+        }
+
+        .info-box-title {
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            color: var(--color-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .info-box-text {
+            color: var(--color-text-muted);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+        }
+
+        .cancel-actions {
+            display: flex;
+            gap: var(--space-3);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .reassurance-list {
+            list-style: none;
+            padding: 0;
+            margin: var(--space-6) 0;
+            text-align: left;
+        }
+
+        .reassurance-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-2);
+            padding: var(--space-2) 0;
+        }
+
+        .reassurance-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            color: var(--color-success);
+        }
+
+        @media (max-width: 768px) {
+            .cancel-card {
+                padding: var(--space-6);
+            }
+
+            .cancel-title {
+                font-size: var(--text-2xl);
+            }
+
+            .cancel-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation - Automatically inserted by faensen_navigation.js -->
+    <script src=".superdesign/design_iterations/faensen_navigation.js"></script>
+
+    <main class="cancel-container">
+        <div class="cancel-card">
+            <div class="cancel-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+            </div>
+
+            <h1 class="cancel-title">Bestellung abgebrochen</h1>
+
+            <p class="cancel-message">
+                Deine Bestellung wurde abgebrochen. Es wurde keine Zahlung durchgeführt.
+            </p>
+
+            <div class="info-box">
+                <h2 class="info-box-title">Was ist passiert?</h2>
+                <p class="info-box-text">
+                    Du hast den Checkout-Prozess abgebrochen oder das Fenster geschlossen, bevor die Zahlung abgeschlossen wurde. Deine Artikel befinden sich weiterhin im Warenkorb und warten auf dich.
+                </p>
+            </div>
+
+            <ul class="reassurance-list">
+                <li class="reassurance-item">
+                    <svg class="reassurance-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Deine Artikel sind noch im Warenkorb gespeichert</span>
+                </li>
+                <li class="reassurance-item">
+                    <svg class="reassurance-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Es wurde keine Zahlung durchgeführt</span>
+                </li>
+                <li class="reassurance-item">
+                    <svg class="reassurance-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Du kannst jederzeit den Checkout erneut starten</span>
+                </li>
+            </ul>
+
+            <div class="cancel-actions">
+                <a href=".superdesign/design_iterations/faensen_homepage_3_final_3.html" class="btn btn-outline">
+                    Zur Startseite
+                </a>
+                <a href=".superdesign/design_iterations/faensen_shop_1.html" class="btn btn-primary">
+                    Zurück zum Shop
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Optional: Log cancellation for analytics
+        console.log('Checkout cancelled at:', new Date().toISOString());
+
+        // Restore cart notification badge if needed
+        if (window.localStorage) {
+            const cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+            if (cart.length > 0 && window.faensenNav) {
+                window.faensenNav.updateCartCount(cart.length);
+            }
+        }
+    </script>
+</body>
+</html>
