@@ -18,8 +18,7 @@
   "author": "Kaffee Fänsen",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^17.2.3",
-    "stripe": "^14.12.0"
+    "dotenv": "^17.2.3"
   },
   "devDependencies": {
     "wrangler": "^3.88.0"

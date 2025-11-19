@@ -1,16 +1,27 @@
-import Stripe from 'stripe';
+import { createHmac } from 'node:crypto';
 
-const STRIPE_API_VERSION = '2024-11-20';
-
-function createStripeClient(env) {
-  if (!env?.STRIPE_SECRET_KEY) {
-    throw new Error('STRIPE_SECRET_KEY is not configured');
+function verifySignature(payload, signatureHeader, secret) {
+  if (!signatureHeader || !secret) {
+    return false;
   }
 
-  return new Stripe(env.STRIPE_SECRET_KEY, {
-    apiVersion: STRIPE_API_VERSION,
-    httpClient: Stripe.createFetchHttpClient(),
-  });
+  const parts = signatureHeader.split(',').reduce(
+    (acc, part) => {
+      const [key, value] = part.split('=');
+      acc[key] = value;
+      return acc;
+    },
+    {},
+  );
+
+  if (!parts.t || !parts.v1) {
+    return false;
+  }
+
+  const signedPayload = `${parts.t}.${payload}`;
+  const expectedSignature = createHmac('sha256', secret).update(signedPayload).digest('hex');
+
+  return parts.v1 === expectedSignature;
 }
 
 export async function onRequestPost({ request, env }) {
@@ -31,13 +42,15 @@ export async function onRequestPost({ request, env }) {
 
   const payload = await request.text();
 
-  try {
-    const stripe = createStripeClient(env);
-    const event = stripe.webhooks.constructEvent(
-      payload,
-      signature,
-      env.STRIPE_WEBHOOK_SECRET,
+  if (!verifySignature(payload, signature, env.STRIPE_WEBHOOK_SECRET)) {
+    return new Response(
+      JSON.stringify({ error: 'Webhook Signatur ungültig' }),
+      { status: 400, headers: { 'Content-Type': 'application/json' } },
     );
+  }
+
+  try {
+    const event = JSON.parse(payload);
 
     switch (event.type) {
       case 'checkout.session.completed': {

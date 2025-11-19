@@ -1,7 +1,3 @@
-import Stripe from 'stripe';
-
-const STRIPE_API_VERSION = '2024-11-20';
-
 const defaultCors = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type',
@@ -15,17 +11,6 @@ function buildCorsHeaders(env, extra = {}) {
     'Access-Control-Allow-Origin': origin,
     ...extra,
   };
-}
-
-function createStripeClient(env) {
-  if (!env?.STRIPE_SECRET_KEY) {
-    throw new Error('STRIPE_SECRET_KEY is not configured');
-  }
-
-  return new Stripe(env.STRIPE_SECRET_KEY, {
-    apiVersion: STRIPE_API_VERSION,
-    httpClient: Stripe.createFetchHttpClient(),
-  });
 }
 
 function deriveSiteUrl(request, env) {
@@ -100,6 +85,13 @@ export async function onRequestPost(context) {
     'Content-Type': 'application/json',
   });
 
+  if (!env?.STRIPE_SECRET_KEY) {
+    return new Response(
+      JSON.stringify({ error: 'STRIPE_SECRET_KEY nicht konfiguriert' }),
+      { status: 500, headers: corsHeaders },
+    );
+  }
+
   try {
     const body = await request.json();
     const { items } = body ?? {};
@@ -111,23 +103,88 @@ export async function onRequestPost(context) {
       );
     }
 
-    const stripe = createStripeClient(env);
     const siteUrl = deriveSiteUrl(request, env);
 
-    const session = await stripe.checkout.sessions.create({
+    const params = new URLSearchParams({
       mode: 'payment',
-      payment_method_types: ['card', 'sepa_debit'],
-      line_items: mapLineItems(items),
+      locale: 'de',
       success_url: `${siteUrl.replace(/\/$/, '')}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl.replace(/\/$/, '')}/shop/shop.html`,
-      shipping_address_collection: {
-        allowed_countries: ['DE', 'AT', 'CH'],
-      },
-      billing_address_collection: 'required',
-      phone_number_collection: { enabled: true },
-      shipping_options: shippingOptions(),
-      locale: 'de',
+      'billing_address_collection': 'required',
+      'shipping_address_collection[allowed_countries][0]': 'DE',
+      'shipping_address_collection[allowed_countries][1]': 'AT',
+      'shipping_address_collection[allowed_countries][2]': 'CH',
+      'phone_number_collection[enabled]': 'true',
     });
+
+    mapLineItems(items).forEach((lineItem, index) => {
+      params.append(`line_items[${index}][price_data][currency]`, lineItem.price_data.currency);
+      params.append(`line_items[${index}][price_data][product_data][name]`, lineItem.price_data.product_data.name);
+      params.append(
+        `line_items[${index}][price_data][product_data][description]`,
+        lineItem.price_data.product_data.description,
+      );
+      if (lineItem.price_data.product_data.images.length > 0) {
+        params.append(
+          `line_items[${index}][price_data][product_data][images][0]`,
+          lineItem.price_data.product_data.images[0],
+        );
+      }
+      params.append(`line_items[${index}][price_data][unit_amount]`, String(lineItem.price_data.unit_amount));
+      params.append(`line_items[${index}][quantity]`, String(lineItem.quantity));
+    });
+
+    shippingOptions().forEach((option, index) => {
+      params.append(
+        `shipping_options[${index}][shipping_rate_data][type]`,
+        option.shipping_rate_data.type,
+      );
+      params.append(
+        `shipping_options[${index}][shipping_rate_data][display_name]`,
+        option.shipping_rate_data.display_name,
+      );
+      params.append(
+        `shipping_options[${index}][shipping_rate_data][fixed_amount][amount]`,
+        String(option.shipping_rate_data.fixed_amount.amount),
+      );
+      params.append(
+        `shipping_options[${index}][shipping_rate_data][fixed_amount][currency]`,
+        option.shipping_rate_data.fixed_amount.currency,
+      );
+      if (option.shipping_rate_data.delivery_estimate) {
+        params.append(
+          `shipping_options[${index}][shipping_rate_data][delivery_estimate][minimum][unit]`,
+          option.shipping_rate_data.delivery_estimate.minimum.unit,
+        );
+        params.append(
+          `shipping_options[${index}][shipping_rate_data][delivery_estimate][minimum][value]`,
+          String(option.shipping_rate_data.delivery_estimate.minimum.value),
+        );
+        params.append(
+          `shipping_options[${index}][shipping_rate_data][delivery_estimate][maximum][unit]`,
+          option.shipping_rate_data.delivery_estimate.maximum.unit,
+        );
+        params.append(
+          `shipping_options[${index}][shipping_rate_data][delivery_estimate][maximum][value]`,
+          String(option.shipping_rate_data.delivery_estimate.maximum.value),
+        );
+      }
+    });
+
+    const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params.toString(),
+    });
+
+    const session = await stripeResponse.json();
+
+    if (!stripeResponse.ok) {
+      throw new Error(session?.error?.message || 'Stripe API Fehler');
+    }
 
     return new Response(
       JSON.stringify({ sessionId: session.id, url: session.url }),
