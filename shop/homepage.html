@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaffee Fänsen - Handwerklich geröstet seit 1933</title>
-    <meta name="description" content="Traditionell gerösteter Kaffee aus Hamm. Seit über 90 Jahren rösten wir mit Leidenschaft. Jede Bohne handverlesen, jede Röstung ein Meisterwerk.">
+    <title>Kaffee F+?nsen - Handwerklich ger+?stet seit 1933</title>
+    <meta name="description" content="Traditionell ger+?steter Kaffee aus Hamm. Seit ++ber 90 Jahren r+?sten wir mit Leidenschaft. Jede Bohne handverlesen, jede R+?stung ein Meisterwerk.">
+    <link rel="canonical" href="https://www.kaffee-faensen.de/">
+    <meta name="theme-color" content="#593F33">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.kaffee-faensen.de/">
+    <meta property="og:title" content="Kaffee F?nsen ? Handwerklich ger?stet seit 1933">
+    <meta property="og:description" content="Familienr?sterei aus Hamm. Bohnen von Hand sortiert, langsam ger?stet und frisch zu dir geliefert.">
+    <meta property="og:image" content="https://www.kaffee-faensen.de/images/logotext.avif">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Kaffee F?nsen ? Handwerklich ger?stet seit 1933">
+    <meta property="twitter:description" content="Tradition seit 1933: feine R?stungen, liebevoll verpackt.">
+    <meta property="twitter:image" content="https://www.kaffee-faensen.de/images/logotext.avif">
 
     <!-- Google Fonts: Patua One + Lora -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,13 +23,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
 
     <!-- Navigation Component -->
-    <script src="faensen_navigation.js"></script>
+    <script src="faensen_navigation.js" defer></script>
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
 
     <style>
         /* ===================================
@@ -29,11 +40,16 @@
             /* COLORS - Brand Palette */
             --color-primary: #593F33;
             --color-secondary: #D1541D;
+            --color-tertiary: #A66A3F;
+            --color-cream: #F3E6D6;
+            --color-deep: #2b1b13;
             --color-bg: #FAF8F5;
             --color-bg-white: #FFFFFF;
             --color-text: #2D2520;
             --color-text-light: #6B5D57;
             --color-border: #E8E3DD;
+            --gradient-amber: radial-gradient(circle at top, rgba(209,84,29,0.18), transparent 60%), linear-gradient(180deg, rgba(250,248,245,0.95) 0%, rgba(244,232,218,0.65) 100%);
+            --gradient-ribbon: linear-gradient(120deg, #D1541D, #A66A3F 60%, #593F33);
 
             /* TYPOGRAPHY */
             --font-display: 'Patua One', serif;
@@ -121,6 +137,10 @@
         a { color: inherit; text-decoration: none; }
         img { max-width: 100%; height: auto; display: block; }
         button { font-family: inherit; }
+        :focus-visible {
+            outline: 3px solid var(--color-secondary);
+            outline-offset: 4px;
+        }
 
         /* ===================================
            LAYOUT
@@ -261,18 +281,153 @@
         =================================== */
         .hero {
             position: relative;
-            min-height: 85vh;
+            min-height: 90vh;
             display: flex;
             align-items: center;
             padding: var(--space-16) 0;
-            background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 100%);
             color: var(--color-text);
+            overflow: hidden;
+            background: var(--gradient-amber);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            filter: saturate(0.9) brightness(1.08);
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(41, 24, 15, 0.7), rgba(250, 248, 245, 0.85));
+            mix-blend-mode: multiply;
+            z-index: 0;
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: var(--space-8);
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            align-items: center;
         }
 
         .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 560px;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
+            }
+        }
+
+        .hero-media {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(14px);
+        }
+
+        .hero-media::after {
+            content: "";
+            position: absolute;
+            inset: 12px;
+            border-radius: var(--radius-lg);
+            border: 1px dashed rgba(89, 63, 51, 0.35);
+            pointer-events: none;
+        }
+
+        .hero-media-label {
+            font-family: var(--font-display);
+            font-size: var(--text-sm);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: var(--space-3);
+        }
+
+        .hero-media-photo {
+            height: 240px;
+            border-radius: var(--radius-lg);
+            background-image: url('https://images.unsplash.com/photo-1459257868276-5e65389e2722?auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            margin-bottom: var(--space-4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-media-photo::after {
+            content: "R?stcharge 2472";
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            font-size: var(--text-sm);
+            letter-spacing: 0.08em;
+        }
+
+        .hero-stat-grid {
+            display: grid;
+            gap: var(--space-3);
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            margin-bottom: var(--space-4);
+        }
+
+        .hero-stat {
+            background: #fff;
+            border-radius: var(--radius-md);
+            padding: var(--space-3);
             text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-stat strong {
+            display: block;
+            font-size: var(--text-3xl);
+            color: var(--color-secondary);
+            line-height: 1;
+        }
+
+        .hero-media-title {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-2);
+            color: var(--color-primary);
+        }
+
+        .hero-media-notes ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .hero-media-notes li {
+            padding: 8px 12px;
+            background: rgba(89,63,51,0.1);
+            border-radius: var(--radius-full);
+            font-size: var(--text-sm);
         }
 
         .hero-label {
@@ -311,8 +466,29 @@
             margin-bottom: var(--space-6);
             color: var(--color-text);
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        }
+
+        .hero-insights {
+            display: grid;
+            gap: var(--space-3);
+            margin-bottom: var(--space-5);
+        }
+
+        .hero-insight {
+            display: flex;
+            gap: var(--space-2);
+            align-items: center;
+        }
+
+        .hero-insight span:first-child {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(209, 84, 29, 0.12);
+            color: var(--color-secondary);
         }
 
         /* ===================================
@@ -384,6 +560,16 @@
             align-items: center;
             justify-content: center;
             margin-bottom: var(--space-5);
+        }
+
+        .hero-content .btn-group {
+            justify-content: flex-start;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content .btn-group {
+                justify-content: center;
+            }
         }
 
         /* Trust Elements */
@@ -851,10 +1037,7 @@
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .fade-in.visible {`r`n            opacity: 1;`r`n            transform: translateY(0);`r`n        }`r`n`r`n        @media (prefers-reduced-motion: reduce) {`r`n            .fade-in,`r`n            .fade-in.visible,`r`n            .hero,`r`n            .hero-media-photo,`r`n            .scroll-top {`r`n                transition: none !important;`r`n                animation: none !important;`r`n                transform: none !important;`r`n                opacity: 1 !important;`r`n            }`r`n        }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
@@ -870,9 +1053,9 @@
         =================================== */
         .bg-white { background: var(--color-bg-white); }
         .bg-light { background: var(--color-bg); }
-    </style>
+    `n    <script type="application/ld+json">\r\n    {\r\n      "@context": "https://schema.org",\r\n      "@type": "Organization",\r\n      "name": "Kaffee F�nsen",\r\n      "url": "https://www.kaffee-faensen.de/",\r\n      "logo": "https://www.kaffee-faensen.de/images/logotext.avif",\r\n      "description": "Familienr�sterei aus Hamm. Handwerkliche R�stungen seit 1933.",\r\n      "contactPoint": {\r\n        "@type": "ContactPoint",\r\n        "contactType": "customer service",\r\n        "availableLanguage": ["de"]\r\n      }\r\n    }\r\n    </script>\r\n    </style>
 </head>
-<body>
+<body>\r\n    <main id="main-content" tabindex="-1">
     <!-- HEADER - Automatically inserted by faensen_navigation.js -->
 
     <!-- ===================================
@@ -881,13 +1064,13 @@
     <section class="hero" id="start">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-label">Handgerösteter Kaffee</div>
+                <div class="hero-label">Handger+?steter Kaffee</div>
 
                 <h1 class="hero-title">Echte Handwerkskunst seit 1933</h1>
-                <p class="hero-subtitle">Kaffee, der Geschichte erzählt</p>
+                <p class="hero-subtitle">Kaffee, der Geschichte erz+?hlt</p>
                 <p class="hero-description">
-                    Seit Generationen rösten wir mit Leidenschaft und Sorgfalt.
-                    Jede Bohne ist handverlesen, jede Röstung ein Meisterwerk.
+                    Seit Generationen r+?sten wir mit Leidenschaft und Sorgfalt.
+                    Jede Bohne ist handverlesen, jede R+?stung ein Meisterwerk.
                 </p>
 
                 <div class="btn-group">
@@ -903,13 +1086,13 @@
                         <span class="trust-icon">
                             <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
                         </span>
-                        <span>Über 5.000 zufriedene Kunden</span>
+                        <span>+?ber 5.000 zufriedene Kunden</span>
                     </div>
                     <div class="trust-item">
                         <span class="trust-icon">
                             <i data-lucide="truck" style="width: 20px; height: 20px;"></i>
                         </span>
-                        <span>Kostenloser Versand ab 30€</span>
+                        <span>Kostenloser Versand ab 30??</span>
                     </div>
                     <div class="trust-item">
                         <span class="trust-icon">
@@ -940,11 +1123,11 @@
                 <div class="fade-in">
                     <div class="section-label">Unser Versprechen</div>
                     <h2 class="section-title" style="text-align: left; margin-bottom: var(--space-4);">
-                        Kaffee, der Geschichte erzählt
+                        Kaffee, der Geschichte erz+?hlt
                     </h2>
                     <p class="section-description" style="text-align: left; max-width: none; margin-bottom: var(--space-5);">
-                        Seit Generationen rösten wir mit Leidenschaft und Sorgfalt.
-                        Jede Bohne ist handverlesen, jede Röstung ein Meisterwerk.
+                        Seit Generationen r+?sten wir mit Leidenschaft und Sorgfalt.
+                        Jede Bohne ist handverlesen, jede R+?stung ein Meisterwerk.
                     </p>
                     <a href="#produkte" class="btn btn-primary">Jetzt bestellen</a>
                 </div>
@@ -974,7 +1157,7 @@
         <div class="container">
             <div class="quote-block fade-in">
                 <blockquote class="quote-text">
-                    Unser Kaffee ist mehr als ein Getränk – er ist unsere Geschichte,
+                    Unser Kaffee ist mehr als ein Getr+?nk ??? er ist unsere Geschichte,
                     unsere Tradition und unser Handwerk. Das schmeckt man mit jedem Schluck.
                 </blockquote>
                 <div class="quote-author">
@@ -982,7 +1165,7 @@
                         <i data-lucide="user" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
                     </div>
                     <div style="text-align: left;">
-                        <div class="quote-name">Rouven Fänsen</div>
+                        <div class="quote-name">Rouven F+?nsen</div>
                         <div class="quote-title">Inhaber in 3. Generation</div>
                     </div>
                 </div>
@@ -1006,9 +1189,9 @@
         <div class="container">
             <div class="section-header fade-in">
                 <div class="section-label">Was uns auszeichnet</div>
-                <h2 class="section-title">Warum Fänsen Kaffee?</h2>
+                <h2 class="section-title">Warum F+?nsen Kaffee?</h2>
                 <p class="section-description">
-                    Unser Kaffee steht für Tradition, Nachhaltigkeit und höchste Handwerkskunst
+                    Unser Kaffee steht f++r Tradition, Nachhaltigkeit und h+?chste Handwerkskunst
                 </p>
             </div>
 
@@ -1017,9 +1200,9 @@
                     <div class="card-icon">
                         <i data-lucide="home" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
                     </div>
-                    <h3 class="card-title">Lokale Rösterei</h3>
+                    <h3 class="card-title">Lokale R+?sterei</h3>
                     <p class="card-text">
-                        Seit 1933 rösten wir in Hamm mit Liebe zum Detail und höchster Qualität
+                        Seit 1933 r+?sten wir in Hamm mit Liebe zum Detail und h+?chster Qualit+?t
                     </p>
                 </div>
 
@@ -1027,9 +1210,9 @@
                     <div class="card-icon">
                         <i data-lucide="briefcase" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
                     </div>
-                    <h3 class="card-title">Großhändler</h3>
+                    <h3 class="card-title">Gro+?h+?ndler</h3>
                     <p class="card-text">
-                        Exklusiver Kaffee für Ihr Unternehmen – fair, nachhaltig und in bester Qualität
+                        Exklusiver Kaffee f++r Ihr Unternehmen ??? fair, nachhaltig und in bester Qualit+?t
                     </p>
                 </div>
 
@@ -1039,7 +1222,7 @@
                     </div>
                     <h3 class="card-title">100% Organisch</h3>
                     <p class="card-text">
-                        Natürliche Kaffeebohnen ohne Pestizide oder künstliche Zusätze
+                        Nat++rliche Kaffeebohnen ohne Pestizide oder k++nstliche Zus+?tze
                     </p>
                 </div>
 
@@ -1049,7 +1232,7 @@
                     </div>
                     <h3 class="card-title">Deutschlandweiter Versand</h3>
                     <p class="card-text">
-                        Von unserer Rösterei direkt zu Ihnen – frisch geröstet geliefert
+                        Von unserer R+?sterei direkt zu Ihnen ??? frisch ger+?stet geliefert
                     </p>
                 </div>
 
@@ -1059,7 +1242,7 @@
                     </div>
                     <h3 class="card-title">Online Shop</h3>
                     <p class="card-text">
-                        Bequem online bestellen und frisch gerösteten Kaffee genießen
+                        Bequem online bestellen und frisch ger+?steten Kaffee genie+?en
                     </p>
                 </div>
 
@@ -1069,7 +1252,7 @@
                     </div>
                     <h3 class="card-title">Kundenvertrauen</h3>
                     <p class="card-text">
-                        Tausende zufriedene Kaffeeliebhaber vertrauen auf unsere Qualität
+                        Tausende zufriedene Kaffeeliebhaber vertrauen auf unsere Qualit+?t
                     </p>
                 </div>
             </div>
@@ -1094,22 +1277,22 @@
                 <div class="section-label">Unsere Reise</div>
                 <h2 class="section-title">Unsere Geschichte</h2>
                 <p class="section-description">
-                    Seit 1933 rösten wir Kaffee mit Hingabe und Leidenschaft
+                    Seit 1933 r+?sten wir Kaffee mit Hingabe und Leidenschaft
                 </p>
             </div>
 
             <div style="max-width: 1000px; margin: 0 auto;">
                 <div class="timeline-item fade-in">
                     <div class="photo-frame">
-                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67bdbec3a0c1a78e1603aaa9_17_1121.jpg" alt="Gründung 1933">
+                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67bdbec3a0c1a78e1603aaa9_17_1121.jpg" alt="Gr++ndung 1933">
                     </div>
                     <div>
                         <div class="timeline-badge">
                             <div class="timeline-year">1933</div>
                         </div>
-                        <h3 class="timeline-title">Die Gründung</h3>
+                        <h3 class="timeline-title">Die Gr++ndung</h3>
                         <p class="timeline-text">
-                            Mit einer kleinen Trommelröstmaschine und großer Vision begann unsere Reise in Hamm
+                            Mit einer kleinen Trommelr+?stmaschine und gro+?er Vision begann unsere Reise in Hamm
                         </p>
                     </div>
                 </div>
@@ -1121,7 +1304,7 @@
                         </div>
                         <h3 class="timeline-title">Zweite Generation</h3>
                         <p class="timeline-text">
-                            Horst Fänsen übernahm die Rösterei und führte die Tradition mit Leidenschaft fort
+                            Horst F+?nsen ++bernahm die R+?sterei und f++hrte die Tradition mit Leidenschaft fort
                         </p>
                     </div>
                     <div class="photo-frame">
@@ -1139,7 +1322,7 @@
                         </div>
                         <h3 class="timeline-title">Dritte Generation</h3>
                         <p class="timeline-text">
-                            In dritter Generation führen wir die Tradition fort. Zweimal wöchentlich rösten wir etwa 250 Kilogramm Kaffee in 13 verschiedenen Sorten
+                            In dritter Generation f++hren wir die Tradition fort. Zweimal w+?chentlich r+?sten wir etwa 250 Kilogramm Kaffee in 13 verschiedenen Sorten
                         </p>
                     </div>
                 </div>
@@ -1165,7 +1348,7 @@
                 <div class="section-label">Unsere Auswahl</div>
                 <h2 class="section-title">Handverlesene Kaffeesorten</h2>
                 <p class="section-description">
-                    Von mild bis kräftig – entdecken Sie unsere Bestseller
+                    Von mild bis kr+?ftig ??? entdecken Sie unsere Bestseller
                 </p>
             </div>
 
@@ -1176,17 +1359,17 @@
                     </div>
                     <div class="product-badge">Bestseller</div>
                     <h3 class="product-title">Hammer Spezial</h3>
-                    <div class="product-price">€12,20</div>
+                    <div class="product-price">??12,20</div>
                     <a href="#" class="btn btn-outline" style="width: 100%;">Zum Produkt</a>
                 </div>
 
                 <div class="product-card fade-in">
                     <div class="product-image">
-                        <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png" alt="Café Haus">
+                        <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png" alt="Caf+? Haus">
                     </div>
                     <div class="product-badge">Klassiker</div>
-                    <h3 class="product-title">Café Haus</h3>
-                    <div class="product-price">€12,60</div>
+                    <h3 class="product-title">Caf+? Haus</h3>
+                    <div class="product-price">??12,60</div>
                     <a href="#" class="btn btn-outline" style="width: 100%;">Zum Produkt</a>
                 </div>
 
@@ -1196,7 +1379,7 @@
                     </div>
                     <div class="product-badge">Premium</div>
                     <h3 class="product-title">Maragogype</h3>
-                    <div class="product-price">€14,80</div>
+                    <div class="product-price">??14,80</div>
                     <a href="#" class="btn btn-outline" style="width: 100%;">Zum Produkt</a>
                 </div>
 
@@ -1206,7 +1389,7 @@
                     </div>
                     <div class="product-badge">Mild</div>
                     <h3 class="product-title">Brasil</h3>
-                    <div class="product-price">€10,80</div>
+                    <div class="product-price">??10,80</div>
                     <a href="#" class="btn btn-outline" style="width: 100%;">Zum Produkt</a>
                 </div>
             </div>
@@ -1224,9 +1407,9 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8468ce539285a857943bb_FF-LOGO-deliver-01-scaled-e1658821528426.jpg" alt="Kaffee Fänsen" class="footer-logo">
+                    <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8468ce539285a857943bb_FF-LOGO-deliver-01-scaled-e1658821528426.jpg" alt="Kaffee F+?nsen" class="footer-logo">
                     <p class="footer-text">
-                        Handwerklich gerösteter Kaffee aus Hamm.<br>
+                        Handwerklich ger+?steter Kaffee aus Hamm.<br>
                         Tradition trifft Leidenschaft seit 1933.
                     </p>
                 </div>
@@ -1235,7 +1418,7 @@
                     <h5 class="footer-title">Navigation</h5>
                     <ul class="footer-links">
                         <li><a href="#produkte">Produkte</a></li>
-                        <li><a href="#ueber-uns">Über uns</a></li>
+                        <li><a href="#ueber-uns">+?ber uns</a></li>
                         <li><a href="#tradition">Tradition</a></li>
                     </ul>
                 </div>
@@ -1251,12 +1434,10 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2025 Kaffee Fänsen – Handwerklich geröstet seit 1933</p>
+                <p>&copy; 2025 Kaffee F+?nsen ??? Handwerklich ger+?stet seit 1933</p>
             </div>
         </div>
-    </footer>
-
-    <!-- ===================================
+    </footer>\r\n\r\n    </main>\r\n\r\n<!-- ===================================
          SCROLL TO TOP BUTTON
     =================================== -->
     <button class="scroll-top" id="scroll-top" aria-label="Nach oben scrollen">
@@ -1266,9 +1447,7 @@
     <!-- ===================================
          JAVASCRIPT
     =================================== -->
-    <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
+    <script>\r\n        const refreshIcons = () => {\r\n            if (window.lucide && typeof lucide.createIcons === 'function') {\r\n                lucide.createIcons();\r\n            }\r\n        };\r\n\r\n        refreshIcons();`r`n        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // Header Scroll Effect
         const header = document.getElementById('header');
@@ -1318,7 +1497,7 @@
         scrollTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
-                behavior: 'smooth'
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
             });
         });
 
@@ -1342,7 +1521,7 @@
                         const targetPosition = target.offsetTop - headerHeight;
                         window.scrollTo({
                             top: targetPosition,
-                            behavior: 'smooth'
+                            behavior: prefersReducedMotion ? 'auto' : 'smooth'
                         });
                     }
                 }
@@ -1350,7 +1529,17 @@
         });
 
         // Refresh Icons
-        setTimeout(() => lucide.createIcons(), 100);
+        setTimeout(refreshIcons, 100);
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-// Kaffee Fänsen - Unified Navigation Component
+﻿// Kaffee F├ñnsen - Unified Navigation Component
 // Matches the exact design from the homepage
 
 class FaensenNavigation {
@@ -17,6 +17,23 @@ class FaensenNavigation {
     render() {
         const navHTML = `
             <style>
+                .skip-link {
+                    position: absolute;
+                    left: 16px;
+                    top: -40px;
+                    padding: 8px 16px;
+                    background: #D1541D;
+                    color: white;
+                    border-radius: 6px;
+                    z-index: 999;
+                    font-weight: 600;
+                    transition: top 0.2s ease;
+                }
+
+                .skip-link:focus {
+                    top: 16px;
+                }
+
                 /* HEADER - Exact match to homepage design */
                 .header {
                     position: sticky;
@@ -156,17 +173,18 @@ class FaensenNavigation {
                 }
             </style>
 
+            <a href="#main-content" class="skip-link">Direkt zum Inhalt</a>
             <header class="header" id="header">
                 <div class="container">
                     <div class="header-inner">
                         <a href="homepage.html" class="header-logo">
-                            <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8468ce539285a857943bb_FF-LOGO-deliver-01-scaled-e1658821528426.jpg" alt="Kaffee Fänsen">
+                            <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8468ce539285a857943bb_FF-LOGO-deliver-01-scaled-e1658821528426.jpg" alt="Kaffee F├ñnsen">
                         </a>
 
                         <ul class="header-nav">
                             <li><a href="homepage.html#start" data-page="home">Start</a></li>
                             <li><a href="shop.html" data-page="shop">Shop</a></li>
-                            <li><a href="homepage.html#ueber-uns" data-page="about">Über uns</a></li>
+                            <li><a href="homepage.html#ueber-uns" data-page="about">├£ber uns</a></li>
                             <li><a href="homepage.html#tradition" data-page="tradition">Tradition</a></li>
                         </ul>
 
@@ -196,6 +214,17 @@ class FaensenNavigation {
         if (cartButton) {
             cartButton.addEventListener('click', () => {
                 this.handleCartClick();
+            });
+        }
+
+        const skipLink = document.querySelector('.skip-link');
+        if (skipLink) {
+            skipLink.addEventListener('click', (event) => {
+                const target = document.getElementById('main-content');
+                if (target) {
+                    target.setAttribute('tabindex', '-1');
+                    target.focus();
+                }
             });
         }
     }

@@ -1,4 +1,4 @@
-/* Kaffee Fänsen Shop Theme */
+﻿/* Kaffee F├ñnsen Shop Theme */
 /* Patua One (Display) + Lora (Body) | Primary: #593F33, Secondary: #D1541D */
 
 @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Lora:wght@400;500;600;700&display=swap');
@@ -111,6 +111,11 @@ a:hover {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--container-padding);
+}
+
+.shop-layout {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-12);
 }
 
 /* BUTTONS */
@@ -293,3 +298,4 @@ select.filter-select:focus {
 .mb-4 { margin-bottom: var(--space-4); }
 .mb-6 { margin-bottom: var(--space-6); }
 .mb-8 { margin-bottom: var(--space-8); }
+\r\n/* Toast Notifications */\r\n.toast-stack {\r\n  position: fixed;\r\n  top: 24px;\r\n  right: 24px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: var(--space-2);\r\n  z-index: 1200;\r\n  pointer-events: none;\r\n}\r\n\r\n.toast {\r\n  background: var(--color-secondary);\r\n  color: #fff;\r\n  padding: var(--space-2) var(--space-3);\r\n  border-radius: var(--radius-md);\r\n  box-shadow: var(--shadow-lg);\r\n  opacity: 0;\r\n  transform: translateY(-10px);\r\n  transition: opacity var(--transition-base), transform var(--transition-base);\r\n}\r\n\r\n.toast.visible {\r\n  opacity: 1;\r\n  transform: translateY(0);\r\n}\r\n\r\n/* Cart Drawer */\r\n.cart-drawer {\r\n  position: fixed;\r\n  inset: 0;\r\n  display: flex;\r\n  pointer-events: none;\r\n  z-index: 1100;\r\n}\r\n\r\n.cart-drawer.is-open {\r\n  pointer-events: auto;\r\n}\r\n\r\n.cart-drawer-backdrop {\r\n  flex: 1;\r\n  background: rgba(0,0,0,0.4);\r\n  opacity: 0;\r\n  transition: opacity var(--transition-base);\r\n}\r\n\r\n.cart-drawer.is-open .cart-drawer-backdrop {\r\n  opacity: 1;\r\n}\r\n\r\n.cart-drawer-panel {\r\n  width: min(420px, 100%);\r\n  background: #fff;\r\n  box-shadow: -20px 0 40px rgba(0,0,0,0.12);\r\n  transform: translateX(100%);\r\n  transition: transform var(--transition-base);\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.cart-drawer.is-open .cart-drawer-panel {\r\n  transform: translateX(0);\r\n}\r\n\r\n.cart-drawer-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: var(--space-4);\r\n  border-bottom: 1px solid var(--color-border);\r\n}\r\n\r\n.cart-drawer-body {\r\n  flex: 1;\r\n  padding: var(--space-4);\r\n  overflow-y: auto;\r\n}\r\n\r\n.cart-item {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  border-bottom: 1px solid var(--color-border);\r\n  padding: var(--space-3) 0;\r\n}\r\n\r\n.cart-item-meta {\r\n  font-size: var(--text-sm);\r\n  color: var(--color-text-muted);\r\n}\r\n\r\n.cart-qty {\r\n  display: inline-flex;\r\n  gap: 8px;\r\n  align-items: center;\r\n}\r\n\r\n.cart-qty button {\r\n  width: 28px;\r\n  height: 28px;\r\n  border-radius: var(--radius-sm);\r\n  border: 1px solid var(--color-border);\r\n  background: #fff;\r\n  cursor: pointer;\r\n}\r\n\r\n.cart-drawer-footer {\r\n  padding: var(--space-4);\r\n  border-top: 1px solid var(--color-border);\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: var(--space-3);\r\n}\r\n\r\n.cart-total {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  font-size: var(--text-base);\r\n}\r\n\r\n.cart-total strong {\r\n  font-size: var(--text-xl);\r\n  color: var(--color-primary);\r\n}\r\n\r\n.w-full {\r\n  width: 100%;\r\n}\r\n
