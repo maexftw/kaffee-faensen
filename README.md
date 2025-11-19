@@ -120,3 +120,15 @@ Made with â¤ï¸ and a lot of Friendly Fire.
 ---
 
 **Live-Status**: ğŸ® Ready to deploy | **Version**: 1.0 | **Last Update**: Oktober 2025
+---
+
+## ?? Cloudflare Pages + Stripe Checkout
+
+Die aktuelle Codebasis enthält Cloudflare Pages Functions für den kompletten Checkout-Flow. Lies **`CLOUDFLARE_SETUP.md`** für die Schritt-für-Schritt-Einrichtung – kurz zusammengefasst:
+
+- `npm run dev` startet `wrangler pages dev .` (lokal testen)
+- `/api/checkout` erstellt Stripe Checkout Sessions (Secrets als Cloudflare Pages Secrets setzen)
+- `/api/stripe-webhook` verarbeitet Stripe-Events (Signatur wird serverseitig geprüft)
+- `wrangler pages deploy .` veröffentlicht Statische Seiten + Functions ohne Netlify
+
+Damit kannst du die Seite direkt zu Cloudflare Pages pushen und den Warenkorb/Stripe-Flow Edge-native betreiben.

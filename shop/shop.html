@@ -727,6 +727,7 @@
 
         // Warenkorb aus localStorage laden
         let cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+        const CHECKOUT_ENDPOINT = window.FAENSEN_CHECKOUT_ENDPOINT || '/api/checkout';
 
         let currentFilters = {
             size: '',
@@ -985,8 +986,8 @@
                 `;
                 document.body.appendChild(btn);
 
-                // Netlify Function aufrufen
-                const response = await fetch('/.netlify/functions/create-checkout', {
+                // Cloudflare Function aufrufen
+                const response = await fetch(CHECKOUT_ENDPOINT, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

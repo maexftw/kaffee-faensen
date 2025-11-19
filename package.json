@@ -4,9 +4,10 @@
   "description": "Kaffee Fänsen - Traditionelle Kaffeerösterei seit 1844",
   "main": "index.js",
   "scripts": {
-    "dev": "netlify dev",
-    "build": "echo 'No build step required for static site'",
-    "deploy": "netlify deploy --prod"
+    "dev": "wrangler pages dev .",
+    "build": "echo \"Static site – no build step\"",
+    "deploy": "wrangler pages deploy .",
+    "stripe:products": "node create-stripe-products.js"
   },
   "keywords": [
     "coffee",
@@ -21,6 +22,6 @@
     "stripe": "^14.12.0"
   },
   "devDependencies": {
-    "netlify-cli": "^17.15.0"
+    "wrangler": "^3.88.0"
   }
 }
