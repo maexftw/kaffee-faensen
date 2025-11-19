@@ -1,6 +1,7 @@
 name = "kaffee-faensen"
 compatibility_date = "2025-01-15"
 pages_build_output_dir = "."
+compatibility_flags = ["nodejs_compat"]
 
 # Optional defaults – override via Cloudflare Dashboard or `wrangler secret`
 [vars]
