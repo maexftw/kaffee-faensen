@@ -193,10 +193,10 @@ export async function onRequestPost(context) {
       'shipping_address_collection[allowed_countries][1]': 'AT',
       'shipping_address_collection[allowed_countries][2]': 'CH',
       'phone_number_collection[enabled]': 'true',
-      // Payment Methods: Kreditkarte
-      // Hinweis: Banküberweisung (customer_balance) erfordert ein Customer-Objekt
-      // SEPA Direct Debit (sepa_debit) kann aktiviert werden, wenn im Stripe Dashboard aktiviert
+      // Payment Methods: Kreditkarte + SEPA Direct Debit (Banküberweisung)
+      // SEPA Direct Debit muss im Stripe Dashboard aktiviert sein
       'payment_method_types[0]': 'card',
+      'payment_method_types[1]': 'sepa_debit',
     });
 
     mapLineItems(items).forEach((lineItem, index) => {
