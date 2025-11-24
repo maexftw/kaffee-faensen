@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaffee Fänsen - Traditionelle Rösterei seit 1844</title>
+    <meta http-equiv="refresh" content="0; url=./shop/homepage.html">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #593F33 0%, #D1541D 100%);
+            color: white;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        a {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            color: #593F33;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        a:hover {
+            transform: scale(1.05);
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            margin: 2rem auto;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☕ Kaffee Fänsen</h1>
+        <p>Traditionelle Rösterei seit 1844</p>
+        <div class="spinner"></div>
+        <p>Weiterleitung zur Homepage...</p>
+        <a href="./shop/homepage.html">Zur Homepage</a>
+    </div>
+</body>
+</html>

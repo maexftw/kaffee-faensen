@@ -1,0 +1,26 @@
+{
+  "name": "kaffee-faensen-website",
+  "version": "1.0.0",
+  "description": "Kaffee Fänsen - Traditionelle Kaffeerösterei seit 1844",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler pages dev .",
+    "build": "echo \"Static site – no build step\"",
+    "deploy": "wrangler pages deploy .",
+    "stripe:products": "node create-stripe-products.js"
+  },
+  "keywords": [
+    "coffee",
+    "shop",
+    "stripe",
+    "netlify"
+  ],
+  "author": "Kaffee Fänsen",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "wrangler": "^3.88.0"
+  }
+}

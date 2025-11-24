@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Cloudflare API Config
+.cloudflare-config.json
+cloudflare-config.json
+
+# Netlify
+.netlify/
+netlify-functions/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+.superdesign/token.txt
+
+# Build outputs
+dist/
+build/
+
+# Lock files (optional - include if using single package manager)
+# package-lock.json
+# yarn.lock
