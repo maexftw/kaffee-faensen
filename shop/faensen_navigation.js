@@ -184,7 +184,7 @@ class FaensenNavigation {
                         <ul class="header-nav">
                             <li><a href="homepage.html#start" data-page="home">Start</a></li>
                             <li><a href="shop.html" data-page="shop">Shop</a></li>
-                            <li><a href="homepage.html#ueber-uns" data-page="about">├£ber uns</a></li>
+                            <li><a href="homepage.html#ueber-uns" data-page="about">Über uns</a></li>
                             <li><a href="homepage.html#tradition" data-page="tradition">Tradition</a></li>
                         </ul>
 
