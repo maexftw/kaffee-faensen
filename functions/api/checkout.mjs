@@ -180,6 +180,9 @@ export async function onRequestPost(context) {
 
     const siteUrl = deriveSiteUrl(request, env);
 
+    // Für Banküberweisung (customer_balance) muss ein Customer erstellt werden
+    // Da wir keine Customer-ID haben, verwenden wir nur Kreditkarte
+    // Banküberweisung kann später hinzugefügt werden, wenn Customer-Management implementiert ist
     const params = new URLSearchParams({
       mode: 'payment',
       locale: 'de',
@@ -190,12 +193,10 @@ export async function onRequestPost(context) {
       'shipping_address_collection[allowed_countries][1]': 'AT',
       'shipping_address_collection[allowed_countries][2]': 'CH',
       'phone_number_collection[enabled]': 'true',
-      // Payment Methods: Kreditkarte + Banküberweisung (Customer Balance)
+      // Payment Methods: Kreditkarte
+      // Hinweis: Banküberweisung (customer_balance) erfordert ein Customer-Objekt
+      // SEPA Direct Debit (sepa_debit) kann aktiviert werden, wenn im Stripe Dashboard aktiviert
       'payment_method_types[0]': 'card',
-      'payment_method_types[1]': 'customer_balance',
-      // Bank Transfer Konfiguration für Customer Balance
-      'payment_method_options[customer_balance][funding_type]': 'bank_transfer',
-      'payment_method_options[customer_balance][bank_transfer][type]': 'eu_bank_transfer',
     });
 
     mapLineItems(items).forEach((lineItem, index) => {
@@ -276,9 +277,12 @@ export async function onRequestPost(context) {
       console.error('Stripe API error:', session);
       const errorMessage = session?.error?.message || 'Stripe API Fehler';
       
-      // Spezifische Fehlermeldung für SEPA Direct Debit
+      // Spezifische Fehlermeldungen für Payment Methods
       if (errorMessage.includes('sepa_debit')) {
         throw new Error('SEPA Direct Debit ist nicht aktiviert oder nicht verfügbar. Bitte prüfe im Stripe Dashboard (Settings > Payment methods) ob SEPA Direct Debit für den Live-Modus aktiviert ist.');
+      }
+      if (errorMessage.includes('customer_balance')) {
+        throw new Error('Banküberweisung (customer_balance) erfordert ein Customer-Objekt. Diese Funktion ist aktuell nicht verfügbar.');
       }
       
       throw new Error(errorMessage);

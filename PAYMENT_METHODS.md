@@ -8,12 +8,13 @@
 - **Abwicklung**: Sofort
 - **Gebühren**: Standard Stripe-Gebühren
 
-### 2. SEPA Direct Debit (Banküberweisung)
-- **Typ**: `sepa_debit`
-- **Verfügbar für**: Deutschland, Österreich, Schweiz (SEPA-Länder)
-- **Abwicklung**: 1-2 Werktage
-- **Gebühren**: Niedrigere Gebühren als Kreditkarten
-- **Vorteil**: Geringere Transaktionskosten, vertraute Zahlungsmethode für deutsche Kunden
+### 2. Banküberweisung (geplant)
+- **Status**: ⏳ Noch nicht implementiert
+- **Typ**: `customer_balance` mit `bank_transfer` ODER `sepa_debit`
+- **Verfügbar für**: Deutschland, Österreich, Schweiz
+- **Hinweis**: 
+  - `customer_balance` erfordert ein Customer-Objekt (nicht aktuell implementiert)
+  - `sepa_debit` kann aktiviert werden, wenn im Stripe Dashboard aktiviert
 
 ---
 
@@ -22,8 +23,17 @@
 Die Zahlungsmethoden werden in `functions/api/checkout.mjs` konfiguriert:
 
 ```javascript
+// Aktuell nur Kreditkarte aktiviert
 'payment_method_types[0]': 'card',
-'payment_method_types[1]': 'sepa_debit',
+
+// Banküberweisung kann hinzugefügt werden:
+// Option 1: SEPA Direct Debit (wenn im Dashboard aktiviert)
+// 'payment_method_types[1]': 'sepa_debit',
+
+// Option 2: Customer Balance Bank Transfer (erfordert Customer-Objekt)
+// 'payment_method_types[1]': 'customer_balance',
+// 'payment_method_options[customer_balance][funding_type]': 'bank_transfer',
+// 'payment_method_options[customer_balance][bank_transfer][type]': 'eu_bank_transfer',
 ```
 
 ---
