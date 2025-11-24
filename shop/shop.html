@@ -772,7 +772,7 @@
             </div>
             <div class="trust-bar-item">
                 <i data-lucide="truck" style="width: 20px; height: 20px;"></i>
-                <span>Gratis ab 30€</span>
+                <span>Kostenloser Versand in Hamm</span>
             </div>
             <div class="trust-bar-item">
                 <i data-lucide="star" style="width: 20px; height: 20px; fill: #FFA000; color: #FFA000;"></i>
@@ -1503,8 +1503,10 @@
             renderProducts();
         }
 
-        // Make removeFromCart globally available for inline onclick handlers
+        // Make functions globally available for inline onclick handlers
         window.removeFromCart = removeFromCart;
+        window.closeCart = closeCart;
+        window.proceedToCheckout = proceedToCheckout;
 
         // INITIALIZE
         document.addEventListener('DOMContentLoaded', () => {
