@@ -1517,10 +1517,20 @@
         // Cart Count
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
-            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cart-count').textContent = count;
+            const count = cart.length; // Use cart.length instead of quantity sum
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = count;
+            }
+            // Also update navigation if available
+            if (window.faensenNav) {
+                window.faensenNav.updateCartCount(count);
+            }
         }
-        updateCartCount();
+        // Wait for navigation to be rendered
+        setTimeout(() => {
+            updateCartCount();
+        }, 100);
 
         // Smooth Scroll for Anchor Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
