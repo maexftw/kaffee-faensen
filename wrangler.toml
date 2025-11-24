@@ -3,6 +3,7 @@ compatibility_date = "2025-01-15"
 pages_build_output_dir = "."
 compatibility_flags = ["nodejs_compat"]
 
-# Optional defaults – override via Cloudflare Dashboard or `wrangler secret`
+# Environment Variables - Plain text variables can be set here
+# Secrets (encrypted) must be set via Cloudflare Dashboard or `wrangler secret put`
 [vars]
-SITE_URL = "https://your-domain.pages.dev"
+SITE_URL = "https://kaffee-faensen.pages.dev"
