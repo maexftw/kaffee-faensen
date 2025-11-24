@@ -728,6 +728,8 @@
         // Warenkorb aus localStorage laden
         let cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
 
+        const CHECKOUT_ENDPOINT = window.FAENSEN_CHECKOUT_ENDPOINT || '/api/checkout';
+
         let currentFilters = {
             size: '',
             grind: '',
@@ -985,8 +987,8 @@
                 `;
                 document.body.appendChild(btn);
 
-                // Netlify Function aufrufen
-                const response = await fetch('/.netlify/functions/create-checkout', {
+                // Cloudflare Function aufrufen
+                const response = await fetch(CHECKOUT_ENDPOINT, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -995,7 +997,8 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error('Checkout-Session konnte nicht erstellt werden');
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.error || 'Checkout-Session konnte nicht erstellt werden');
                 }
 
                 const { url } = await response.json();
