@@ -270,7 +270,13 @@ export async function onRequestPost(context) {
     const session = await stripeResponse.json();
 
     if (!stripeResponse.ok) {
+      console.error('Stripe API error:', session);
       throw new Error(session?.error?.message || 'Stripe API Fehler');
+    }
+
+    if (!session?.url) {
+      console.error('Stripe session missing URL:', session);
+      throw new Error('Stripe Session URL fehlt');
     }
 
     return new Response(

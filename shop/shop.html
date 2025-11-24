@@ -1323,6 +1323,11 @@
             document.body.appendChild(btn);
 
             try {
+                // Validate cart before sending
+                if (!cart || cart.length === 0) {
+                    throw new Error('Warenkorb ist leer');
+                }
+
                 // Cloudflare Function aufrufen
                 const response = await fetch(CHECKOUT_ENDPOINT, {
                     method: 'POST',
@@ -1334,13 +1339,23 @@
 
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.error || 'Checkout-Session konnte nicht erstellt werden');
+                    const errorMessage = errorData.error || errorData.message || `HTTP ${response.status}: ${response.statusText}`;
+                    console.error('Checkout API error:', {
+                        status: response.status,
+                        statusText: response.statusText,
+                        error: errorData
+                    });
+                    throw new Error(errorMessage);
                 }
 
-                const { url } = await response.json();
+                const responseData = await response.json();
+                
+                if (!responseData.url) {
+                    throw new Error('Keine Checkout-URL erhalten');
+                }
 
                 // Zu Stripe weiterleiten
-                window.location.href = url;
+                window.location.href = responseData.url;
 
             } catch (error) {
                 console.error('Checkout error:', error);
@@ -1348,7 +1363,8 @@
                 if (btn && btn.parentNode) {
                     btn.parentNode.removeChild(btn);
                 }
-                alert('❌ Es gab einen Fehler beim Checkout. Bitte versuche es erneut.');
+                const errorMessage = error.message || 'Unbekannter Fehler';
+                alert(`❌ Es gab einen Fehler beim Checkout: ${errorMessage}\n\nBitte versuche es erneut oder kontaktiere uns bei anhaltenden Problemen.`);
             }
         }
 
