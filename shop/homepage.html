@@ -1351,6 +1351,140 @@
 
         // Refresh Icons
         setTimeout(() => lucide.createIcons(), 100);
+
+        // Cart Modal Functions
+        let cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+
+        function viewCart() {
+            renderCart();
+            const modal = document.getElementById('cartModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                lucide.createIcons();
+            }
+        }
+
+        function closeCart() {
+            const modal = document.getElementById('cartModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+
+        function renderCart() {
+            const cartBody = document.getElementById('cartModalBody');
+            const totalPriceEl = document.getElementById('cartTotalPrice');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            if (!cartBody || !totalPriceEl || !checkoutBtn) return;
+
+            cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+
+            if (cart.length === 0) {
+                cartBody.innerHTML = `
+                    <div class="cart-empty">
+                        <i data-lucide="shopping-cart" class="cart-empty-icon"></i>
+                        <h3>Dein Warenkorb ist leer</h3>
+                        <p>Füge Produkte hinzu, um zu beginnen</p>
+                    </div>
+                `;
+                totalPriceEl.textContent = '€0.00';
+                checkoutBtn.disabled = true;
+                lucide.createIcons();
+                return;
+            }
+
+            checkoutBtn.disabled = false;
+            const total = cart.reduce((sum, item) => sum + (item.price || 0), 0);
+            totalPriceEl.textContent = `€${total.toFixed(2)}`;
+
+            cartBody.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <img src="${item.image || ''}" alt="${item.product || ''}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h3 class="cart-item-name">${item.product || ''}</h3>
+                        <p class="cart-item-meta">${item.size || ''} • ${item.grind || ''}</p>
+                        <div class="cart-item-price">€${(item.price || 0).toFixed(2)}</div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${index})" aria-label="Entfernen">
+                        <i data-lucide="trash-2"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function removeFromCart(index) {
+            cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+            if (index >= 0 && index < cart.length) {
+                const removedItem = cart[index];
+                cart.splice(index, 1);
+                localStorage.setItem('faensen_cart', JSON.stringify(cart));
+                updateCartCount();
+                renderCart();
+            }
+        }
+
+        function proceedToCheckout() {
+            cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+            if (cart.length === 0) {
+                alert('Dein Warenkorb ist leer!');
+                return;
+            }
+            closeCart();
+            window.location.href = 'shop.html';
+        }
+
+        // Make viewCart globally available
+        window.viewCart = viewCart;
+
+        // Listen for cart click events
+        window.addEventListener('faensenCartClick', () => {
+            viewCart();
+        });
+
+        // ESC key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('cartModal');
+                if (modal && modal.style.display === 'flex') {
+                    closeCart();
+                }
+            }
+        });
     </script>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal" style="display: none;">
+        <div class="cart-modal-overlay" onclick="closeCart()"></div>
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h2 class="cart-modal-title">Dein Warenkorb</h2>
+                <button class="cart-modal-close" onclick="closeCart()" aria-label="Warenkorb schließen">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="cart-modal-body" id="cartModalBody">
+                <!-- Cart items will be rendered here -->
+            </div>
+            <div class="cart-modal-footer">
+                <div class="cart-summary">
+                    <div class="cart-total">
+                        <span class="cart-total-label">Gesamt</span>
+                        <span class="cart-total-price" id="cartTotalPrice">€0.00</span>
+                    </div>
+                    <button class="btn btn-primary btn-checkout" onclick="proceedToCheckout()" id="checkoutBtn">
+                        Zur Kasse
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeCart()" style="margin-top: var(--space-2);">
+                        Weiter einkaufen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
