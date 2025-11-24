@@ -304,6 +304,9 @@ class FaensenNavigation {
         // If there's a global toggleCart function, call it
         if (typeof window.toggleCart === 'function') {
             window.toggleCart();
+        } else if (typeof window.viewCart === 'function') {
+            // Use the new viewCart function if available
+            window.viewCart();
         } else {
             // Default behavior
             if (this.cartCount === 0) {
