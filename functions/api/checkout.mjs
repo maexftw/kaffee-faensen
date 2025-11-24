@@ -271,7 +271,14 @@ export async function onRequestPost(context) {
 
     if (!stripeResponse.ok) {
       console.error('Stripe API error:', session);
-      throw new Error(session?.error?.message || 'Stripe API Fehler');
+      const errorMessage = session?.error?.message || 'Stripe API Fehler';
+      
+      // Spezifische Fehlermeldung für SEPA Direct Debit
+      if (errorMessage.includes('sepa_debit')) {
+        throw new Error('SEPA Direct Debit ist nicht aktiviert oder nicht verfügbar. Bitte prüfe im Stripe Dashboard (Settings > Payment methods) ob SEPA Direct Debit für den Live-Modus aktiviert ist.');
+      }
+      
+      throw new Error(errorMessage);
     }
 
     if (!session?.url) {
