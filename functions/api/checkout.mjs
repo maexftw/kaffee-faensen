@@ -44,33 +44,105 @@ function mapLineItems(items = []) {
   });
 }
 
-function shippingOptions() {
-  return [
-    {
-      shipping_rate_data: {
-        type: 'fixed_amount',
-        display_name: 'Standardversand',
-        fixed_amount: {
-          amount: 490,
-          currency: 'eur',
-        },
-        delivery_estimate: {
-          minimum: { unit: 'business_day', value: 2 },
-          maximum: { unit: 'business_day', value: 5 },
-        },
+function calculateCartWeight(items = []) {
+  let totalWeight = 0;
+  
+  items.forEach((item) => {
+    const size = item.size || '';
+    let itemWeight = 0;
+    
+    if (size === '250g') {
+      itemWeight = 0.25; // 0.25 kg
+    } else if (size === '500g') {
+      itemWeight = 0.5; // 0.5 kg
+    }
+    
+    const quantity = item.quantity && item.quantity > 0 ? item.quantity : 1;
+    totalWeight += itemWeight * quantity;
+  });
+  
+  return totalWeight;
+}
+
+function calculateDHLShipping(weight) {
+  // DHL standard rates for Germany (in cents)
+  if (weight <= 2) {
+    return 490; // €4.90
+  } else if (weight <= 5) {
+    return 690; // €6.90
+  } else if (weight <= 10) {
+    return 890; // €8.90
+  } else {
+    return 1690; // €16.90 (up to 31.5kg)
+  }
+}
+
+function isHammAddress(postalCode) {
+  if (!postalCode) return false;
+  
+  // Hamm PLZ range: 59063-59077
+  const plz = parseInt(postalCode, 10);
+  return plz >= 59063 && plz <= 59077;
+}
+
+function shippingOptions(cartWeight) {
+  const options = [];
+  
+  // Calculate DHL shipping cost based on weight
+  const dhlCost = calculateDHLShipping(cartWeight);
+  
+  // Free courier option for Hamm (will be shown for Hamm addresses)
+  options.push({
+    shipping_rate_data: {
+      type: 'fixed_amount',
+      display_name: 'Kostenloser Kurier (Hamm)',
+      fixed_amount: {
+        amount: 0,
+        currency: 'eur',
+      },
+      delivery_estimate: {
+        minimum: { unit: 'business_day', value: 1 },
+        maximum: { unit: 'business_day', value: 2 },
+      },
+      metadata: {
+        hamm_only: 'true',
+        postal_code_range: '59063-59077',
       },
     },
-    {
-      shipping_rate_data: {
-        type: 'fixed_amount',
-        display_name: 'Kostenloser Versand (ab 30€)',
-        fixed_amount: {
-          amount: 0,
-          currency: 'eur',
-        },
+  });
+  
+  // DHL shipping option based on weight
+  let dhlDisplayName = 'DHL Versand';
+  if (cartWeight <= 2) {
+    dhlDisplayName = 'DHL Versand (bis 2kg)';
+  } else if (cartWeight <= 5) {
+    dhlDisplayName = 'DHL Versand (bis 5kg)';
+  } else if (cartWeight <= 10) {
+    dhlDisplayName = 'DHL Versand (bis 10kg)';
+  } else {
+    dhlDisplayName = 'DHL Versand (bis 31.5kg)';
+  }
+  
+  options.push({
+    shipping_rate_data: {
+      type: 'fixed_amount',
+      display_name: dhlDisplayName,
+      fixed_amount: {
+        amount: dhlCost,
+        currency: 'eur',
+      },
+      delivery_estimate: {
+        minimum: { unit: 'business_day', value: 2 },
+        maximum: { unit: 'business_day', value: 5 },
+      },
+      metadata: {
+        dhl_shipping: 'true',
+        weight_based: 'true',
       },
     },
-  ];
+  });
+  
+  return options;
 }
 
 export const onRequestOptions = ({ env }) =>
@@ -102,6 +174,9 @@ export async function onRequestPost(context) {
         { status: 400, headers: corsHeaders },
       );
     }
+
+    // Calculate cart weight for shipping cost calculation
+    const cartWeight = calculateCartWeight(items);
 
     const siteUrl = deriveSiteUrl(request, env);
 
@@ -137,7 +212,7 @@ export async function onRequestPost(context) {
       params.append(`line_items[${index}][quantity]`, String(lineItem.quantity));
     });
 
-    shippingOptions().forEach((option, index) => {
+    shippingOptions(cartWeight).forEach((option, index) => {
       params.append(
         `shipping_options[${index}][shipping_rate_data][type]`,
         option.shipping_rate_data.type,
@@ -171,6 +246,15 @@ export async function onRequestPost(context) {
           `shipping_options[${index}][shipping_rate_data][delivery_estimate][maximum][value]`,
           String(option.shipping_rate_data.delivery_estimate.maximum.value),
         );
+      }
+      // Add metadata if present
+      if (option.shipping_rate_data.metadata) {
+        Object.keys(option.shipping_rate_data.metadata).forEach((key) => {
+          params.append(
+            `shipping_options[${index}][shipping_rate_data][metadata][${key}]`,
+            String(option.shipping_rate_data.metadata[key]),
+          );
+        });
       }
     });
 
