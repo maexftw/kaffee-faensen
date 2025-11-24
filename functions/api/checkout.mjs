@@ -190,9 +190,12 @@ export async function onRequestPost(context) {
       'shipping_address_collection[allowed_countries][1]': 'AT',
       'shipping_address_collection[allowed_countries][2]': 'CH',
       'phone_number_collection[enabled]': 'true',
-      // Payment Methods: Kreditkarte + SEPA Direct Debit (Banküberweisung)
+      // Payment Methods: Kreditkarte + Banküberweisung (Customer Balance)
       'payment_method_types[0]': 'card',
-      'payment_method_types[1]': 'sepa_debit',
+      'payment_method_types[1]': 'customer_balance',
+      // Bank Transfer Konfiguration für Customer Balance
+      'payment_method_options[customer_balance][funding_type]': 'bank_transfer',
+      'payment_method_options[customer_balance][bank_transfer][type]': 'eu_bank_transfer',
     });
 
     mapLineItems(items).forEach((lineItem, index) => {
