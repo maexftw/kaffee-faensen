@@ -180,9 +180,6 @@ export async function onRequestPost(context) {
 
     const siteUrl = deriveSiteUrl(request, env);
 
-    // Für Banküberweisung (customer_balance) muss ein Customer erstellt werden
-    // Da wir keine Customer-ID haben, verwenden wir nur Kreditkarte
-    // Banküberweisung kann später hinzugefügt werden, wenn Customer-Management implementiert ist
     const params = new URLSearchParams({
       mode: 'payment',
       locale: 'de',
@@ -193,10 +190,8 @@ export async function onRequestPost(context) {
       'shipping_address_collection[allowed_countries][1]': 'AT',
       'shipping_address_collection[allowed_countries][2]': 'CH',
       'phone_number_collection[enabled]': 'true',
-      // Payment Methods: Nur Kreditkarte aktiviert
-      // SEPA Direct Debit ist nicht im Stripe Dashboard aktiviert
-      // Banküberweisung (customer_balance) erfordert Customer-Objekt
-      'payment_method_types[0]': 'card',
+      // Payment Method Configuration - enthält alle aktivierten Payment Methods
+      'payment_method_configuration': 'pmc_1Qux1zA474V2RPC7hAxpL2FH',
     });
 
     mapLineItems(items).forEach((lineItem, index) => {
