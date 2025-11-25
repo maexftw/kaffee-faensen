@@ -180,9 +180,27 @@ export async function onRequestPost(context) {
 
     const siteUrl = deriveSiteUrl(request, env);
 
+    // Customer für Banküberweisung erstellen (erforderlich für customer_balance)
+    const customerResponse = await fetch('https://api.stripe.com/v1/customers', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: '',
+    });
+
+    const customer = await customerResponse.json();
+
+    if (!customerResponse.ok) {
+      console.error('Customer creation error:', customer);
+      throw new Error('Kunde konnte nicht erstellt werden');
+    }
+
     const params = new URLSearchParams({
       mode: 'payment',
       locale: 'de',
+      'customer': customer.id,
       success_url: `${siteUrl.replace(/\/$/, '')}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl.replace(/\/$/, '')}/shop/shop.html`,
       'billing_address_collection': 'required',
@@ -190,8 +208,13 @@ export async function onRequestPost(context) {
       'shipping_address_collection[allowed_countries][1]': 'AT',
       'shipping_address_collection[allowed_countries][2]': 'CH',
       'phone_number_collection[enabled]': 'true',
-      // Payment Method Configuration - enthält alle aktivierten Payment Methods
-      'payment_method_configuration': 'pmc_1Qux1zA474V2RPC7hAxpL2FH',
+      // Payment Methods: Kreditkarte + Banküberweisung
+      'payment_method_types[0]': 'card',
+      'payment_method_types[1]': 'customer_balance',
+      // Bank Transfer Konfiguration
+      'payment_method_options[customer_balance][funding_type]': 'bank_transfer',
+      'payment_method_options[customer_balance][bank_transfer][type]': 'eu_bank_transfer',
+      'payment_method_options[customer_balance][bank_transfer][eu_bank_transfer][country]': 'DE',
     });
 
     mapLineItems(items).forEach((lineItem, index) => {
@@ -272,12 +295,9 @@ export async function onRequestPost(context) {
       console.error('Stripe API error:', session);
       const errorMessage = session?.error?.message || 'Stripe API Fehler';
       
-      // Spezifische Fehlermeldungen für Payment Methods
-      if (errorMessage.includes('sepa_debit')) {
-        throw new Error('SEPA Direct Debit ist nicht aktiviert oder nicht verfügbar. Bitte prüfe im Stripe Dashboard (Settings > Payment methods) ob SEPA Direct Debit für den Live-Modus aktiviert ist.');
-      }
-      if (errorMessage.includes('customer_balance')) {
-        throw new Error('Banküberweisung (customer_balance) erfordert ein Customer-Objekt. Diese Funktion ist aktuell nicht verfügbar.');
+      // Spezifische Fehlermeldung für Banküberweisung
+      if (errorMessage.includes('customer_balance') || errorMessage.includes('bank_transfer')) {
+        throw new Error('Banküberweisung ist nicht aktiviert. Bitte prüfe im Stripe Dashboard (Settings > Payment methods) ob Bank transfers aktiviert ist.');
       }
       
       throw new Error(errorMessage);
