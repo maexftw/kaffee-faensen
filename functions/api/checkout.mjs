@@ -91,11 +91,11 @@ function shippingOptions(cartWeight) {
   // Calculate DHL shipping cost based on weight
   const dhlCost = calculateDHLShipping(cartWeight);
   
-  // Free courier option for Hamm (will be shown for Hamm addresses)
+  // Free courier option for Hamm only
   options.push({
     shipping_rate_data: {
       type: 'fixed_amount',
-      display_name: 'Kostenloser Kurier (Hamm)',
+      display_name: 'Kostenloser Kurier – nur Hamm (PLZ 59063-59077)',
       fixed_amount: {
         amount: 0,
         currency: 'eur',
