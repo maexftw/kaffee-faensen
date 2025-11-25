@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGB - Kaffee Fänsen</title>
+    <meta name="description" content="Allgemeine Geschäftsbedingungen der Privatrösterei Fänsen">
+
+    <!-- Google Fonts: Patua One + Lora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Navigation Component -->
+    <script src="faensen_navigation.js"></script>
+
+    <style>
+        :root {
+            --color-primary: #593F33;
+            --color-secondary: #D1541D;
+            --color-bg: #FAF8F5;
+            --color-bg-white: #FFFFFF;
+            --color-text: #2D2520;
+            --color-text-light: #6B5D57;
+            --color-border: #E8E3DD;
+            --font-display: 'Patua One', serif;
+            --font-body: 'Lora', serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--color-primary);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .container { padding: 48px; }
+        }
+
+        .page-header {
+            padding: 64px 0 32px;
+            text-align: center;
+            border-bottom: 2px solid var(--color-border);
+            margin-bottom: 48px;
+        }
+
+        .page-title {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 16px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--color-text-light);
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .content-section h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--color-secondary);
+            display: inline-block;
+        }
+
+        .content-section h3 {
+            font-size: 20px;
+            margin: 24px 0 12px;
+        }
+
+        .content-section p, .content-section li {
+            margin-bottom: 16px;
+        }
+
+        .content-section ul, .content-section ol {
+            padding-left: 24px;
+        }
+
+        .contact-info {
+            background: var(--color-bg-white);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .contact-info strong {
+            color: var(--color-primary);
+        }
+
+        .highlight-box {
+            background: #FFF3E0;
+            border-left: 4px solid var(--color-secondary);
+            padding: 16px 24px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        a {
+            color: var(--color-secondary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 64px;
+            padding: 32px 0;
+            background: var(--color-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .footer a {
+            color: rgba(255,255,255,0.8);
+            margin: 0 16px;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER - Automatically inserted by faensen_navigation.js -->
+
+    <main class="container" id="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Allgemeine Geschäftsbedingungen</h1>
+            <p class="page-subtitle">Stand: November 2025</p>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 1 Geltungsbereich</h2>
+            <p>(1) Diese Allgemeinen Geschäftsbedingungen (nachfolgend „AGB") gelten für alle Verträge, die zwischen der Privatrösterei Fänsen und dem Kunden über den Online-Shop geschlossen werden.</p>
+            <div class="contact-info">
+                <p><strong>Privatrösterei Fänsen</strong></p>
+                <p>Inhaber: Rouven Fänsen</p>
+                <p>Gewerbepark 27<br>59069 Hamm</p>
+                <p>E-Mail: <a href="mailto:info@kaffee-faensen.de">info@kaffee-faensen.de</a></p>
+            </div>
+            <p>(2) Verbraucher im Sinne dieser AGB ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken abschließt, die überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit zugerechnet werden können.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 2 Vertragsschluss</h2>
+            <p>(1) Die Darstellung der Produkte im Online-Shop stellt kein rechtlich bindendes Angebot, sondern eine unverbindliche Aufforderung zur Bestellung dar.</p>
+            <p>(2) Mit dem Absenden der Bestellung gibt der Kunde ein verbindliches Angebot zum Kauf der im Warenkorb enthaltenen Produkte ab.</p>
+            <p>(3) Der Vertrag kommt zustande, wenn wir die Bestellung durch eine Auftragsbestätigung per E-Mail annehmen oder die Ware versenden.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 3 Preise und Zahlung</h2>
+            <p>(1) Alle angegebenen Preise sind Endpreise und enthalten die gesetzliche Mehrwertsteuer.</p>
+            <p>(2) Zusätzlich zu den angegebenen Preisen fallen Versandkosten an, sofern nicht ausdrücklich als „versandkostenfrei" gekennzeichnet. Die Versandkosten werden vor Abschluss der Bestellung deutlich angezeigt.</p>
+            <p>(3) Die Zahlung erfolgt über die im Bestellprozess angebotenen Zahlungsarten:</p>
+            <ul>
+                <li>Kreditkarte (über Stripe)</li>
+                <li>Banküberweisung</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 4 Lieferung</h2>
+            <p>(1) Die Lieferung erfolgt an die vom Kunden angegebene Lieferadresse.</p>
+            <p>(2) Die Lieferzeit beträgt in der Regel 2-5 Werktage nach Zahlungseingang.</p>
+            <p>(3) Für Kunden in Hamm (PLZ 59063-59077) bieten wir einen kostenlosen Kurierservice an.</p>
+            <p>(4) Für Lieferungen außerhalb von Hamm berechnen wir eine Versandkostenpauschale gemäß der Anzeige im Bestellprozess.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 5 Widerrufsrecht</h2>
+            <div class="highlight-box">
+                <p><strong>Wichtiger Hinweis:</strong> Bei Lebensmitteln, die schnell verderben können oder deren Verfallsdatum schnell überschritten würde, besteht gemäß § 312g Abs. 2 Nr. 2 BGB <strong>kein Widerrufsrecht</strong>.</p>
+            </div>
+            <p>Da es sich bei Kaffee um ein Lebensmittel handelt, ist das Widerrufsrecht nach § 312g Abs. 2 Nr. 2 BGB ausgeschlossen. Der Kaffee wird frisch geröstet und verliert mit der Zeit sein volles Aroma, weshalb er zu den schnell verderblichen Waren zählt.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 6 Eigentumsvorbehalt</h2>
+            <p>Die gelieferte Ware bleibt bis zur vollständigen Bezahlung des Kaufpreises unser Eigentum.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 7 Gewährleistung</h2>
+            <p>(1) Es gelten die gesetzlichen Gewährleistungsrechte.</p>
+            <p>(2) Bei offensichtlichen Mängeln (z.B. beschädigte Verpackung) bitten wir um sofortige Mitteilung.</p>
+            <p>(3) Sollte die Ware beschädigt ankommen oder nicht der Bestellung entsprechen, setzen Sie sich bitte umgehend mit uns in Verbindung: <a href="mailto:info@kaffee-faensen.de">info@kaffee-faensen.de</a></p>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 8 Haftung</h2>
+            <p>(1) Wir haften unbeschränkt für Vorsatz und grobe Fahrlässigkeit.</p>
+            <p>(2) Für leichte Fahrlässigkeit haften wir nur bei Verletzung wesentlicher Vertragspflichten und der Höhe nach begrenzt auf den vorhersehbaren, typischerweise eintretenden Schaden.</p>
+            <p>(3) Die vorstehenden Haftungsbeschränkungen gelten nicht für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 9 Datenschutz</h2>
+            <p>Informationen zur Erhebung und Verarbeitung personenbezogener Daten finden Sie in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 10 Streitbeilegung</h2>
+            <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a></p>
+            <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>§ 11 Schlussbestimmungen</h2>
+            <p>(1) Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.</p>
+            <p>(2) Sollten einzelne Bestimmungen dieser AGB unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Kaffee Fänsen – Handwerklich geröstet seit 1933</p>
+        <p>
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+            <a href="agb.html">AGB</a>
+        </p>
+    </footer>
+</body>
+</html>
