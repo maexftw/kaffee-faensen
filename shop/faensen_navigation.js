@@ -171,6 +171,145 @@ class FaensenNavigation {
                     border-radius: 9999px;
                     font-family: 'Patua One', serif;
                 }
+
+                /* Mobile Menu Button */
+                .header-menu-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 48px;
+                    min-height: 48px;
+                    padding: 0;
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                    color: #2D2520;
+                }
+
+                @media (min-width: 768px) {
+                    .header-menu-btn {
+                        display: none;
+                    }
+                }
+
+                /* Mobile Menu Overlay */
+                .mobile-menu-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.5);
+                    z-index: 200;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity 0.3s ease, visibility 0.3s ease;
+                }
+
+                .mobile-menu-overlay.open {
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                /* Mobile Menu Panel */
+                .mobile-menu {
+                    position: fixed;
+                    top: 0;
+                    right: -280px;
+                    width: 280px;
+                    height: 100%;
+                    background: #FAF8F5;
+                    z-index: 201;
+                    transition: right 0.3s ease;
+                    display: flex;
+                    flex-direction: column;
+                    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+                }
+
+                .mobile-menu.open {
+                    right: 0;
+                }
+
+                .mobile-menu-header {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 24px;
+                    border-bottom: 1px solid #E5DED6;
+                }
+
+                .mobile-menu-header img {
+                    height: 40px;
+                    width: auto;
+                }
+
+                .mobile-menu-close {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 48px;
+                    min-height: 48px;
+                    padding: 0;
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                    color: #2D2520;
+                }
+
+                .mobile-menu-nav {
+                    flex: 1;
+                    padding: 24px;
+                    list-style: none;
+                    margin: 0;
+                }
+
+                .mobile-menu-nav li {
+                    margin-bottom: 8px;
+                }
+
+                .mobile-menu-nav a {
+                    display: block;
+                    padding: 16px;
+                    font-family: 'Patua One', serif;
+                    font-size: 1.25rem;
+                    color: #2D2520;
+                    border-radius: 8px;
+                    transition: background 0.2s ease, color 0.2s ease;
+                }
+
+                .mobile-menu-nav a:hover,
+                .mobile-menu-nav a.active {
+                    background: #593F33;
+                    color: white;
+                }
+
+                .mobile-menu-footer {
+                    padding: 24px;
+                    border-top: 1px solid #E5DED6;
+                    text-align: center;
+                }
+
+                .mobile-menu-cta {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    width: 100%;
+                    padding: 16px 24px;
+                    background: #D1541D;
+                    color: white;
+                    font-family: 'Patua One', serif;
+                    font-size: 1rem;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    text-decoration: none;
+                    transition: background 0.2s ease;
+                }
+
+                .mobile-menu-cta:hover {
+                    background: #B8461A;
+                }
             </style>
 
             <a href="#main-content" class="skip-link">Direkt zum Inhalt</a>
@@ -188,17 +327,58 @@ class FaensenNavigation {
                             <li><a href="homepage.html#tradition" data-page="tradition">Tradition</a></li>
                         </ul>
 
-                        <button class="header-cart" id="cart-btn" aria-label="Warenkorb">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="9" cy="21" r="1"></circle>
-                                <circle cx="20" cy="21" r="1"></circle>
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                            </svg>
-                            <span class="header-cart-badge" id="cart-count">0</span>
-                        </button>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <button class="header-cart" id="cart-btn" aria-label="Warenkorb">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="9" cy="21" r="1"></circle>
+                                    <circle cx="20" cy="21" r="1"></circle>
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                </svg>
+                                <span class="header-cart-badge" id="cart-count">0</span>
+                            </button>
+                            <button class="header-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </header>
+
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+
+            <!-- Mobile Menu Panel -->
+            <nav class="mobile-menu" id="mobile-menu">
+                <div class="mobile-menu-header">
+                    <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8468ce539285a857943bb_FF-LOGO-deliver-01-scaled-e1658821528426.jpg" alt="Kaffee Fänsen">
+                    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Menü schließen">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <ul class="mobile-menu-nav">
+                    <li><a href="homepage.html#start" data-page="home">Start</a></li>
+                    <li><a href="shop.html" data-page="shop">Shop</a></li>
+                    <li><a href="homepage.html#ueber-uns" data-page="about">Über uns</a></li>
+                    <li><a href="homepage.html#tradition" data-page="tradition">Tradition</a></li>
+                </ul>
+                <div class="mobile-menu-footer">
+                    <a href="shop.html" class="mobile-menu-cta">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        Jetzt bestellen
+                    </a>
+                </div>
+            </nav>
         `;
 
         // Insert navigation at the beginning of body
@@ -227,6 +407,55 @@ class FaensenNavigation {
                 }
             });
         }
+
+        // Mobile menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menuClose = document.getElementById('mobile-menu-close');
+        const menuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => this.openMobileMenu());
+        }
+
+        if (menuClose) {
+            menuClose.addEventListener('click', () => this.closeMobileMenu());
+        }
+
+        if (menuOverlay) {
+            menuOverlay.addEventListener('click', () => this.closeMobileMenu());
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('open')) {
+                this.closeMobileMenu();
+            }
+        });
+
+        // Close menu on link click
+        const mobileNavLinks = document.querySelectorAll('.mobile-menu-nav a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => this.closeMobileMenu());
+        });
+    }
+
+    openMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('mobile-menu-overlay');
+
+        if (mobileMenu) mobileMenu.classList.add('open');
+        if (menuOverlay) menuOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    closeMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('mobile-menu-overlay');
+
+        if (mobileMenu) mobileMenu.classList.remove('open');
+        if (menuOverlay) menuOverlay.classList.remove('open');
+        document.body.style.overflow = '';
     }
 
     initScrollEffect() {
@@ -250,9 +479,19 @@ class FaensenNavigation {
 
     setActivePage() {
         const currentPage = this.getCurrentPage();
-        const navLinks = document.querySelectorAll('.header-nav a');
 
+        // Desktop nav
+        const navLinks = document.querySelectorAll('.header-nav a');
         navLinks.forEach(link => {
+            const page = link.getAttribute('data-page');
+            if (page === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+        // Mobile nav
+        const mobileNavLinks = document.querySelectorAll('.mobile-menu-nav a');
+        mobileNavLinks.forEach(link => {
             const page = link.getAttribute('data-page');
             if (page === currentPage) {
                 link.classList.add('active');
