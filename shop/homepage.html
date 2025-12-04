@@ -749,12 +749,16 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 72px;
-            height: 72px;
+            width: 64px;
+            height: 64px;
             margin: 0 auto var(--space-3);
             background: var(--color-bg);
-            border: 3px solid var(--color-primary);
+            border: 3px solid var(--color-secondary);
             border-radius: var(--radius-full);
+        }
+        
+        .card-icon i {
+            color: var(--color-secondary) !important;
         }
 
         .card-title {
@@ -775,20 +779,33 @@
             position: relative;
             padding: var(--space-2);
             background: var(--color-bg-white);
-            border: 4px solid var(--color-primary);
-            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            max-width: 400px;
+            margin: 0 auto;
         }
 
         .photo-frame::before {
             content: '';
             position: absolute;
-            inset: 8px;
+            inset: 4px;
             border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
             pointer-events: none;
         }
 
         .photo-frame img {
             width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius-sm);
+        }
+        
+        @media (min-width: 1024px) {
+            .timeline-item .photo-frame {
+                max-width: 350px;
+            }
         }
 
         /* ===================================
@@ -1326,40 +1343,42 @@
            FOOTER
         =================================== */
         .footer {
-            padding: var(--space-10) 0 var(--space-4);
-            background: var(--color-primary);
-            color: white;
-            border-top: 4px solid var(--color-secondary);
+            padding: var(--space-8) 0 var(--space-4);
+            background: var(--color-bg);
+            color: var(--color-text);
+            border-top: 2px solid var(--color-border);
         }
 
         .footer-grid {
             display: grid;
             gap: var(--space-6);
-            margin-bottom: var(--space-8);
+            margin-bottom: var(--space-6);
         }
 
         @media (min-width: 768px) {
             .footer-grid {
                 grid-template-columns: 2fr 1fr 1fr;
+                gap: var(--space-8);
             }
         }
 
         .footer-logo {
-            height: 56px;
+            height: 48px;
             margin-bottom: var(--space-3);
-            filter: brightness(0) invert(1);
+            filter: none;
         }
 
         .footer-text {
             font-size: var(--text-base);
             line-height: var(--leading-relaxed);
-            opacity: 0.9;
+            color: var(--color-text-light);
         }
 
         .footer-title {
             font-family: var(--font-display);
             font-size: var(--text-lg);
             margin-bottom: var(--space-3);
+            color: var(--color-primary);
         }
 
         .footer-links {
@@ -1374,20 +1393,20 @@
 
         .footer-links a {
             font-size: var(--text-base);
-            opacity: 0.8;
-            transition: opacity var(--transition-fast);
+            color: var(--color-text-light);
+            transition: color var(--transition-fast);
         }
 
         .footer-links a:hover {
-            opacity: 1;
+            color: var(--color-secondary);
         }
 
         .footer-bottom {
             padding-top: var(--space-4);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 1px solid var(--color-border);
             text-align: center;
             font-size: var(--text-sm);
-            opacity: 0.8;
+            color: var(--color-text-light);
         }
 
         /* ===================================
@@ -1677,7 +1696,7 @@
             <div class="grid grid-3">
                 <div class="card card-center fade-in">
                     <div class="card-icon">
-                        <i data-lucide="home" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                        <i data-lucide="home" style="width: 28px; height: 28px;"></i>
                     </div>
                     <h3 class="card-title">Lokale Rösterei</h3>
                     <p class="card-text">
@@ -1687,7 +1706,7 @@
 
                 <div class="card card-center fade-in">
                     <div class="card-icon">
-                        <i data-lucide="briefcase" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                        <i data-lucide="briefcase" style="width: 28px; height: 28px;"></i>
                     </div>
                     <h3 class="card-title">Großhändler</h3>
                     <p class="card-text">
@@ -1697,7 +1716,7 @@
 
                 <div class="card card-center fade-in">
                     <div class="card-icon">
-                        <i data-lucide="leaf" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                        <i data-lucide="leaf" style="width: 28px; height: 28px;"></i>
                     </div>
                     <h3 class="card-title">Natürliche Qualität</h3>
                     <p class="card-text">
@@ -1707,7 +1726,7 @@
 
                 <div class="card card-center fade-in">
                     <div class="card-icon">
-                        <i data-lucide="truck" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                        <i data-lucide="truck" style="width: 28px; height: 28px;"></i>
                     </div>
                     <h3 class="card-title">Deutschlandweiter Versand</h3>
                     <p class="card-text">
@@ -1717,7 +1736,7 @@
 
                 <div class="card card-center fade-in">
                     <div class="card-icon">
-                        <i data-lucide="shopping-bag" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                        <i data-lucide="shopping-bag" style="width: 28px; height: 28px;"></i>
                     </div>
                     <h3 class="card-title">Online Shop</h3>
                     <p class="card-text">
@@ -1727,7 +1746,7 @@
 
                 <div class="card card-center fade-in">
                     <div class="card-icon">
-                        <i data-lucide="star" style="width: 32px; height: 32px; color: var(--color-primary);"></i>
+                        <i data-lucide="star" style="width: 28px; height: 28px;"></i>
                     </div>
                     <h3 class="card-title">Kundenvertrauen</h3>
                     <p class="card-text">
