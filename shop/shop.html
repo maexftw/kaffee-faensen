@@ -19,6 +19,9 @@
     <!-- Stripe Payment Links -->
     <script src="stripe-payment-links.js"></script>
 
+    <!-- Produktdaten -->
+    <script src="products-data.js"></script>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
@@ -893,144 +896,21 @@
 
     <script>
         // PRODUCT DATA
-        const products = [
-            {
-                handle: "hammer-spezial",
-                name: "Hammer Spezial",
-                description: "Würziger Hochland-Arabica mit nussiger Note",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 6.10,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 6.10, "500g": 12.20 },
-                rating: 4.8,
-                reviews: 127,
-                badge: "Bestseller"
-            },
-            {
-                handle: "cafe-haus",
-                name: "Café Haus",
-                description: "Harmonischer Genuss mit ausgewogener Säure",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 6.30,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 6.30, "500g": 12.60 },
-                rating: 4.9,
-                reviews: 98
-            },
-            {
-                handle: "maragogype",
-                name: "Maragogype",
-                description: "Die edle Elefantenbohne mit fruchtiger Note",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 7.40,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 7.40, "500g": 14.80 },
-                rating: 4.9,
-                reviews: 156,
-                badge: "Premium"
-            },
-            {
-                handle: "ratsherren-mischung",
-                name: "Ratsherren Mischung",
-                description: "Kräftiger Genuss mit feiner Kakaonote",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 6.30,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 6.30, "500g": 12.60 },
-                rating: 4.7,
-                reviews: 84
-            },
-            {
-                handle: "peru",
-                name: "Peru",
-                description: "Vollmundiger Hochland-Genuss mit feiner Säure",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 6.40,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 6.40, "500g": 12.80 },
-                rating: 4.8,
-                reviews: 112,
-                badge: "Neu"
-            },
-            {
-                handle: "brasil",
-                name: "Brasil",
-                description: "Mild-aromatischer Klassiker mit Schokoladennote",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 6.00,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 6.00, "500g": 12.00 },
-                rating: 4.6,
-                reviews: 93
-            },
-            {
-                handle: "espresso",
-                name: "Espresso",
-                description: "Intensive Röstung für perfekten Espresso-Genuss",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 6.50,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 6.50, "500g": 13.00 },
-                rating: 4.9,
-                reviews: 203,
-                badge: "Bestseller"
-            },
-            {
-                handle: "creme",
-                name: "Crème",
-                description: "Samtige Crema mit vollmundigem Körper",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 6.20,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 6.20, "500g": 12.40 },
-                rating: 4.7,
-                reviews: 76
-            },
-            {
-                handle: "cappuccino",
-                name: "Cappuccino",
-                description: "Perfekt abgestimmt für cremigen Milchkaffee",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 6.40,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 6.40, "500g": 12.80 },
-                rating: 4.8,
-                reviews: 145
-            },
-            {
-                handle: "naturmild",
-                name: "Naturmild",
-                description: "Besonders bekömmlich mit milder Röstung",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 6.30,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 6.30, "500g": 12.60 },
-                rating: 4.5,
-                reviews: 67
-            },
-            {
-                handle: "saurearm",
-                name: "Säurearm",
-                description: "Magenschonend geröstet für empfindliche Genießer",
-                image: "https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg",
-                basePrice: 6.50,
-                sizes: ["250g", "500g"],
-                grinds: ["Ganze Bohne", "Filterkaffee", "Siebträger", "French Press", "Espressokanne"],
-                pricing: { "250g": 6.50, "500g": 13.00 },
-                rating: 4.7,
-                reviews: 89
-            }
-        ];
+        // Produkte aus zentraler products-data.js verwenden
+        // Mapping von FAENSEN_PRODUCTS zu shop-Format
+        const products = FAENSEN_PRODUCTS.map(p => ({
+            handle: p.handle,
+            name: p.name,
+            description: p.shortDescription,
+            image: p.image,
+            basePrice: p.basePrice,
+            sizes: p.sizes,
+            grinds: p.grinds,
+            pricing: p.pricing,
+            rating: p.rating,
+            reviews: p.reviews,
+            badge: p.badge
+        }));
 
         // Warenkorb aus localStorage laden
         let cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
@@ -1159,6 +1039,16 @@
                     </button>
                 </div>
             `;
+
+            // Klick auf Bild oder Namen oeffnet Produktseite
+            card.querySelector('.product-image-wrapper').style.cursor = 'pointer';
+            card.querySelector('.product-image-wrapper').addEventListener('click', function() {
+                window.location.href = product.handle + '.html';
+            });
+            card.querySelector('.product-name').style.cursor = 'pointer';
+            card.querySelector('.product-name').addEventListener('click', function() {
+                window.location.href = product.handle + '.html';
+            });
 
             return card;
         }
