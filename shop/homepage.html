@@ -6,10 +6,10 @@
     <title>Kaffee Fänsen - Handwerklich geröstet seit 1933</title>
     <meta name="description" content="Traditionell gerösteter Kaffee aus Hamm. Seit über 90 Jahren rösten wir mit Leidenschaft. Jede Bohne handverlesen, jede Röstung ein Meisterwerk.">
 
-    <!-- Google Fonts: Patua One + Lora -->
+    <!-- Google Fonts: Patua One + Lora + Great Vibes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Patua+One&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -38,6 +38,7 @@
             /* TYPOGRAPHY */
             --font-display: 'Patua One', serif;
             --font-body: 'Lora', serif;
+            --font-script: 'Great Vibes', cursive;
 
             /* Font Sizes - Modular Scale (1.25 ratio) */
             --text-xs: 12px;
@@ -257,89 +258,270 @@
         }
 
         /* ===================================
-           HERO SECTION
+           HERO SECTION - Full-Width Cinematic
+           Premium Design with Animated Typography
         =================================== */
         .hero {
             position: relative;
-            min-height: 85vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: var(--space-16) 0;
-            background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 100%);
-            color: var(--color-text);
+            justify-content: center;
+            padding: var(--space-10) 0;
+            overflow: hidden;
         }
 
+        /* Hero Background Image */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=85')
+                center/cover no-repeat;
+            transform: scale(1.05);
+            animation: heroZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroZoom {
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1.15); }
+        }
+
+        /* Dark Gradient Overlay */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(45, 37, 32, 0.4) 0%,
+                rgba(89, 63, 51, 0.85) 50%,
+                rgba(45, 37, 32, 0.95) 100%
+            );
+        }
+
+        /* Film Grain Texture */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* Hero Content Container */
         .hero-content {
-            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
+            padding: 0 var(--space-3);
         }
 
-        /* Free Shipping Badge at Top */
-        .hero-badge-top {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            margin-bottom: var(--space-3);
-            background: #2E7D32;
-            color: white;
-            font-family: var(--font-display);
-            font-size: var(--text-sm);
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            border-radius: var(--radius-full);
-            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
-            animation: bounce-in 0.6s ease-out;
+        /* Handschrift-Akzent */
+        .hero-script {
+            font-family: var(--font-script);
+            font-size: clamp(36px, 6vw, 64px);
+            color: var(--color-secondary);
+            margin-bottom: var(--space-2);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
         }
 
-        @keyframes bounce-in {
-            0% { transform: translateY(-20px); opacity: 0; }
-            60% { transform: translateY(5px); }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
+        /* Animated Label */
         .hero-label {
             display: inline-block;
-            padding: 6px 16px;
+            padding: 8px 20px;
             margin-bottom: var(--space-4);
-            background: var(--color-secondary);
+            background: rgba(209, 84, 29, 0.9);
             color: white;
             font-family: var(--font-display);
             font-size: var(--text-sm);
-            letter-spacing: 0.08em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             border-radius: 4px;
-            transform: rotate(-1deg);
-            box-shadow: 3px 3px 0 rgba(89, 63, 51, 0.2);
-            transition: transform var(--transition-fast);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out 0.4s forwards;
         }
 
-        .hero-label:hover {
-            transform: rotate(-1deg) scale(1.05);
-        }
-
+        /* Main Title - Animated */
         .hero-title {
-            font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
-            margin-bottom: var(--space-3);
-            color: var(--color-primary);
-        }
-
-        .hero-subtitle {
-            font-size: clamp(var(--text-xl), 3vw, var(--text-2xl));
-            font-weight: 500;
+            font-size: clamp(var(--text-4xl), 8vw, 80px);
+            line-height: 1.1;
             margin-bottom: var(--space-4);
-            color: var(--color-text);
+            color: #FFFFFF;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
+        .hero-title .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(50px) rotateX(-15deg);
+            animation: wordReveal 0.8s ease-out forwards;
+        }
+
+        .hero-title .word:nth-child(1) { animation-delay: 0.5s; }
+        .hero-title .word:nth-child(2) { animation-delay: 0.6s; }
+        .hero-title .word:nth-child(3) { animation-delay: 0.7s; }
+        .hero-title .word:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes wordReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) rotateX(-15deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Description */
         .hero-description {
-            font-size: var(--text-lg);
+            font-size: clamp(var(--text-base), 2vw, var(--text-xl));
             line-height: var(--leading-relaxed);
             margin-bottom: var(--space-6);
-            color: var(--color-text);
+            color: rgba(255, 255, 255, 0.9);
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.9s forwards;
+        }
+
+        /* Button Group Animation */
+        .hero .btn-group {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 1.1s forwards;
+        }
+
+        /* Scroll Indicator */
+        .hero-scroll {
+            position: absolute;
+            bottom: var(--space-6);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: var(--text-sm);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 1.5s forwards;
+            cursor: pointer;
+            transition: color var(--transition-base);
+        }
+
+        .hero-scroll:hover {
+            color: var(--color-secondary);
+        }
+
+        .hero-scroll-icon {
+            width: 24px;
+            height: 40px;
+            border: 2px solid currentColor;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .hero-scroll-icon::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 8px;
+            width: 4px;
+            height: 8px;
+            background: currentColor;
+            border-radius: 2px;
+            transform: translateX(-50%);
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { top: 8px; opacity: 1; }
+            50% { top: 20px; opacity: 0.3; }
+        }
+
+        /* Trust Badges on Hero */
+        .hero .trust-badges {
+            margin-top: var(--space-6);
+            padding-top: var(--space-4);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 1.3s forwards;
+        }
+
+        .hero .trust-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero .trust-icon {
+            color: var(--color-secondary);
+        }
+
+        /* Hero Buttons - Enhanced */
+        .hero .btn-primary {
+            background: var(--color-secondary);
+            border-color: var(--color-secondary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(209, 84, 29, 0.4);
+        }
+
+        .hero .btn-primary:hover {
+            background: #E16324;
+            border-color: #E16324;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(209, 84, 29, 0.5);
+        }
+
+        .hero .btn-outline {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: white;
+            backdrop-filter: blur(4px);
+        }
+
+        .hero .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: white;
+            transform: translateY(-4px);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 90vh;
+            }
+
+            .hero-scroll {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: clamp(var(--text-3xl), 10vw, var(--text-4xl));
+            }
         }
 
         /* ===================================
@@ -413,32 +595,35 @@
             margin-bottom: var(--space-5);
         }
 
-        /* Trust Elements */
+        /* Trust Elements - Gestalt Proximity */
         .trust-badges {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-4);
+            gap: var(--space-3);
             align-items: center;
             justify-content: center;
-            margin-top: var(--space-6);
+            margin-top: var(--space-5);
             padding-top: var(--space-4);
-            border-top: 1px solid var(--color-border);
+            border-top: 1px solid rgba(89, 63, 51, 0.1);
         }
 
         .trust-item {
             display: flex;
             align-items: center;
             gap: var(--space-1);
+            padding: var(--space-1) var(--space-2);
             font-size: var(--text-sm);
-            color: var(--color-text-light);
+            color: var(--color-text);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-sm);
         }
 
         .trust-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             color: var(--color-secondary);
         }
 
@@ -1248,22 +1433,37 @@
     <!-- HEADER - Automatically inserted by faensen_navigation.js -->
 
     <!-- ===================================
-         HERO SECTION
+         HERO SECTION - Full-Width Cinematic
     =================================== -->
     <section class="hero" id="start">
+        <!-- Background Image Layer -->
+        <div class="hero-bg"></div>
+        <!-- Dark Gradient Overlay -->
+        <div class="hero-overlay"></div>
+
         <div class="container">
             <div class="hero-content">
-                <div class="hero-label">Handgerösteter Kaffee seit 1933</div>
+                <!-- Handschrift-Akzent -->
+                <div class="hero-script">Seit 1933</div>
 
-                <h1 class="hero-title">Jede Bohne mit Hingabe geröstet – für deinen perfekten Moment</h1>
+                <div class="hero-label">Echte Handwerkskunst aus Hamm</div>
+
+                <!-- Animated Title -->
+                <h1 class="hero-title">
+                    <span class="word">Kaffee,</span>
+                    <span class="word">der</span>
+                    <span class="word">Geschichte</span>
+                    <span class="word">erzählt</span>
+                </h1>
+
                 <p class="hero-description">
                     Zweimal wöchentlich rösten wir 250 Kilogramm feinsten Kaffee in unserer Hammer Rösterei.
                     Familienrezepte aus drei Generationen – für deinen unvergleichlichen Kaffeegenuss.
                 </p>
 
                 <div class="btn-group">
-                    <a href="shop.html" class="btn btn-secondary btn-lg">
-                        <i data-lucide="shopping-cart" style="width: 20px; height: 20px;"></i>
+                    <a href="shop.html" class="btn btn-primary btn-lg">
+                        <i data-lucide="shopping-cart" style="width: 20px; height: 20px; margin-right: 8px;"></i>
                         Jetzt bestellen
                     </a>
                     <a href="#tradition" class="btn btn-outline btn-lg">Unsere Geschichte</a>
@@ -1272,25 +1472,31 @@
                 <div class="trust-badges">
                     <div class="trust-item">
                         <span class="trust-icon">
-                            <i data-lucide="users" style="width: 20px; height: 20px;"></i>
+                            <i data-lucide="users" style="width: 18px; height: 18px;"></i>
                         </span>
-                        <span><strong>5.000+</strong> zufriedene Kunden</span>
+                        <span><strong>5.000+</strong> Kunden</span>
                     </div>
                     <div class="trust-item">
                         <span class="trust-icon">
-                            <i data-lucide="flame" style="width: 20px; height: 20px;"></i>
+                            <i data-lucide="flame" style="width: 18px; height: 18px;"></i>
                         </span>
-                        <span><strong>250kg</strong> frisch geröstet pro Woche</span>
+                        <span><strong>250kg</strong> pro Woche</span>
                     </div>
                     <div class="trust-item">
                         <span class="trust-icon">
-                            <i data-lucide="award" style="width: 20px; height: 20px;"></i>
+                            <i data-lucide="award" style="width: 18px; height: 18px;"></i>
                         </span>
-                        <span><strong>3. Generation</strong> Familientradition</span>
+                        <span><strong>3. Generation</strong></span>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Scroll Indicator -->
+        <a href="#bestseller" class="hero-scroll">
+            <div class="hero-scroll-icon"></div>
+            <span>Entdecken</span>
+        </a>
     </section>
 
     <!-- ===================================
@@ -1305,7 +1511,7 @@
     <!-- ===================================
          BESTSELLER PRODUCTS SECTION
     =================================== -->
-    <section class="section bestseller-section">
+    <section class="section bestseller-section" id="bestseller">
         <div class="container">
             <div class="section-header fade-in">
                 <div class="section-label">Unsere Bestseller</div>
