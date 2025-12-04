@@ -1248,94 +1248,77 @@
            CTA BANNER
         =================================== */
         .cta-banner {
-            padding: var(--space-8) 0;
-            background: linear-gradient(135deg, #593F33 0%, #4A3329 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.05)"/></svg>');
-            opacity: 0.3;
+            padding: var(--space-10) 0;
+            background: var(--color-bg);
+            border-top: 2px solid var(--color-border);
+            border-bottom: 2px solid var(--color-border);
         }
 
         .cta-banner-content {
-            position: relative;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             gap: var(--space-4);
-            padding: var(--space-6);
-            background: rgba(255, 255, 255, 0.05);
-            border: 3px solid var(--color-secondary);
-            border-radius: var(--radius-lg);
-            backdrop-filter: blur(10px);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .cta-banner-icon {
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 80px;
-            height: 80px;
+            width: 56px;
+            height: 56px;
             background: var(--color-secondary);
             border-radius: var(--radius-full);
             color: white;
             flex-shrink: 0;
         }
 
-        @media (min-width: 768px) {
-            .cta-banner-icon {
-                display: flex;
-            }
-        }
-
         .cta-banner-text {
             flex: 1;
-            text-align: center;
-        }
-
-        @media (min-width: 768px) {
-            .cta-banner-text {
-                text-align: left;
-            }
         }
 
         .cta-banner-title {
             font-family: var(--font-display);
-            font-size: clamp(var(--text-xl), 3vw, var(--text-3xl));
-            color: white;
-            margin-bottom: var(--space-1);
+            font-size: var(--text-2xl);
+            color: var(--color-primary);
+            margin-bottom: var(--space-2);
+            line-height: 1.2;
         }
 
         .cta-banner-subtitle {
-            font-size: var(--text-lg);
-            color: rgba(255, 255, 255, 0.9);
+            font-size: var(--text-base);
+            color: var(--color-text-light);
             margin: 0;
+            line-height: 1.6;
         }
 
         .cta-banner-button {
             flex-shrink: 0;
+            margin-top: var(--space-2);
         }
 
-        @media (max-width: 767px) {
+        @media (min-width: 768px) {
             .cta-banner-content {
-                flex-direction: column;
-                text-align: center;
+                flex-direction: row;
+                text-align: left;
+                gap: var(--space-6);
             }
 
-            .cta-banner-button {
-                width: 100%;
+            .cta-banner-text {
+                flex: 1;
             }
 
-            .cta-banner-button .btn {
-                width: 100%;
+            .cta-banner-title {
+                font-size: var(--text-3xl);
+                margin-bottom: var(--space-1);
+            }
+
+            .cta-banner-subtitle {
+                font-size: var(--text-lg);
             }
         }
 
@@ -1824,15 +1807,15 @@
         <div class="container">
             <div class="cta-banner-content">
                 <div class="cta-banner-icon">
-                    <i data-lucide="gift" style="width: 40px; height: 40px;"></i>
+                    <i data-lucide="truck" style="width: 28px; height: 28px;"></i>
                 </div>
                 <div class="cta-banner-text">
-                    <h3 class="cta-banner-title">🚚 Kostenlose Lieferung in Hamm</h3>
+                    <h3 class="cta-banner-title">Kostenlose Lieferung in Hamm</h3>
                     <p class="cta-banner-subtitle">Heute bestellt? Morgen geröstet! Deutschlandweiter Versand ab €4,99.</p>
                 </div>
                 <div class="cta-banner-button">
-                    <a href="shop.html" class="btn btn-primary btn-lg">
-                        <i data-lucide="shopping-cart" style="width: 20px; height: 20px;"></i>
+                    <a href="shop.html" class="btn btn-primary">
+                        <i data-lucide="shopping-cart" style="width: 18px; height: 18px;"></i>
                         Jetzt bestellen
                     </a>
                 </div>
