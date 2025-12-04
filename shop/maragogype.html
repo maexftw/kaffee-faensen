@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hammer Spezial - Kaffee Fänsen</title>
+    <meta name="description" content="Hammer Spezial - Würziger Hochland-Arabica mit nussiger Note. Handwerklich geröstet seit 1933.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Navigation Component -->
+    <script src="faensen_navigation.js"></script>
+
+    <!-- Produktdaten -->
+    <script src="products-data.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            --color-primary: #593F33;
+            --color-secondary: #D1541D;
+            --color-bg: #FAF8F5;
+            --color-bg-white: #FFFFFF;
+            --color-text: #2D2520;
+            --color-text-light: #6B5D57;
+            --color-border: #E8E3DD;
+            --font-display: 'Patua One', serif;
+            --font-body: 'Lora', serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 16px 0;
+            font-size: 14px;
+            color: var(--color-text-light);
+        }
+
+        .breadcrumb a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--color-secondary);
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+        }
+
+        /* Product Section */
+        .product-section {
+            padding: 32px 0 64px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media (min-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Product Image */
+        .product-image-wrapper {
+            position: relative;
+            background: linear-gradient(135deg, #FAF8F5 0%, #F5F0E8 100%);
+            border: 3px solid var(--color-primary);
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 24px;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 8px 16px;
+            background: var(--color-secondary);
+            color: white;
+            font-family: var(--font-display);
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transform: rotate(-3deg);
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        /* Product Info */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .product-title {
+            font-size: 36px;
+            color: var(--color-primary);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stars {
+            display: flex;
+            gap: 2px;
+            color: #F59E0B;
+        }
+
+        .rating-text {
+            font-size: 14px;
+            color: var(--color-text-light);
+        }
+
+        .product-price {
+            font-family: var(--font-display);
+            font-size: 32px;
+            color: var(--color-primary);
+        }
+
+        .product-price-small {
+            font-size: 16px;
+            color: var(--color-text-light);
+            font-family: var(--font-body);
+        }
+
+        .product-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+
+        /* Selectors */
+        .selector-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .selector-label {
+            font-family: var(--font-display);
+            font-size: 14px;
+            color: var(--color-text);
+        }
+
+        .selector-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .selector-btn {
+            padding: 12px 20px;
+            background: var(--color-bg-white);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .selector-btn:hover {
+            border-color: var(--color-primary);
+        }
+
+        .selector-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+        }
+
+        /* Add to Cart Button */
+        .btn-add-cart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 18px 32px;
+            background: var(--color-secondary);
+            color: white;
+            font-family: var(--font-display);
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-add-cart:hover {
+            background: #B8461A;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(209, 84, 29, 0.3);
+        }
+
+        /* Details Section */
+        .details-section {
+            padding: 64px 0;
+            background: var(--color-bg-white);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media (min-width: 768px) {
+            .details-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .detail-card {
+            padding: 24px;
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+        }
+
+        .detail-card h3 {
+            font-size: 20px;
+            color: var(--color-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-card p {
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* Brewing Tips */
+        .brewing-tips {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .brewing-tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: var(--color-bg-white);
+            border-radius: 8px;
+        }
+
+        .brewing-tip-icon {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-secondary);
+            color: white;
+            border-radius: 50%;
+        }
+
+        .brewing-tip-content h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .brewing-tip-content p {
+            font-size: 13px;
+            color: var(--color-text-light);
+            margin: 0;
+        }
+
+        /* Info Box */
+        .info-box {
+            padding: 16px;
+            background: #E8F5E9;
+            border-left: 4px solid #2E7D32;
+            border-radius: 0 8px 8px 0;
+            margin-top: 24px;
+        }
+
+        .info-box p {
+            margin: 0;
+            font-size: 14px;
+            color: #1B5E20;
+        }
+
+        /* Related Products */
+        .related-section {
+            padding: 64px 0;
+        }
+
+        .section-title {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 32px;
+            color: var(--color-primary);
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .related-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .related-card {
+            background: var(--color-bg-white);
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            padding: 16px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+
+        .related-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(89, 63, 51, 0.15);
+        }
+
+        .related-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: contain;
+            margin-bottom: 12px;
+        }
+
+        .related-card h4 {
+            font-size: 16px;
+            color: var(--color-primary);
+            margin-bottom: 4px;
+        }
+
+        .related-card .price {
+            font-family: var(--font-display);
+            color: var(--color-text);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 48px 0 24px;
+            background: var(--color-primary);
+            color: white;
+            border-top: 4px solid var(--color-secondary);
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
+        }
+
+        .footer-logo {
+            height: 56px;
+            margin-bottom: 16px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Cart Modal Styles */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-modal.open {
+            display: flex;
+        }
+
+        .cart-modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .cart-modal-content {
+            position: relative;
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .cart-modal-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: var(--color-primary);
+        }
+
+        .cart-modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--color-text-light);
+        }
+
+        .cart-modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .cart-modal-footer {
+            padding: 20px 24px;
+            border-top: 1px solid var(--color-border);
+            background: var(--color-bg);
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: var(--color-bg);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--color-primary);
+        }
+
+        .cart-item-meta {
+            font-size: 13px;
+            color: var(--color-text-light);
+        }
+
+        .cart-item-price {
+            font-family: var(--font-display);
+            font-size: 16px;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-light);
+            padding: 4px;
+        }
+
+        .cart-item-remove:hover {
+            color: var(--color-secondary);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-display);
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 16px;
+            background: var(--color-secondary);
+            color: white;
+            font-family: var(--font-display);
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-checkout:hover {
+            background: #B8461A;
+        }
+
+        .btn-continue {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: var(--color-primary);
+            font-family: var(--font-display);
+            font-size: 14px;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-continue:hover {
+            border-color: var(--color-primary);
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--color-text-light);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            padding: 16px 24px;
+            background: var(--color-primary);
+            color: white;
+            font-family: var(--font-display);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation wird automatisch von faensen_navigation.js eingefügt -->
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="homepage.html">Start</a>
+            <span>›</span>
+            <a href="shop.html">Shop</a>
+            <span>›</span>
+            <span id="breadcrumb-product">Hammer Spezial</span>
+        </nav>
+    </div>
+
+    <!-- Product Section -->
+    <section class="product-section">
+        <div class="container">
+            <div class="product-grid">
+                <!-- Product Image -->
+                <div class="product-image-wrapper">
+                    <div class="product-badge" id="product-badge">Bestseller</div>
+                    <img id="product-image" src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67b895dd2cb7b5f32a1a5b54_smartmockups_lgdczczd.jpg" alt="Hammer Spezial">
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <h1 class="product-title" id="product-title">Hammer Spezial</h1>
+
+                    <div class="product-rating">
+                        <div class="stars" id="product-stars">
+                            <i data-lucide="star" style="width: 18px; height: 18px; fill: currentColor;"></i>
+                            <i data-lucide="star" style="width: 18px; height: 18px; fill: currentColor;"></i>
+                            <i data-lucide="star" style="width: 18px; height: 18px; fill: currentColor;"></i>
+                            <i data-lucide="star" style="width: 18px; height: 18px; fill: currentColor;"></i>
+                            <i data-lucide="star" style="width: 18px; height: 18px; fill: currentColor;"></i>
+                        </div>
+                        <span class="rating-text" id="product-rating-text">4.8 (127 Bewertungen)</span>
+                    </div>
+
+                    <div class="product-price">
+                        <span id="product-price">€12,20</span>
+                        <span class="product-price-small" id="product-price-unit">/ 500g</span>
+                    </div>
+
+                    <p class="product-description" id="product-description">
+                        Ein mittlere Röstung bestehend aus 100% reinem Hochland-Arabica mit würzigem Charakter und ausgewogener Säure. Das Produkt bietet ein harmonisches Geschmackserlebnis für anspruchsvolle Kaffeegenießer.
+                    </p>
+
+                    <!-- Size Selector -->
+                    <div class="selector-group">
+                        <span class="selector-label">Größe wählen:</span>
+                        <div class="selector-options" id="size-options">
+                            <button class="selector-btn" data-size="250g">250g</button>
+                            <button class="selector-btn active" data-size="500g">500g</button>
+                        </div>
+                    </div>
+
+                    <!-- Grind Selector -->
+                    <div class="selector-group">
+                        <span class="selector-label">Mahlgrad wählen:</span>
+                        <div class="selector-options" id="grind-options">
+                            <button class="selector-btn active" data-grind="Ganze Bohne">Ganze Bohne</button>
+                            <button class="selector-btn" data-grind="Filterkaffee">Filterkaffee</button>
+                            <button class="selector-btn" data-grind="Siebträger">Siebträger</button>
+                            <button class="selector-btn" data-grind="French Press">French Press</button>
+                            <button class="selector-btn" data-grind="Espressokanne">Espressokanne</button>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart -->
+                    <button class="btn-add-cart" id="add-to-cart-btn">
+                        <i data-lucide="shopping-cart" style="width: 20px; height: 20px;"></i>
+                        In den Warenkorb
+                    </button>
+
+                    <!-- Info Box -->
+                    <div class="info-box">
+                        <p><strong>Kostenlose Lieferung in Hamm</strong> (PLZ 59063-59077). Deutschlandweiter Versand ab €4,90.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="details-section">
+        <div class="container">
+            <div class="details-grid">
+                <div>
+                    <div class="detail-card">
+                        <h3>
+                            <i data-lucide="coffee" style="width: 24px; height: 24px; color: var(--color-secondary);"></i>
+                            Geschmacksprofil
+                        </h3>
+                        <p id="flavor-profile">Vollmundiger Kaffee mit einer harmonischen Balance zwischen Intensität und Milde. Würziger Hochland-Arabica mit nussiger Note, mittlere Röstung, ausgewogene Säure.</p>
+                    </div>
+
+                    <div class="detail-card" style="margin-top: 24px;">
+                        <h3>
+                            <i data-lucide="globe" style="width: 24px; height: 24px; color: var(--color-secondary);"></i>
+                            Herkunft & Röstung
+                        </h3>
+                        <p><strong>Herkunft:</strong> <span id="product-origin">Hochland-Arabica</span></p>
+                        <p><strong>Röstung:</strong> <span id="product-roast">Mittlere Röstung</span></p>
+                        <p style="margin-top: 12px;">Sorgfältig angebaut, schonend geröstet – seit 1933 in Hamm.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="detail-card">
+                        <h3>
+                            <i data-lucide="flame" style="width: 24px; height: 24px; color: var(--color-secondary);"></i>
+                            Zubereitungsempfehlungen
+                        </h3>
+                        <div class="brewing-tips" id="brewing-tips">
+                            <!-- Wird dynamisch gefüllt -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-section">
+        <div class="container">
+            <h2 class="section-title">Das könnte dir auch gefallen</h2>
+            <div class="related-grid" id="related-products">
+                <!-- Wird dynamisch gefüllt -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8468ce539285a857943bb_FF-LOGO-deliver-01-scaled-e1658821528426.jpg" alt="Kaffee Fänsen" class="footer-logo">
+                    <p>Handwerklich gerösteter Kaffee aus Hamm.<br>Tradition trifft Leidenschaft seit 1933.</p>
+                </div>
+                <div>
+                    <h5 class="footer-title">Navigation</h5>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="homepage.html#ueber-uns">Über uns</a></li>
+                        <li><a href="homepage.html#tradition">Tradition</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="footer-title">Rechtliches</h5>
+                    <ul class="footer-links">
+                        <li><a href="impressum.html">Impressum</a></li>
+                        <li><a href="datenschutz.html">Datenschutz</a></li>
+                        <li><a href="agb.html">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Kaffee Fänsen – Handwerklich geröstet seit 1933</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-overlay" onclick="closeCart()"></div>
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h2 class="cart-modal-title">Dein Warenkorb</h2>
+                <button class="cart-modal-close" onclick="closeCart()">
+                    <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+                </button>
+            </div>
+            <div class="cart-modal-body" id="cartModalBody">
+                <!-- Dynamisch gefüllt -->
+            </div>
+            <div class="cart-modal-footer">
+                <div class="cart-total">
+                    <span>Gesamt</span>
+                    <span id="cartTotalPrice">€0,00</span>
+                </div>
+                <button class="btn-checkout" onclick="proceedToCheckout()" id="checkoutBtn">
+                    Zur Kasse
+                </button>
+                <button class="btn-continue" onclick="closeCart()">
+                    Weiter einkaufen
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">Produkt hinzugefügt!</div>
+
+    <script>
+        // Aktuelles Produkt (wird aus URL ermittelt)
+        const CURRENT_HANDLE = window.location.pathname.split('/').pop().replace('.html', '') || 'hammer-spezial';
+        let currentProduct = null;
+        let selectedSize = '500g';
+        let selectedGrind = 'Ganze Bohne';
+
+        // Produkt initialisieren
+        function initProduct() {
+            currentProduct = getProductByHandle(CURRENT_HANDLE);
+            if (!currentProduct) {
+                console.error('Produkt nicht gefunden:', CURRENT_HANDLE);
+                return;
+            }
+
+            // UI aktualisieren
+            document.getElementById('product-title').textContent = currentProduct.name;
+            document.getElementById('breadcrumb-product').textContent = currentProduct.name;
+            document.getElementById('product-image').src = currentProduct.image;
+            document.getElementById('product-image').alt = currentProduct.name;
+            document.getElementById('product-description').textContent = currentProduct.fullDescription;
+            document.getElementById('flavor-profile').textContent = currentProduct.flavorProfile;
+            document.getElementById('product-origin').textContent = currentProduct.origin;
+            document.getElementById('product-roast').textContent = currentProduct.roastLevel;
+            document.getElementById('product-rating-text').textContent = `${currentProduct.rating} (${currentProduct.reviews} Bewertungen)`;
+            document.title = `${currentProduct.name} - Kaffee Fänsen`;
+
+            // Badge
+            const badgeEl = document.getElementById('product-badge');
+            if (currentProduct.badge) {
+                badgeEl.textContent = currentProduct.badge;
+                badgeEl.style.display = 'block';
+            } else {
+                badgeEl.style.display = 'none';
+            }
+
+            // Preis aktualisieren
+            updatePrice();
+
+            // Zubereitungstipps
+            const tipsContainer = document.getElementById('brewing-tips');
+            tipsContainer.innerHTML = currentProduct.brewingTips.map(tip => `
+                <div class="brewing-tip">
+                    <div class="brewing-tip-icon">
+                        <i data-lucide="coffee" style="width: 16px; height: 16px;"></i>
+                    </div>
+                    <div class="brewing-tip-content">
+                        <h4>${tip.method}</h4>
+                        <p>${tip.description}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Ähnliche Produkte laden
+            loadRelatedProducts();
+
+            // Icons neu rendern
+            lucide.createIcons();
+        }
+
+        // Preis aktualisieren
+        function updatePrice() {
+            const price = currentProduct.pricing[selectedSize];
+            document.getElementById('product-price').textContent = `€${price.toFixed(2).replace('.', ',')}`;
+            document.getElementById('product-price-unit').textContent = `/ ${selectedSize}`;
+        }
+
+        // Größen-Auswahl
+        document.getElementById('size-options').addEventListener('click', (e) => {
+            if (e.target.classList.contains('selector-btn')) {
+                document.querySelectorAll('#size-options .selector-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                selectedSize = e.target.dataset.size;
+                updatePrice();
+            }
+        });
+
+        // Mahlgrad-Auswahl
+        document.getElementById('grind-options').addEventListener('click', (e) => {
+            if (e.target.classList.contains('selector-btn')) {
+                document.querySelectorAll('#grind-options .selector-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                selectedGrind = e.target.dataset.grind;
+            }
+        });
+
+        // In den Warenkorb
+        document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+            const cartItem = {
+                handle: currentProduct.handle,
+                product: currentProduct.name,
+                size: selectedSize,
+                grind: selectedGrind,
+                price: currentProduct.pricing[selectedSize],
+                image: currentProduct.image
+            };
+
+            // Warenkorb aus localStorage laden
+            let cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+            cart.push(cartItem);
+            localStorage.setItem('faensen_cart', JSON.stringify(cart));
+
+            // UI aktualisieren
+            updateCartCount();
+            showToast('Produkt hinzugefügt!');
+        });
+
+        // Cart Count aktualisieren
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+            const count = cart.length;
+
+            // Navigation Badge aktualisieren
+            if (window.faensenNav) {
+                window.faensenNav.updateCartCount(count);
+            }
+
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = count;
+            }
+        }
+
+        // Toast anzeigen
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // Ähnliche Produkte laden
+        function loadRelatedProducts() {
+            const related = FAENSEN_PRODUCTS
+                .filter(p => p.handle !== CURRENT_HANDLE)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 4);
+
+            const container = document.getElementById('related-products');
+            container.innerHTML = related.map(p => `
+                <a href="${p.handle}.html" class="related-card">
+                    <img src="${p.image}" alt="${p.name}">
+                    <h4>${p.name}</h4>
+                    <span class="price">ab €${p.basePrice.toFixed(2).replace('.', ',')}</span>
+                </a>
+            `).join('');
+        }
+
+        // Cart Modal Funktionen
+        function viewCart() {
+            renderCart();
+            document.getElementById('cartModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+            const body = document.getElementById('cartModalBody');
+            const totalEl = document.getElementById('cartTotalPrice');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            if (cart.length === 0) {
+                body.innerHTML = `
+                    <div class="cart-empty">
+                        <i data-lucide="shopping-cart" style="width: 48px; height: 48px; margin-bottom: 16px;"></i>
+                        <p>Dein Warenkorb ist leer</p>
+                    </div>
+                `;
+                totalEl.textContent = '€0,00';
+                checkoutBtn.disabled = true;
+                lucide.createIcons();
+                return;
+            }
+
+            checkoutBtn.disabled = false;
+            const total = cart.reduce((sum, item) => sum + (item.price || 0), 0);
+            totalEl.textContent = `€${total.toFixed(2).replace('.', ',')}`;
+
+            body.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.product}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.product}</div>
+                        <div class="cart-item-meta">${item.size} • ${item.grind}</div>
+                        <div class="cart-item-price">€${(item.price || 0).toFixed(2).replace('.', ',')}</div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${index})">
+                        <i data-lucide="trash-2" style="width: 18px; height: 18px;"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+            cart.splice(index, 1);
+            localStorage.setItem('faensen_cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function proceedToCheckout() {
+            const cart = JSON.parse(localStorage.getItem('faensen_cart') || '[]');
+            if (cart.length === 0) {
+                alert('Dein Warenkorb ist leer!');
+                return;
+            }
+            closeCart();
+            // Zum Shop-Checkout weiterleiten
+            window.location.href = 'shop.html#checkout';
+        }
+
+        // Event-Listener für Cart-Button in Navigation
+        window.addEventListener('faensenCartClick', () => {
+            viewCart();
+        });
+
+        // ESC zum Schließen
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeCart();
+            }
+        });
+
+        // Globale Funktionen
+        window.viewCart = viewCart;
+        window.closeCart = closeCart;
+        window.removeFromCart = removeFromCart;
+        window.proceedToCheckout = proceedToCheckout;
+
+        // Initialisieren
+        document.addEventListener('DOMContentLoaded', () => {
+            initProduct();
+            updateCartCount();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
