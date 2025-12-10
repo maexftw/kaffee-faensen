@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaffee Fänsen - Handwerklich geröstet seit 1933</title>
-    <meta name="description" content="Traditionell gerösteter Kaffee aus Hamm. Seit über 90 Jahren rösten wir mit Leidenschaft. Jede Bohne handverlesen, jede Röstung ein Meisterwerk.">
+    <meta name="description"
+        content="Traditionell gerösteter Kaffee aus Hamm. Seit über 90 Jahren rösten wir mit Leidenschaft. Jede Bohne handverlesen, jede Röstung ein Meisterwerk.">
 
     <!-- Google Fonts: Patua One + Lora + Great Vibes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Patua+One&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Patua+One&family=Lora:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -91,7 +95,9 @@
         /* ===================================
            RESET & BASE STYLES
         =================================== */
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
         }
 
@@ -110,7 +116,12 @@
         }
 
         /* Typography Reset */
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             margin: 0;
             font-family: var(--font-display);
             font-weight: 400;
@@ -118,10 +129,24 @@
             color: var(--color-text);
         }
 
-        p { margin: 0; }
-        a { color: inherit; text-decoration: none; }
-        img { max-width: 100%; height: auto; display: block; }
-        button { font-family: inherit; }
+        p {
+            margin: 0;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        button {
+            font-family: inherit;
+        }
 
         /* ===================================
            LAYOUT
@@ -276,27 +301,29 @@
             position: absolute;
             inset: 0;
             background:
-                url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=85')
-                center/cover no-repeat;
+                url('https://images.unsplash.com/photo-1559496417-e7f25cb24aad?w=1920&q=85') center/cover no-repeat;
             transform: scale(1.05);
             animation: heroZoom 20s ease-in-out infinite alternate;
         }
 
         @keyframes heroZoom {
-            0% { transform: scale(1.05); }
-            100% { transform: scale(1.15); }
+            0% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1.15);
+            }
         }
 
         /* Dark Gradient Overlay */
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(
-                180deg,
-                rgba(45, 37, 32, 0.4) 0%,
-                rgba(89, 63, 51, 0.85) 50%,
-                rgba(45, 37, 32, 0.95) 100%
-            );
+            background: linear-gradient(180deg,
+                    rgba(45, 37, 32, 0.4) 0%,
+                    rgba(89, 63, 51, 0.85) 50%,
+                    rgba(45, 37, 32, 0.95) 100%);
         }
 
         /* Film Grain Texture */
@@ -365,16 +392,28 @@
             animation: wordReveal 0.8s ease-out forwards;
         }
 
-        .hero-title .word:nth-child(1) { animation-delay: 0.5s; }
-        .hero-title .word:nth-child(2) { animation-delay: 0.6s; }
-        .hero-title .word:nth-child(3) { animation-delay: 0.7s; }
-        .hero-title .word:nth-child(4) { animation-delay: 0.8s; }
+        .hero-title .word:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .hero-title .word:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+
+        .hero-title .word:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+
+        .hero-title .word:nth-child(4) {
+            animation-delay: 0.8s;
+        }
 
         @keyframes wordReveal {
             0% {
                 opacity: 0;
                 transform: translateY(50px) rotateX(-15deg);
             }
+
             100% {
                 opacity: 1;
                 transform: translateY(0) rotateX(0);
@@ -386,6 +425,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             100% {
                 opacity: 1;
                 transform: translateY(0);
@@ -454,8 +494,17 @@
         }
 
         @keyframes scrollBounce {
-            0%, 100% { top: 8px; opacity: 1; }
-            50% { top: 20px; opacity: 0.3; }
+
+            0%,
+            100% {
+                top: 8px;
+                opacity: 1;
+            }
+
+            50% {
+                top: 20px;
+                opacity: 0.3;
+            }
         }
 
         /* Trust Badges on Hero */
@@ -678,8 +727,13 @@
             background: linear-gradient(90deg, transparent, var(--color-border), transparent);
         }
 
-        .divider::before { left: 0; }
-        .divider::after { right: 0; }
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
 
         .divider-icon {
             display: inline-flex;
@@ -702,26 +756,58 @@
             gap: var(--space-4);
         }
 
-        .grid-2 { grid-template-columns: 1fr; }
-        .grid-3 { grid-template-columns: 1fr; }
-        .grid-4 { grid-template-columns: 1fr; }
+        .grid-2 {
+            grid-template-columns: 1fr;
+        }
+
+        .grid-3 {
+            grid-template-columns: 1fr;
+        }
+
+        .grid-4 {
+            grid-template-columns: 1fr;
+        }
 
         @media (min-width: 640px) {
-            .grid-2 { grid-template-columns: repeat(2, 1fr); }
-            .grid-3 { grid-template-columns: repeat(2, 1fr); }
-            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (min-width: 768px) {
-            .grid-3 { grid-template-columns: repeat(3, 1fr); }
-            .grid-4 { grid-template-columns: repeat(4, 1fr); }
-            .grid { gap: var(--space-4); }
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .grid-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .grid {
+                gap: var(--space-4);
+            }
         }
 
         @media (min-width: 1024px) {
-            .grid-3 { grid-template-columns: repeat(3, 1fr); }
-            .grid-4 { grid-template-columns: repeat(4, 1fr); }
-            .grid { gap: var(--space-4); }
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .grid-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .grid {
+                gap: var(--space-4);
+            }
         }
 
         /* ===================================
@@ -756,7 +842,7 @@
             border: 3px solid var(--color-secondary);
             border-radius: var(--radius-full);
         }
-        
+
         .card-icon i {
             color: var(--color-secondary) !important;
         }
@@ -801,7 +887,7 @@
             display: block;
             border-radius: var(--radius-sm);
         }
-        
+
         @media (min-width: 1024px) {
             .timeline-item .photo-frame {
                 max-width: 350px;
@@ -911,6 +997,7 @@
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1192,7 +1279,7 @@
             line-height: 1.3;
             font-weight: 600;
         }
-        
+
         .product-card .card-text {
             font-size: var(--text-sm);
             color: var(--color-text-light);
@@ -1240,13 +1327,13 @@
             margin: var(--space-2) 0 var(--space-1) 0;
             flex-shrink: 0;
         }
-        
+
         .product-price-small {
             font-size: var(--text-sm);
             color: var(--color-text-light);
             font-weight: 400;
         }
-        
+
         .product-card .btn {
             margin-top: auto;
             min-height: 44px;
@@ -1458,8 +1545,15 @@
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(12px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(12px);
+            }
         }
 
         .bounce {
@@ -1469,10 +1563,16 @@
         /* ===================================
            UTILITIES
         =================================== */
-        .bg-white { background: var(--color-bg-white); }
-        .bg-light { background: var(--color-bg); }
+        .bg-white {
+            background: var(--color-bg-white);
+        }
+
+        .bg-light {
+            background: var(--color-bg);
+        }
     </style>
 </head>
+
 <body>
     <!-- HEADER - Automatically inserted by faensen_navigation.js -->
 
@@ -1571,7 +1671,8 @@
                     <a href="hammer-spezial.html" style="text-decoration: none; color: inherit;">
                         <div class="product-image">
                             <div class="product-badge-corner">🏆 BESTSELLER</div>
-                            <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png" alt="Hammer Spezial">
+                            <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png"
+                                alt="Hammer Spezial">
                         </div>
                         <h3 class="product-title">Hammer Spezial</h3>
                         <p class="card-text">Würziger Hochland-Arabica mit nussiger Note</p>
@@ -1588,7 +1689,8 @@
                     <a href="maragogype.html" style="text-decoration: none; color: inherit;">
                         <div class="product-image">
                             <div class="product-badge-corner">⭐ PREMIUM</div>
-                            <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png" alt="Maragogype">
+                            <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png"
+                                alt="Maragogype">
                         </div>
                         <h3 class="product-title">Maragogype</h3>
                         <p class="card-text">Die edle Elefantenbohne mit fruchtiger Note</p>
@@ -1605,7 +1707,8 @@
                     <a href="espresso.html" style="text-decoration: none; color: inherit;">
                         <div class="product-image">
                             <div class="product-badge-corner">🔥 BELIEBT</div>
-                            <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png" alt="Espresso">
+                            <img src="https://cdn.prod.website-files.com/67b880dcaaa044d288cc8f3d/67be03ecacf2d8af5226c519_smartmockups_lfm7vg0l-1.png"
+                                alt="Espresso">
                         </div>
                         <h3 class="product-title">Espresso</h3>
                         <p class="card-text">Intensive Röstung für perfekten Espresso-Genuss</p>
@@ -1638,7 +1741,8 @@
                     <h2 class="section-title" style="text-align: left; margin-bottom: var(--space-4);">
                         Kaffee, der Geschichte erzählt
                     </h2>
-                    <p class="section-description" style="text-align: left; max-width: none; margin-bottom: var(--space-5);">
+                    <p class="section-description"
+                        style="text-align: left; max-width: none; margin-bottom: var(--space-5);">
                         Seit Generationen rösten wir mit Leidenschaft und Sorgfalt.
                         Jede Bohne ist handverlesen, jede Röstung ein Meisterwerk.
                     </p>
@@ -1647,7 +1751,8 @@
 
                 <div class="fade-in">
                     <div class="photo-frame">
-                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67bf1ee5829be43edda85201_Untitled%20design%20(1).png" alt="Handverlesene Kaffeebohnen">
+                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67bf1ee5829be43edda85201_Untitled%20design%20(1).png"
+                            alt="Handverlesene Kaffeebohnen">
                     </div>
                 </div>
             </div>
@@ -1736,7 +1841,8 @@
                     </div>
                     <h3 class="card-title">Deutschlandweiter Versand</h3>
                     <p class="card-text">
-                        Von unserer Rösterei direkt zu Ihnen – frisch geröstet geliefert. <strong>Kostenloser Versand in Hamm (PLZ 59063-59077)</strong>
+                        Von unserer Rösterei direkt zu Ihnen – frisch geröstet geliefert. <strong>Kostenloser Versand in
+                            Hamm (PLZ 59063-59077)</strong>
                     </p>
                 </div>
 
@@ -1779,7 +1885,8 @@
             <div style="max-width: 1000px; margin: 0 auto;">
                 <div class="timeline-item fade-in">
                     <div class="photo-frame">
-                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67bdbec3a0c1a78e1603aaa9_17_1121.jpg" alt="Gründung 1933">
+                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67bdbec3a0c1a78e1603aaa9_17_1121.jpg"
+                            alt="Gründung 1933">
                     </div>
                     <div>
                         <div class="timeline-badge">
@@ -1803,21 +1910,25 @@
                         </p>
                     </div>
                     <div class="photo-frame">
-                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8466233bd0fe70b72690b_Faensen_15.%20November%202022_001_(C)POTT.Production.jpg" alt="1969">
+                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8466233bd0fe70b72690b_Faensen_15.%20November%202022_001_(C)POTT.Production.jpg"
+                            alt="1969">
                     </div>
                 </div>
 
                 <div class="timeline-item fade-in">
                     <div class="photo-frame">
-                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b84661a310147872736001_Faensen_15.%20November%202022_014_(C)POTT.Production.jpg" alt="Heute">
+                        <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b84661a310147872736001_Faensen_15.%20November%202022_014_(C)POTT.Production.jpg"
+                            alt="Heute">
                     </div>
                     <div>
-                        <div class="timeline-badge" style="border-color: var(--color-secondary); box-shadow: 4px 4px 0 var(--color-secondary);">
+                        <div class="timeline-badge"
+                            style="border-color: var(--color-secondary); box-shadow: 4px 4px 0 var(--color-secondary);">
                             <div class="timeline-year" style="color: var(--color-secondary);">Heute</div>
                         </div>
                         <h3 class="timeline-title">Dritte Generation</h3>
                         <p class="timeline-text">
-                            In dritter Generation führen wir die Tradition fort. Zweimal wöchentlich rösten wir etwa 250 Kilogramm Kaffee in 13 verschiedenen Sorten
+                            In dritter Generation führen wir die Tradition fort. Zweimal wöchentlich rösten wir etwa 250
+                            Kilogramm Kaffee in 13 verschiedenen Sorten
                         </p>
                     </div>
                 </div>
@@ -1836,7 +1947,8 @@
                 </div>
                 <div class="cta-banner-text">
                     <h3 class="cta-banner-title">Kostenlose Lieferung in Hamm</h3>
-                    <p class="cta-banner-subtitle">Heute bestellt? Morgen geröstet! Deutschlandweiter Versand ab €4,99.</p>
+                    <p class="cta-banner-subtitle">Heute bestellt? Morgen geröstet! Deutschlandweiter Versand ab €4,99.
+                    </p>
                 </div>
                 <div class="cta-banner-button">
                     <a href="shop.html" class="btn btn-primary">
@@ -1855,7 +1967,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8468ce539285a857943bb_FF-LOGO-deliver-01-scaled-e1658821528426.jpg" alt="Kaffee Fänsen" class="footer-logo">
+                    <img src="https://cdn.prod.website-files.com/67b843c30eba57499fb124ab/67b8468ce539285a857943bb_FF-LOGO-deliver-01-scaled-e1658821528426.jpg"
+                        alt="Kaffee Fänsen" class="footer-logo">
                     <p class="footer-text">
                         Handwerklich gerösteter Kaffee aus Hamm.<br>
                         Tradition trifft Leidenschaft seit 1933.
@@ -2132,4 +2245,5 @@
         </div>
     </div>
 </body>
+
 </html>
